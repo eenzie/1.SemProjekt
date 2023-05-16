@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1.SemesterProjekt.Models
 {
-    internal class Kunde
+    internal class Customer
     {
     }
 }
