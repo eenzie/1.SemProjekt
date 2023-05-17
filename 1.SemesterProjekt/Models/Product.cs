@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1.SemesterProjekt.Models
 {
-    public class Customer
+    public abstract class Product
     {
     }
 }

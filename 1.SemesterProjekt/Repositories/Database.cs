@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _1.SemesterProjekt.Models
+namespace _1.SemesterProjekt.Repositories
 {
-    public class Customer
+    private class Database
     {
     }
 }
