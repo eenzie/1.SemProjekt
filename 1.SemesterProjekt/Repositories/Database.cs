@@ -158,5 +158,47 @@ namespace _1.SemesterProjekt.Repositories
                 }
             }
         }
+        /// <summary>
+        /// Method to delelete a customer based on their customer ID
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="deleteCustomer"></param>
+        /// <returns></returns>
+        public bool DeleteCustomerById(int customerId)
+        {
+            // //This using statement ensures that the SqlConnection object
+            //is disposed of properly after its usage. It establishes a connection to the database
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string deleteSqlString = "DELETE FROM Customers WHERE Id = @customerId";
+
+                using (SqlCommand sqlCommand = new SqlCommand(deleteSqlString, sqlConnection))
+                {
+                    //add parameters with customer ID and a database type
+                    sqlCommand.Parameters.Add("@customerId", SqlDbType.Int);
+                    //add a value to the above parameter
+                    sqlCommand.Parameters["@customerId"].Value = customerId;
+
+                    try
+                    {
+                        sqlConnection.Open();
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                        //if rowsAffected is greater than zero, then the program found the customer and has
+                        //deleted the customer, otherwise it is false and can't delete the customer
+                        return rowsAffected > 0;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        //Display an error message of the exception
+                        MessageBox.Show(ex.Message);
+
+                        //false indicates that the program fails to delete the customer
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }
