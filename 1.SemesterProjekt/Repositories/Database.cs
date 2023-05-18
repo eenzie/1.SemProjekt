@@ -6,9 +6,14 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Net;
+using System.Windows.Forms;
 
-namespace _1.SemesterProjekt.Repositories {
-    public class Database {
+namespace _1.SemesterProjekt.Repositories
+{
+    public class Database
+    {
 
         private readonly string ConnectionString = @"Server=mssql3.unoeuro.com;Database=tripshop_dk_db_project;User Id=tripshop_dk;Password=wDafdGbx6ynAkcRzprmt;TrustServerCertificate=True";
 
@@ -21,18 +26,21 @@ namespace _1.SemesterProjekt.Repositories {
         /// <param name="email">Customer's email [optional]</param>
         /// <param name="customer">A new Customer instance</param>
         /// <returns>Returns true if success, false otherwise</returns>
-        public bool Create(string name, string address, string phoneNumber, string email, out Customer customer) {
+        public bool Create(string name, string address, string phoneNumber, string email, out Customer customer)
+        {
             // Gives customer the default value (NULL) in case validation fails
             customer = default;
 
             // Check if name is Null or whitespace
-            if (string.IsNullOrWhiteSpace(name)) {
+            if (string.IsNullOrWhiteSpace(name))
+            {
                 return false;
             }
 
             // Creates a SQL Connection in a using statement,
             // because a "using" will automatically Dispose the resource (the SqlConnection instance)
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
 
                 // Construct a parameterized insert SQL string
                 string insertSqlString =
@@ -77,6 +85,78 @@ namespace _1.SemesterProjekt.Repositories {
                 return newlyInsertedId > 0;
             }
         }
+        /// <summary>
+        /// Update customer details using Name parameter
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="updatedCustomer"></param>
+        public void UpdateCustomerByName(string name, Customer updatedCustomer)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string updateSqlString = "UPDATE Customers SET " +
+                                         "Name = @updatedName, " +
+                                         "Address = @updatedAddress, " +
+                                         "PhoneNo = @updatedPhoneNo, " +
+                                         "Email = @updatedEmail " +
+                                         "WHERE Name = @name";
 
+                using (SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedCustomer.Name;
+                    sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
+                    sqlCommand.Parameters.Add("@updatedPhoneNo", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
+                    sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
+                    sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
+
+                    try
+                    {
+                        sqlConnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update Customer details using Email parameter
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="updatedCustomer"></param>
+        public void UpdateCustomerByEmail(string email, Customer updatedCustomer)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string updateSqlString = "UPDATE Customers SET " +
+                                         "Name = @updatedName, " +
+                                         "Address = @updatedAddress, " +
+                                         "PhoneNo = @updatedPhoneNo, " +
+                                         "Email = @updatedEmail " +
+                                         "WHERE Email = @email";
+
+                using (SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection))
+                {
+                    sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedCustomer.Name;
+                    sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
+                    sqlCommand.Parameters.Add("@updatedPhoneNo", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
+                    sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
+                    sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar).Value = email;
+
+                    try
+                    {
+                        sqlConnection.Open();
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
     }
 }
