@@ -165,7 +165,7 @@ namespace _1.SemesterProjekt.Repositories
         /// <param name="customerId"></param>
         /// <param name="deleteCustomer"></param>
         /// <returns></returns>
-        public bool DeleteCustomerById(int customerId)
+        public bool DeleteCustomerById(Customer customer)
         {
             // //This using statement ensures that the SqlConnection object
             //is disposed of properly after its usage. It establishes a connection to the database
@@ -178,7 +178,7 @@ namespace _1.SemesterProjekt.Repositories
                     //add parameters with customer ID and a database type
                     sqlCommand.Parameters.Add("@customerId", SqlDbType.Int);
                     //add a value to the above parameter
-                    sqlCommand.Parameters["@customerId"].Value = customerId;
+                    sqlCommand.Parameters["@customerId"].Value = customer.ID;
 
                     try
                     {
