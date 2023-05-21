@@ -93,46 +93,47 @@ namespace _1.SemesterProjekt.Repositories
         /// <param name="id"></param>
         /// <param name="updatedCustomer"></param>
         /// <returns>true if customer is found and query is executed</returns>
-            public bool UpdateCustomerByID(string id, Customer updatedCustomer)
+        public bool UpdateCustomerByID(string id, Customer updatedCustomer)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+                string updateSqlString = "UPDATE Customers SET " +
+                                         "Name = @updatedName, " +
+                                         "Address = @updatedAddress, " +
+                                         "PhoneNo = @updatedPhoneNo, " +
+                                         "Email = @updatedEmail " +
+                                         "WHERE ID = @id";
+
+                using (SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection))
                 {
-                    string updateSqlString = "UPDATE Customers SET " +
-                                             "Name = @updatedName, " +
-                                             "Address = @updatedAddress, " +
-                                             "PhoneNo = @updatedPhoneNo, " +
-                                             "Email = @updatedEmail " +
-                                             "WHERE ID = @id";
+                    sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedCustomer.Name;
+                    sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
+                    sqlCommand.Parameters.Add("@updatedPhoneNo", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
+                    sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
+                    sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
 
-                    using (SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection))
+                    try
                     {
-                        sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedCustomer.Name;
-                        sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
-                        sqlCommand.Parameters.Add("@updatedPhoneNo", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
-                        sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
-                        sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
+                        sqlConnection.Open();
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
 
-                        try
-                        {
-                            sqlConnection.Open();
-                            int rowsAffected = sqlCommand.ExecuteNonQuery();
+                        //if rowsAffected is greater than zero, then the program found the customer and has
+                        //deleted the customer, otherwise it is false and can't delete the customer
+                        return rowsAffected > 0;
+                    }
 
-                            //if rowsAffected is greater than zero, then the program found the customer and has
-                            //deleted the customer, otherwise it is false and can't delete the customer
-                            return rowsAffected > 0;
-                        }
+                    catch (Exception ex)
+                    {
+                        //Display an error message of the exception
+                        MessageBox.Show(ex.Message);
 
-                        catch (Exception ex)
-                        {
-                            //Display an error message of the exception
-                            MessageBox.Show(ex.Message);
-
-                            //false indicates that the program fails to delete the customer
-                            return false;
-                        }
+                        //false indicates that the program fails to delete the customer
+                        return false;
+                    }
                 }
             }
         }
+
 
         /// <summary>
         /// Written by Ina
