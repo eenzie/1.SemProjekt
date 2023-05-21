@@ -85,12 +85,15 @@ namespace _1.SemesterProjekt.Repositories
                 return newlyInsertedId > 0;
             }
         }
+
         /// <summary>
-        /// Update customer details using Name parameter
+        /// Written by Ina
+        /// Update customer details using ID parameter
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="id"></param>
         /// <param name="updatedCustomer"></param>
-        public void UpdateCustomerByName(string name, Customer updatedCustomer)
+        /// <returns>true if customer is found and query is executed</returns>
+        public bool UpdateCustomerByID(string id, Customer updatedCustomer)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
@@ -99,7 +102,7 @@ namespace _1.SemesterProjekt.Repositories
                                          "Address = @updatedAddress, " +
                                          "PhoneNo = @updatedPhoneNo, " +
                                          "Email = @updatedEmail " +
-                                         "WHERE Name = @name";
+                                         "WHERE ID = @id";
 
                 using (SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection))
                 {
@@ -107,53 +110,75 @@ namespace _1.SemesterProjekt.Repositories
                     sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
                     sqlCommand.Parameters.Add("@updatedPhoneNo", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
                     sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
-                    sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = name;
+                    sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
 
                     try
                     {
                         sqlConnection.Open();
-                        sqlCommand.ExecuteNonQuery();
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                        //if rowsAffected is greater than zero, then the program found the customer and has
+                        //deleted the customer, otherwise it is false and can't delete the customer
+                        return rowsAffected > 0;
                     }
+
                     catch (Exception ex)
                     {
+                        //Display an error message of the exception
                         MessageBox.Show(ex.Message);
+
+                        //false indicates that the program fails to delete the customer
+                        return false;
                     }
                 }
             }
         }
 
+
         /// <summary>
-        /// Update Customer details using Email parameter
+        /// Written by Ina
+        /// Update Customer details using ID parameter to set Is Deleted to true (1)
         /// </summary>
-        /// <param name="email"></param>
-        /// <param name="updatedCustomer"></param>
-        public void UpdateCustomerByEmail(string email, Customer updatedCustomer)
+        /// <param name="customer"></param>
+        /// <returns>true if customer is found and query is executed</returns>
+        public bool IsDeletedCustomerByID(Customer customer)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                string updateSqlString = "UPDATE Customers SET " +
-                                         "Name = @updatedName, " +
-                                         "Address = @updatedAddress, " +
-                                         "PhoneNo = @updatedPhoneNo, " +
-                                         "Email = @updatedEmail " +
-                                         "WHERE Email = @email";
+                string isDeletedSqlString = "UPDATE Customers SET " +
+                                         "Name = @Name, " +
+                                         "Address = IS NULL, " +
+                                         "PhoneNo = IS NULL, " +
+                                         "Email = IS NULL, " +
+                                         "IsDeleted = 1 " +
+                                         "WHERE id = @id";
 
-                using (SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection))
+                using (SqlCommand sqlCommand = new SqlCommand(isDeletedSqlString, sqlConnection))
                 {
-                    sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedCustomer.Name;
-                    sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
-                    sqlCommand.Parameters.Add("@updatedPhoneNo", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
-                    sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
-                    sqlCommand.Parameters.Add("@email", SqlDbType.NVarChar).Value = email;
+                    sqlCommand.Parameters.Add("@Name", SqlDbType.NVarChar).Value = customer.Name;
+                    sqlCommand.Parameters.Add("@Address", SqlDbType.NVarChar).Value = customer.Address;
+                    sqlCommand.Parameters.Add("@PhoneNo", SqlDbType.NVarChar).Value = customer.PhoneNo;
+                    sqlCommand.Parameters.Add("@Email", SqlDbType.NVarChar).Value = customer.Email;
+                    sqlCommand.Parameters.Add("@IsDeleted", SqlDbType.NVarChar).Value = customer.IsDeleted;
+                    sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = customer.ID;
 
                     try
                     {
                         sqlConnection.Open();
-                        sqlCommand.ExecuteNonQuery();
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                        //if rowsAffected is greater than zero, then the program found the customer and has
+                        //deleted the customer, otherwise it is false and can't delete the customer
+                        return rowsAffected > 0;
                     }
+
                     catch (Exception ex)
                     {
+                        //Display an error message of the exception
                         MessageBox.Show(ex.Message);
+
+                        //false indicates that the program fails to delete the customer
+                        return false;
                     }
                 }
             }
