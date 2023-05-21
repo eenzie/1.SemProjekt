@@ -35,5 +35,18 @@ namespace _1.SemesterProjekt.Service
             bool isUpdated = database.IsDeletedCustomerByID(Customer);
             return isUpdated;
         }
+
+        /// <summary>
+        /// Written by Anh
+        /// Service layer method to Delete customer by ID
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns>return true if customer was succesfully deleted otherwise false</returns>
+        public bool DeleteCustomerById(Customer customer)
+        {
+            Database database = new Database();
+            bool isDeleted = database.DeleteCustomerById(customer);
+            return isDeleted;
+        }
     }
 }

@@ -185,6 +185,7 @@ namespace _1.SemesterProjekt.Repositories
         }
 
         /// <summary>
+        /// Written by Anh
         /// Method to delelete a customer based on their customer ID
         /// </summary>
         /// <param name="customerId"></param>
