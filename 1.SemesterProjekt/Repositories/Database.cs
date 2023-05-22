@@ -27,7 +27,7 @@ namespace _1.SemesterProjekt.Repositories
         /// <param name="email"></param>
         /// <param name="customer"></param>
         /// <returns>Returns true if success, false otherwise</returns>
-        public bool Create(string name, string address, int postcode, string phoneNumber, string email, out Customer customer)
+        public bool CreateCustomer(string name, string address, int postcode, string phoneNumber, string email, out Customer customer)
         {
             // Gives customer the default value (NULL) in case validation fails
             customer = default;
