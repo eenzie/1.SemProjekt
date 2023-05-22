@@ -10,25 +10,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _1.SemesterProjekt
-{
-    public partial class Form_Customer : Form
-    {
+namespace _1.SemesterProjekt {
+    public partial class Form_Customer : Form {
         private CustomerService _customerService = new CustomerService();
-        public Form_Customer()
-        {
+        public BindingList<Customer> Customers { get; set; } = new BindingList<Customer>();
+        public Form_Customer() {
             InitializeComponent();
 
         }
 
         private void bt_ShowAllCustomers_Click(object sender, EventArgs e) {
-            // tb_CustomerNumSearch
+            Customers = new BindingList<Customer>(_customerService.ReadAllCustomers());
 
+
+
+            dgv_Customers.DataSource = Customers;
+            dgv_Customers.Columns["IsDeleted"].Visible = false;
+        }
+
+        private void bt_SearchCustomer_Click(object sender, EventArgs e) {
             string input = tb_CustomerNumSearch.Text;
-            List<Customer> customers = _customerService.ReadCustomersByName(input);
 
-            Console.WriteLine("");
+            if (int.TryParse(input, out int parsedInt)) {
+                Customers = new BindingList<Customer>() { _customerService.ReadCustomerById(parsedInt) };
+            }
+            else {
+                Customers = new BindingList<Customer>(_customerService.ReadCustomersByName(input));
+            }
 
+
+            dgv_Customers.DataSource = Customers;
+            dgv_Customers.Columns["IsDeleted"].Visible = false;
         }
     }
 }

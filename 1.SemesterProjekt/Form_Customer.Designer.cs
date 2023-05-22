@@ -130,6 +130,7 @@
             this.bt_SearchCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bt_SearchCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bt_SearchCustomer.UseVisualStyleBackColor = true;
+            this.bt_SearchCustomer.Click += new System.EventHandler(this.bt_SearchCustomer_Click);
             // 
             // bt_ShowAllCustomers
             // 

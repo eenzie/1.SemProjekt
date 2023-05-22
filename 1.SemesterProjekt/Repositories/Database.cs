@@ -129,7 +129,7 @@ namespace _1.SemesterProjekt.Repositories
         /// <returns></returns>
         public Customer GetCustomerById(int id) {
             using (SqlConnection connection = new SqlConnection(ConnectionString)) {
-                string selectSQLString = $"select Name, Address, PostCode, PhoneNo, Email from Customers where Id = {id} and IsDeleted = false;";
+                string selectSQLString = $"select Name, Address, PostCode, Phone, Email from Customers where ID = {id} and IsDeleted = 0;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
                 connection.Open();
 

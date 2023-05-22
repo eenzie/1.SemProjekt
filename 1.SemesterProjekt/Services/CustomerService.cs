@@ -13,6 +13,10 @@ namespace _1.SemesterProjekt.Service
     {
         private Database _database = new Database();
 
+        public bool CreatedCustomer(string name, string address, int postCode, string phone, string email, out Customer customer) {
+            return _database.CreateCustomer(name, address, postCode, phone, email, out customer);
+        }
+
         /// <summary>
         /// Written by Ina
         /// Service layer method to update customer by ID
@@ -27,9 +31,16 @@ namespace _1.SemesterProjekt.Service
         }
 
 
-
+        public List<Customer> ReadAllCustomers() {
+            return _database.GetAllCustomers();
+        }
+        
         public List<Customer> ReadCustomersByName(string input) {
             return _database.GetCustomerByName(input);
+        }
+
+        public Customer ReadCustomerById(int id) {
+            return _database.GetCustomerById(id);
         }
 
 
