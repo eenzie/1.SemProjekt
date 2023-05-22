@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace _1.SemesterProjekt
 {
-    public partial class Form1 : Form
+    public partial class Form_Order : Form
     {
-        public Form1()
+        public Form_Order()
         {
             InitializeComponent();
+        }
+
+        private void Form_Order_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
