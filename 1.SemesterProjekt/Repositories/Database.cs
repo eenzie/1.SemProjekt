@@ -86,6 +86,33 @@ namespace _1.SemesterProjekt.Repositories
             }
         }
 
+
+        public List<Customer> GetAllCustomers() {
+            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
+                string selectSQLString = $"select Id, Name, Address, PhoneNo, Email from Customers where IsDeleted = false;";
+                SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
+
+                List<Customer> customers = new List<Customer>;
+                connection.Open();
+
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read()) {
+                    int id = sqlDataReader.GetInt32(0);
+                    string name = sqlDataReader.GetString(1);
+                    string address = sqlDataReader.GetString(2);
+                    string phone = sqlDataReader.GetString(3);
+                    string email = sqlDataReader.GetString(4);
+
+
+                    Customer customer = new Customer(id, name, address, phone, email, false);
+                    customers.Add(customer);
+                }
+
+                return customers;
+            }
+        }
+
         /// <summary>
         /// Written by Ina
         /// Update customer details using ID parameter
