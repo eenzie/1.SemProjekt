@@ -158,7 +158,7 @@ namespace _1.SemesterProjekt.Repositories
         /// <returns></returns>
         public List<Customer> GetAllCustomers() {
             using (SqlConnection connection = new SqlConnection(ConnectionString)) {
-                string selectSQLString = $"select Id, Name, Address, PostCode, PhoneNo, Email from Customers where IsDeleted = false;";
+                string selectSQLString = $"select Id, Name, Address, PostCode, Phone, Email from Customers where IsDeleted = 0;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
                 List<Customer> customers = new List<Customer>();
@@ -198,7 +198,7 @@ namespace _1.SemesterProjekt.Repositories
                                          "Name = @updatedName, " +
                                          "Address = @updatedAddress, " +
                                          "PostCode 0 @updatedPostCode, " +
-                                         "PhoneNo = @updatedPhoneNo, " +
+                                         "Phone = @updatedPhone, " +
                                          "Email = @updatedEmail " +
                                          "WHERE ID = @id";
 
@@ -207,7 +207,7 @@ namespace _1.SemesterProjekt.Repositories
                     sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedCustomer.Name;
                     sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
                     sqlCommand.Parameters.Add("@updatedPostCode", SqlDbType.Int).Value = updatedCustomer.PostCode;
-                    sqlCommand.Parameters.Add("@updatedPhoneNo", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
+                    sqlCommand.Parameters.Add("@updatedPhone", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
                     sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
                     sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
 
@@ -247,7 +247,7 @@ namespace _1.SemesterProjekt.Repositories
                                          "Name = @Name, " +
                                          "Address = IS NULL, " +
                                          "PostCode = @PostCode, " +
-                                         "PhoneNo = IS NULL, " +
+                                         "Phone = IS NULL, " +
                                          "Email = IS NULL, " +
                                          "IsDeleted = 1 " +
                                          "WHERE id = @id";
@@ -257,7 +257,7 @@ namespace _1.SemesterProjekt.Repositories
                     sqlCommand.Parameters.Add("@Name", SqlDbType.NVarChar).Value = customer.Name;
                     sqlCommand.Parameters.Add("@Address", SqlDbType.NVarChar).Value = customer.Address;
                     sqlCommand.Parameters.Add("@PostCode", SqlDbType.Int).Value = customer.PostCode;
-                    sqlCommand.Parameters.Add("@PhoneNo", SqlDbType.NVarChar).Value = customer.PhoneNo;
+                    sqlCommand.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = customer.PhoneNo;
                     sqlCommand.Parameters.Add("@Email", SqlDbType.NVarChar).Value = customer.Email;
                     sqlCommand.Parameters.Add("@IsDeleted", SqlDbType.NVarChar).Value = customer.IsDeleted;
                     sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = customer.ID;
