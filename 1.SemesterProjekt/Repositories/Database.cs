@@ -97,7 +97,7 @@ namespace _1.SemesterProjekt.Repositories
         /// <returns></returns>
         public List<Customer> GetCustomerByName(string name) {
             using (SqlConnection connection = new SqlConnection(ConnectionString)) {
-                string selectSQLString = $"select Id, Name, Address, PostCode, PhoneNo, Email from Customers where LOWER(Name) LIKE LOWER(%{name}%) IsDeleted = false;";
+                string selectSQLString = $"select ID, Name, Address, PostCode, Phone, Email from Customers where LOWER(Name) LIKE LOWER('%{name}%') and IsDeleted = 0;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
                 List<Customer> customers = new List<Customer>();

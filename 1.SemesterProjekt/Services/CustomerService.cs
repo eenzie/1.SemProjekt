@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace _1.SemesterProjekt.Service 
 {
     public class CustomerService 
     {
+        private Database _database = new Database();
+
         /// <summary>
         /// Written by Ina
         /// Service layer method to update customer by ID
@@ -19,20 +22,26 @@ namespace _1.SemesterProjekt.Service
         /// <returns>true if customer is found and method call is successful</returns>
         public bool EditCustomerByID(string id, Customer updatedCustomer) 
         { 
-            Database database = new Database();
-            bool isUpdated = database.UpdateCustomerByID(id, updatedCustomer);
+            bool isUpdated = _database.UpdateCustomerByID(id, updatedCustomer);
             return isUpdated;
         }
 
+
+
+        public List<Customer> ReadCustomersByName(string input) {
+            return _database.GetCustomerByName(input);
+        }
+
+
         /// <summary>
+        /// Written by Ina
         /// Update Customer details to set Is Deleted to true
         /// </summary>
         /// <param name="Customer"></param>
         /// <returns>true if customer is found and method call is successful</returns>
         public bool IsDeletedCustomerByID(Customer Customer)
         {
-            Database database = new Database();
-            bool isUpdated = database.IsDeletedCustomerByID(Customer);
+            bool isUpdated = _database.IsDeletedCustomerByID(Customer);
             return isUpdated;
         }
 
@@ -44,8 +53,7 @@ namespace _1.SemesterProjekt.Service
         /// <returns>return true if customer was succesfully deleted otherwise false</returns>
         public bool DeleteCustomerById(Customer customer)
         {
-            Database database = new Database();
-            bool isDeleted = database.DeleteCustomerById(customer);
+            bool isDeleted = _database.DeleteCustomerById(customer);
             return isDeleted;
         }
     }
