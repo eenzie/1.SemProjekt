@@ -87,6 +87,55 @@ namespace _1.SemesterProjekt.Repositories
         }
 
 
+
+        public List<Customer> GetCustomerByName(string name) {
+            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
+                string selectSQLString = $"select Id, Name, Address, PhoneNo, Email from Customers where LOWER(Name) LIKE LOWER(%{name}%) IsDeleted = false;";
+                SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
+
+                List<Customer> customers = new List<Customer>();
+                connection.Open();
+
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read()) {
+                    int id = sqlDataReader.GetInt32(0);
+                    string cname = sqlDataReader.GetString(1);
+                    string address = sqlDataReader.GetString(2);
+                    string phone = sqlDataReader.GetString(3);
+                    string email = sqlDataReader.GetString(4);
+
+
+                    Customer customer = new Customer(id, cname, address, phone, email, false);
+                    customers.Add(customer);
+                }
+
+                return customers;
+            }
+        }
+
+        public Customer GetCustomerById(int id) {
+            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
+                string selectSQLString = $"select Name, Address, PhoneNo, Email from Customers where Id = {id} and IsDeleted = false;";
+                SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
+                connection.Open();
+
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                if (sqlDataReader.Read()) {
+                    string name = sqlDataReader.GetString(0);
+                    string address = sqlDataReader.GetString(1);
+                    string phone = sqlDataReader.GetString(2);
+                    string email = sqlDataReader.GetString(3);
+
+
+                    Customer customer = new Customer(id, name, address, phone, email, false);
+                    return customer;
+                }
+
+                return default;
+            }
+        }
         public List<Customer> GetAllCustomers() {
             using (SqlConnection connection = new SqlConnection(ConnectionString)) {
                 string selectSQLString = $"select Id, Name, Address, PhoneNo, Email from Customers where IsDeleted = false;";
