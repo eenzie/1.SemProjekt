@@ -92,7 +92,7 @@ namespace _1.SemesterProjekt.Repositories
                 string selectSQLString = $"select Id, Name, Address, PhoneNo, Email from Customers where IsDeleted = false;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
-                List<Customer> customers = new List<Customer>;
+                List<Customer> customers = new List<Customer>();
                 connection.Open();
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
