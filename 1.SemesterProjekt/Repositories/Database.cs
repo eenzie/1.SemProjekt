@@ -14,19 +14,20 @@ namespace _1.SemesterProjekt.Repositories
 {
     public class Database
     {
-
         private readonly string ConnectionString = @"Server=mssql3.unoeuro.com;Database=tripshop_dk_db_project;User Id=tripshop_dk;Password=wDafdGbx6ynAkcRzprmt;TrustServerCertificate=True";
 
         /// <summary>
+        /// Written by Anton
         /// Method to register a new customer in the database
         /// </summary>
-        /// <param name="name">Customer's full name [required]</param>
-        /// <param name="address">Customer's address [optional]</param>
-        /// <param name="phoneNumber">Customer's phone number [optional]</param>
-        /// <param name="email">Customer's email [optional]</param>
-        /// <param name="customer">A new Customer instance</param>
+        /// <param name="name"></param>
+        /// <param name="address"></param>
+        /// <param name="postcode"></param>
+        /// <param name="phoneNumber"></param>
+        /// <param name="email"></param>
+        /// <param name="customer"></param>
         /// <returns>Returns true if success, false otherwise</returns>
-        public bool Create(string name, string address, string phoneNumber, string email, out Customer customer)
+        public bool Create(string name, string address, int postcode, string phoneNumber, string email, out Customer customer)
         {
             // Gives customer the default value (NULL) in case validation fails
             customer = default;
@@ -44,7 +45,7 @@ namespace _1.SemesterProjekt.Repositories
 
                 // Construct a parameterized insert SQL string
                 string insertSqlString =
-                    $"insert into Customers (Name, Address, Phone, Email, MarkedAsDeleted) output inserted.Id values (@name, @address, @phoneNumber, @email, 0);";
+                    $"insert into Customers (Name, Address, PostCode, Phone, Email, MarkedAsDeleted) output inserted.Id values (@name, @address, @postcode, @phoneNumber, @email, 0);";
 
                 // Create SQL Command with the insert SQL string and SQL connection
                 SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
@@ -63,6 +64,9 @@ namespace _1.SemesterProjekt.Repositories
                 sqlCommand.Parameters.Add("@address", SqlDbType.NVarChar);
                 sqlCommand.Parameters["@address"].Value = address;
 
+                sqlCommand.Parameters.Add("@postcode", SqlDbType.Int);
+                sqlCommand.Parameters["@postcode"].Value = postcode;
+
                 sqlCommand.Parameters.Add("@phoneNumber", SqlDbType.NVarChar);
                 sqlCommand.Parameters["@phoneNumber"].Value = phoneNumber;
 
@@ -78,19 +82,22 @@ namespace _1.SemesterProjekt.Repositories
                 int newlyInsertedId = (int)sqlCommand.ExecuteScalar();
 
                 // Instantiate Customer instance
-                customer = new Customer(newlyInsertedId, name, address, phoneNumber, email, false);
-
+                customer = new Customer(newlyInsertedId, name, address, postcode, phoneNumber, email, false);
 
                 // If the command above succeeded in creating a customer, the Id will be greater than zero
                 return newlyInsertedId > 0;
             }
         }
 
-
-
+        /// <summary>
+        /// Written by Anton
+        /// Method to get all customers by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public List<Customer> GetCustomerByName(string name) {
             using (SqlConnection connection = new SqlConnection(ConnectionString)) {
-                string selectSQLString = $"select Id, Name, Address, PhoneNo, Email from Customers where LOWER(Name) LIKE LOWER(%{name}%) IsDeleted = false;";
+                string selectSQLString = $"select Id, Name, Address, PostCode, PhoneNo, Email from Customers where LOWER(Name) LIKE LOWER(%{name}%) IsDeleted = false;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
                 List<Customer> customers = new List<Customer>();
@@ -102,11 +109,11 @@ namespace _1.SemesterProjekt.Repositories
                     int id = sqlDataReader.GetInt32(0);
                     string cname = sqlDataReader.GetString(1);
                     string address = sqlDataReader.GetString(2);
-                    string phone = sqlDataReader.GetString(3);
-                    string email = sqlDataReader.GetString(4);
+                    int postcode = sqlDataReader.GetInt32(3);
+                    string phone = sqlDataReader.GetString(4);
+                    string email = sqlDataReader.GetString(5);
 
-
-                    Customer customer = new Customer(id, cname, address, phone, email, false);
+                    Customer customer = new Customer(id, cname, address, postcode, phone, email, false);
                     customers.Add(customer);
                 }
 
@@ -114,9 +121,15 @@ namespace _1.SemesterProjekt.Repositories
             }
         }
 
+        /// <summary>
+        /// Written by Anton
+        /// Method to get all Customers by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Customer GetCustomerById(int id) {
             using (SqlConnection connection = new SqlConnection(ConnectionString)) {
-                string selectSQLString = $"select Name, Address, PhoneNo, Email from Customers where Id = {id} and IsDeleted = false;";
+                string selectSQLString = $"select Name, Address, PostCode, PhoneNo, Email from Customers where Id = {id} and IsDeleted = false;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
                 connection.Open();
 
@@ -125,20 +138,27 @@ namespace _1.SemesterProjekt.Repositories
                 if (sqlDataReader.Read()) {
                     string name = sqlDataReader.GetString(0);
                     string address = sqlDataReader.GetString(1);
-                    string phone = sqlDataReader.GetString(2);
-                    string email = sqlDataReader.GetString(3);
+                    int postcode = sqlDataReader.GetInt32(2);
+                    string phone = sqlDataReader.GetString(3);
+                    string email = sqlDataReader.GetString(4);
 
 
-                    Customer customer = new Customer(id, name, address, phone, email, false);
+                    Customer customer = new Customer(id, name, address, postcode, phone, email, false);
                     return customer;
                 }
 
                 return default;
             }
         }
+
+        /// <summary>
+        /// Written by Anton
+        /// Method to get all customers
+        /// </summary>
+        /// <returns></returns>
         public List<Customer> GetAllCustomers() {
             using (SqlConnection connection = new SqlConnection(ConnectionString)) {
-                string selectSQLString = $"select Id, Name, Address, PhoneNo, Email from Customers where IsDeleted = false;";
+                string selectSQLString = $"select Id, Name, Address, PostCode, PhoneNo, Email from Customers where IsDeleted = false;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
                 List<Customer> customers = new List<Customer>();
@@ -150,11 +170,12 @@ namespace _1.SemesterProjekt.Repositories
                     int id = sqlDataReader.GetInt32(0);
                     string name = sqlDataReader.GetString(1);
                     string address = sqlDataReader.GetString(2);
-                    string phone = sqlDataReader.GetString(3);
-                    string email = sqlDataReader.GetString(4);
+                    int postcode = sqlDataReader.GetInt32(3);
+                    string phone = sqlDataReader.GetString(4);
+                    string email = sqlDataReader.GetString(5);
 
 
-                    Customer customer = new Customer(id, name, address, phone, email, false);
+                    Customer customer = new Customer(id, name, address, postcode, phone, email, false);
                     customers.Add(customer);
                 }
 
@@ -176,6 +197,7 @@ namespace _1.SemesterProjekt.Repositories
                 string updateSqlString = "UPDATE Customers SET " +
                                          "Name = @updatedName, " +
                                          "Address = @updatedAddress, " +
+                                         "PostCode 0 @updatedPostCode, " +
                                          "PhoneNo = @updatedPhoneNo, " +
                                          "Email = @updatedEmail " +
                                          "WHERE ID = @id";
@@ -184,6 +206,7 @@ namespace _1.SemesterProjekt.Repositories
                 {
                     sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedCustomer.Name;
                     sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
+                    sqlCommand.Parameters.Add("@updatedPostCode", SqlDbType.Int).Value = updatedCustomer.PostCode;
                     sqlCommand.Parameters.Add("@updatedPhoneNo", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
                     sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
                     sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
@@ -210,7 +233,6 @@ namespace _1.SemesterProjekt.Repositories
             }
         }
 
-
         /// <summary>
         /// Written by Ina
         /// Update Customer details using ID parameter to set Is Deleted to true (1)
@@ -224,6 +246,7 @@ namespace _1.SemesterProjekt.Repositories
                 string isDeletedSqlString = "UPDATE Customers SET " +
                                          "Name = @Name, " +
                                          "Address = IS NULL, " +
+                                         "PostCode = @PostCode, " +
                                          "PhoneNo = IS NULL, " +
                                          "Email = IS NULL, " +
                                          "IsDeleted = 1 " +
@@ -233,6 +256,7 @@ namespace _1.SemesterProjekt.Repositories
                 {
                     sqlCommand.Parameters.Add("@Name", SqlDbType.NVarChar).Value = customer.Name;
                     sqlCommand.Parameters.Add("@Address", SqlDbType.NVarChar).Value = customer.Address;
+                    sqlCommand.Parameters.Add("@PostCode", SqlDbType.Int).Value = customer.PostCode;
                     sqlCommand.Parameters.Add("@PhoneNo", SqlDbType.NVarChar).Value = customer.PhoneNo;
                     sqlCommand.Parameters.Add("@Email", SqlDbType.NVarChar).Value = customer.Email;
                     sqlCommand.Parameters.Add("@IsDeleted", SqlDbType.NVarChar).Value = customer.IsDeleted;
