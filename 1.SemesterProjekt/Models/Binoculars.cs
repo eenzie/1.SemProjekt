@@ -17,7 +17,7 @@ namespace _1.SemesterProjekt.Models
         /// <param name="price"></param>
         /// <param name="stock"></param>
         /// <param name="type"></param>
-        public Binoculars(int id, string name, Brand brand, decimal price, string type) : base(id, name, brand, price)
+        public Binoculars(int id, string name, Brand brand, decimal price, string type) : base(id, name, brand, price, 5)
         {
             this.Type = type;
         }

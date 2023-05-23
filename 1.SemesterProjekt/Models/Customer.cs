@@ -29,12 +29,21 @@ namespace _1.SemesterProjekt.Models
             this.IsDeleted = isDeleted;
         }
 
+        public Customer(string name, string address, int postcode, string phoneNo, string email)
+        {
+            this.Name = name;
+            this.Address = address;
+            this.PostCode = postcode;
+            this.PhoneNo = phoneNo;
+            this.Email = email;
+        }
+
         public int ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int PostCode { get; set; }
         public string PhoneNo { get; set; }
         public string Email { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

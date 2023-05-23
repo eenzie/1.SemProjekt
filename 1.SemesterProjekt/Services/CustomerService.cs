@@ -13,8 +13,8 @@ namespace _1.SemesterProjekt.Service
     {
         private Database _database = new Database();
 
-        public bool CreatedCustomer(string name, string address, int postCode, string phone, string email, out Customer customer) {
-            return _database.CreateCustomer(name, address, postCode, phone, email, out customer);
+        public bool CreateCustomer(Customer customer) {
+            return _database.CreateCustomer(customer);
         }
 
         /// <summary>
@@ -35,8 +35,14 @@ namespace _1.SemesterProjekt.Service
             return _database.GetAllCustomers();
         }
         
-        public List<Customer> ReadCustomersByName(string input) {
-            return _database.GetCustomerByName(input);
+        public List<Customer> ReadCustomersByName(string input, int? postcode = null) {
+            List<Customer> customers = _database.GetCustomerByName(input);
+
+            if (postcode != null) {
+                return customers.Where(c => c.PostCode == postcode).ToList();
+            }
+
+            return customers;
         }
 
         public Customer ReadCustomerById(int id) {

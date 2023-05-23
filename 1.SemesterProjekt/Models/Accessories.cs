@@ -19,7 +19,7 @@ namespace _1.SemesterProjekt.Models
         /// <param name="price"></param>
         /// <param name="stock"></param>
         /// <param name="type"></param>
-        public Accessories(int id, string name, Brand brand, decimal price, string type) : base(id, name, brand, price)
+        public Accessories(int id, string name, Brand brand, decimal price, string type) : base(id, name, brand, price, 6)
         {
             this.Type = type;
         }

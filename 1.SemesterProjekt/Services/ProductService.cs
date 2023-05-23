@@ -1,19 +1,26 @@
 ﻿using _1.SemesterProjekt.Models;
 using _1.SemesterProjekt.Repositories;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace _1.SemesterProjekt.Service {
     public class ProductService 
     {
         private Database _database = new Database();
 
-        public bool CreatedProduct(string name, string brand, decimal price, int stock, string type, double strength, bool hasUVFilter, string glassType, string coating, bool isSunglass, out Product product)
+        public bool CreatedProduct(Product product)
         {
-            return _database.CreateProduct(name, brand, price, stock, type, strength, hasUVFilter, glassType, coating, isSunglass, out product);
+            switch (product.ProductGroupID) {
+                case 3:
+                    return _database.InsertGlassesIntoDatabase((Glasses)product);
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -21,9 +28,9 @@ namespace _1.SemesterProjekt.Service {
         /// Service layer method to get all products in stock
         /// </summary>
         /// <returns>true if customer is found and method call is successful</returns>
-        public List<Product> ReadAllProductsInStock()
+        public List<ProductStock> ReadAllProductsInStock()
         {
-            return _database.GetAllProductsInStock();
+            return _database.SelectProductsInStockFromDatabase();
         }
 
     }

@@ -21,7 +21,7 @@ namespace _1.SemesterProjekt.Models
         /// <param name="glassType"></param>
         /// <param name="coating"></param>
         /// <param name="isSunglasses"></param>
-     public Glasses(int id, string name, Brand brand, decimal price, double strength, string glassType, string coating, bool isSunglasses) : base(id, name, brand, price)
+     public Glasses(int id, string name, Brand brand, decimal price, double strength, string glassType, string coating, bool isSunglasses) : base(id, name, brand, price, 3)
         {
             Strength = strength;
             GlassType = glassType;

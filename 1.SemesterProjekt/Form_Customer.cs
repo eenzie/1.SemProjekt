@@ -38,6 +38,14 @@ namespace _1.SemesterProjekt
         private void bt_SearchCustomer_Click(object sender, EventArgs e)
         {
             string input = tb_CustomerSearch.Text;
+            string postcodeString = cmBox_PostCode.Text;
+            int? postcode = null;
+
+            if (!string.IsNullOrWhiteSpace(postcodeString)) {
+                if (int.TryParse(postcodeString, out int _postcode)){
+                    postcode = _postcode;
+                }
+            }
 
             if (int.TryParse(input, out int parsedInt))
             {
@@ -45,11 +53,16 @@ namespace _1.SemesterProjekt
             }
             else
             {
-                Customers = new BindingList<Customer>(_customerService.ReadCustomersByName(input));
+                Customers = new BindingList<Customer>(_customerService.ReadCustomersByName(input, postcode));
             }
 
             dgv_Customers.DataSource = Customers;
             dgv_Customers.Columns["IsDeleted"].Visible = false;
+        }
+
+        private void bt_NewCustomer_Click(object sender, EventArgs e) {
+            var form_Customer_Edit = new Form_Customer_Edit();
+            form_Customer_Edit.ShowDialog();
         }
     }
 }

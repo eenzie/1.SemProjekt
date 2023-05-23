@@ -8,6 +8,11 @@ namespace _1.SemesterProjekt.Models {
     public class Store {
         public int ID { get; set; }
         public string Address { get; set; }
-        public Employee BossMan { get; set; }
+
+        public Store(int id, string address)
+        {
+            ID = id;
+            Address = address;
+        }
     }
 }
