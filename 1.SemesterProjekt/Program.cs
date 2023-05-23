@@ -16,7 +16,7 @@ namespace _1.SemesterProjekt
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_Customer());
+            Application.Run(new Form_StartPage());
         }
     }
 }

@@ -24,7 +24,8 @@ namespace _1.SemesterProjekt
 
         private void bt_Form_Customer_Click(object sender, EventArgs e)
         {
-
+            Form_Customer form_Customer = new Form_Customer();
+            form_Customer.ShowDialog();
         }
 
         private void bt_Form_Employee_Click(object sender, EventArgs e)
@@ -34,7 +35,8 @@ namespace _1.SemesterProjekt
 
         private void bt_Form_Products_Click(object sender, EventArgs e)
         {
-
+            Form_Product form_Product = new Form_Product();
+            form_Product.ShowDialog();
         }
 
         private void bt_Form_Eyetest_Click(object sender, EventArgs e)
