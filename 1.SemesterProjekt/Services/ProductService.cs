@@ -16,5 +16,15 @@ namespace _1.SemesterProjekt.Service {
             return _database.CreateProduct(name, brand, price, stock, type, strength, hasUVFilter, glassType, coating, isSunglass, out product);
         }
 
+        /// <summary>
+        /// Written by Ina
+        /// Service layer method to get all products in stock
+        /// </summary>
+        /// <returns>true if customer is found and method call is successful</returns>
+        public List<Product> ReadAllProductsInStock()
+        {
+            return _database.GetAllProductsInStock();
+        }
+
     }
 }

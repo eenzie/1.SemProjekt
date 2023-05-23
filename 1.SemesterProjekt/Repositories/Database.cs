@@ -421,5 +421,38 @@ namespace _1.SemesterProjekt.Repositories
                 return newlyInsertedId > 0;
             }
         }
+
+        /// <summary>
+        /// Written by Ina
+        /// Method to get all products from database where product is in stock
+        /// </summary>
+        /// <returns>true if product is found and query is executed</returns>
+        public List<Product> GetAllProductsInStock()
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                string selectSQLString = $"SELECT ID, Name, Brand, Price, Stock from Products WHERE Stock > 0;";
+                SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
+
+                List<Product> products = new List<Product>();
+                connection.Open();
+
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    int id = sqlDataReader.GetInt32(0);
+                    string name = sqlDataReader.GetString(1);
+                    string brand = sqlDataReader.GetString(2);
+                    double price = sqlDataReader.GetDouble(3);
+                    int stock = sqlDataReader.GetInt32(4);
+
+                    Product product = new Product(id, name, brand, price, stock);
+                    products.Add(product);
+                }
+
+                return products;
+            }
+        }
     }
 }
