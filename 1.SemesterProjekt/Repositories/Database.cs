@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Net;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace _1.SemesterProjekt.Repositories
 {
@@ -95,8 +96,10 @@ namespace _1.SemesterProjekt.Repositories
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public List<Customer> GetCustomerByName(string name) {
-            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
+        public List<Customer> GetCustomerByName(string name)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
                 string selectSQLString = $"select ID, Name, Address, PostCode, Phone, Email from Customers where LOWER(Name) LIKE LOWER('%{name}%') and IsDeleted = 0;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
@@ -105,7 +108,8 @@ namespace _1.SemesterProjekt.Repositories
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     string cname = sqlDataReader.GetString(1);
                     string address = sqlDataReader.GetString(2);
@@ -127,15 +131,18 @@ namespace _1.SemesterProjekt.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Customer GetCustomerById(int id) {
-            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
+        public Customer GetCustomerById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
                 string selectSQLString = $"select Name, Address, PostCode, Phone, Email from Customers where ID = {id} and IsDeleted = 0;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
                 connection.Open();
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                if (sqlDataReader.Read()) {
+                if (sqlDataReader.Read())
+                {
                     string name = sqlDataReader.GetString(0);
                     string address = sqlDataReader.GetString(1);
                     int postcode = sqlDataReader.GetInt32(2);
@@ -156,8 +163,10 @@ namespace _1.SemesterProjekt.Repositories
         /// Method to get all customers
         /// </summary>
         /// <returns></returns>
-        public List<Customer> GetAllCustomers() {
-            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
+        public List<Customer> GetAllCustomers()
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
                 string selectSQLString = $"select Id, Name, Address, PostCode, Phone, Email from Customers where IsDeleted = 0;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
@@ -166,7 +175,8 @@ namespace _1.SemesterProjekt.Repositories
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     string name = sqlDataReader.GetString(1);
                     string address = sqlDataReader.GetString(2);
@@ -325,6 +335,90 @@ namespace _1.SemesterProjekt.Repositories
                         return false;
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Written by Anh
+        /// Method to create a product in the database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="brand"></param>
+        /// <param name="price"></param>
+        /// <param name="stock"></param>
+        /// <param name="type"></param>
+        /// <param name="strength"></param>
+        /// <param name="hasUVFilter"></param>
+        /// <param name="glassType"></param>
+        /// <param name="coating"></param>
+        /// <param name="isSunglass"></param>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public bool CreateProduct(string name, string brand, decimal price, int stock, string type, double strength, bool hasUVFilter, string glassType, string coating, bool isSunglass, out Product product)
+        {
+            product = default;
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return false;
+            }
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string insertSqlString =
+                   $"insert into Products (Name, Brand, Price, Stock, Type, Strength, HasUVFilter, GlassType, Coating, IsSunglass) output inserted.Id values (@name, @brand, @price, @stock, @type, @strength, @hasUVFilter, @glasstype, @coating, @isSunglass);";
+
+                SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
+
+                #region Parameters
+
+                sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar);
+                sqlCommand.Parameters["@name"].Value = name;
+
+                sqlCommand.Parameters.Add("@brand", SqlDbType.NVarChar);
+                sqlCommand.Parameters["@brand"].Value = brand;
+
+                sqlCommand.Parameters.Add("@price", SqlDbType.Decimal);
+                sqlCommand.Parameters["@price"].Value = price;
+
+                sqlCommand.Parameters.Add("@stock", SqlDbType.Int);
+                sqlCommand.Parameters["@stock"].Value = stock;
+
+                sqlCommand.Parameters.Add("@type", SqlDbType.NVarChar);
+                sqlCommand.Parameters["@type"].Value = type;
+
+                sqlCommand.Parameters.Add("@strength", SqlDbType.Decimal);
+                sqlCommand.Parameters["@strength"].Value = strength;
+
+                sqlCommand.Parameters.Add("@hasUVFilter", SqlDbType.TinyInt);
+                sqlCommand.Parameters["@hasUVFilter"].Value = hasUVFilter;
+
+                sqlCommand.Parameters.Add("@glassType", SqlDbType.NVarChar);
+                sqlCommand.Parameters["@glassType"].Value = glassType;
+
+                sqlCommand.Parameters.Add("@coating", SqlDbType.NVarChar);
+                sqlCommand.Parameters["@coating"].Value = coating;
+
+                sqlCommand.Parameters.Add("@isSunglass", SqlDbType.TinyInt);
+                sqlCommand.Parameters["@isSunglass"].Value = isSunglass;
+
+
+                #endregion
+
+                sqlConnection.Open();
+
+                int newlyInsertedId = (int)sqlCommand.ExecuteScalar();
+
+                product = new Accessories(newlyInsertedId, name, brand, price, stock, type);
+
+                product = new Binoculars(newlyInsertedId, name, brand, price, stock, type);
+
+                product = new ContactLenses(newlyInsertedId, name, brand, price, stock, strength, hasUVFilter, type);
+
+                product = new Glasses(newlyInsertedId, name, brand, price, stock, strength, glassType, coating, isSunglass);
+
+
+                return newlyInsertedId > 0;
             }
         }
     }
