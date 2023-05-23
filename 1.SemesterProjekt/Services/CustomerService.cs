@@ -24,10 +24,9 @@ namespace _1.SemesterProjekt.Service
         /// <param name="id"></param>
         /// <param name="updatedCustomer"></param>
         /// <returns>true if customer is found and method call is successful</returns>
-        public bool EditCustomerByID(string id, Customer updatedCustomer) 
-        { 
-            bool isUpdated = _database.UpdateCustomerByID(id, updatedCustomer);
-            return isUpdated;
+        public bool EditCustomer( Customer updatedCustomer) 
+        {
+            return _database.UpdateCustomerInDatabase(updatedCustomer);
         }
 
 

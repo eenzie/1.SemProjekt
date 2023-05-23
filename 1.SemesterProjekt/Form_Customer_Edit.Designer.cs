@@ -229,7 +229,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form_Customer_Edit";
             this.Text = "Kundeoprettelse og redigering";
-            this.Load += new System.EventHandler(this.Form_Customer_Edit_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_postcode)).EndInit();

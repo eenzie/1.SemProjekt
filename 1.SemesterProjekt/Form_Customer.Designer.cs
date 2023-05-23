@@ -48,6 +48,7 @@
             this.dgv_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Customers.Location = new System.Drawing.Point(15, 143);
             this.dgv_Customers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgv_Customers.MultiSelect = false;
             this.dgv_Customers.Name = "dgv_Customers";
             this.dgv_Customers.ReadOnly = true;
             this.dgv_Customers.RowHeadersWidth = 51;
@@ -80,6 +81,7 @@
             this.bt_UpdateCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bt_UpdateCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bt_UpdateCustomer.UseVisualStyleBackColor = true;
+            this.bt_UpdateCustomer.Click += new System.EventHandler(this.bt_UpdateCustomer_Click);
             // 
             // bt_NewCustomer
             // 

@@ -13,10 +13,8 @@ using System.Runtime.InteropServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography.X509Certificates;
 
-namespace _1.SemesterProjekt.Repositories
-{
-    public class Database
-    {
+namespace _1.SemesterProjekt.Repositories {
+    public class Database {
         private readonly string ConnectionString = @"Server=mssql3.unoeuro.com;Database=tripshop_dk_db_project;User Id=tripshop_dk;Password=wDafdGbx6ynAkcRzprmt;TrustServerCertificate=True";
 
         /// <summary>
@@ -30,18 +28,15 @@ namespace _1.SemesterProjekt.Repositories
         /// <param name="email"></param>
         /// <param name="customer"></param>
         /// <returns>Returns true if success, false otherwise</returns>
-        public bool CreateCustomer(Customer customer)
-        {
+        public bool CreateCustomer(Customer customer) {
             // Check if name is Null or whitespace
-            if (string.IsNullOrWhiteSpace(customer.Name))
-            {
+            if (string.IsNullOrWhiteSpace(customer.Name)) {
                 return false;
             }
 
             // Creates a SQL Connection in a using statement,
             // because a "using" will automatically Dispose the resource (the SqlConnection instance)
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-            {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
 
                 // Construct a parameterized insert SQL string
                 string insertSqlString =
@@ -88,10 +83,8 @@ namespace _1.SemesterProjekt.Repositories
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public List<Customer> GetCustomerByName(string name)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
+        public List<Customer> GetCustomerByName(string name) {
+            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
                 string selectSQLString = $"select ID, Name, Address, PostCode, Phone, Email from Customers where LOWER(Name) LIKE LOWER('%{name}%') and IsDeleted = 0;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
@@ -100,8 +93,7 @@ namespace _1.SemesterProjekt.Repositories
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read())
-                {
+                while (sqlDataReader.Read()) {
                     int id = sqlDataReader.GetInt32(0);
                     string cname = sqlDataReader.GetString(1);
                     string address = sqlDataReader.GetString(2);
@@ -123,18 +115,15 @@ namespace _1.SemesterProjekt.Repositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Customer GetCustomerById(int id)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
+        public Customer GetCustomerById(int id) {
+            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
                 string selectSQLString = $"select Name, Address, PostCode, Phone, Email from Customers where ID = {id} and IsDeleted = 0;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
                 connection.Open();
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                if (sqlDataReader.Read())
-                {
+                if (sqlDataReader.Read()) {
                     string name = sqlDataReader.GetString(0);
                     string address = sqlDataReader.GetString(1);
                     int postcode = sqlDataReader.GetInt32(2);
@@ -155,10 +144,8 @@ namespace _1.SemesterProjekt.Repositories
         /// Method to get all customers
         /// </summary>
         /// <returns></returns>
-        public List<Customer> GetAllCustomers()
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
+        public List<Customer> GetAllCustomers() {
+            using (SqlConnection connection = new SqlConnection(ConnectionString)) {
                 string selectSQLString = $"select Id, Name, Address, PostCode, Phone, Email from Customers where IsDeleted = 0;";
                 SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
@@ -167,8 +154,7 @@ namespace _1.SemesterProjekt.Repositories
 
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read())
-                {
+                while (sqlDataReader.Read()) {
                     int id = sqlDataReader.GetInt32(0);
                     string name = sqlDataReader.GetString(1);
                     string address = sqlDataReader.GetString(2);
@@ -192,46 +178,35 @@ namespace _1.SemesterProjekt.Repositories
         /// <param name="id"></param>
         /// <param name="updatedCustomer"></param>
         /// <returns>true if customer is found and query is executed</returns>
-        public bool UpdateCustomerByID(string id, Customer updatedCustomer)
-        {
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-            {
+        public bool UpdateCustomerInDatabase(Customer updatedCustomer) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
                 string updateSqlString = "UPDATE Customers SET " +
                                          "Name = @updatedName, " +
                                          "Address = @updatedAddress, " +
-                                         "PostCode 0 @updatedPostCode, " +
+                                         $"PostCode = {updatedCustomer.PostCode}, " +
                                          "Phone = @updatedPhone, " +
                                          "Email = @updatedEmail " +
-                                         "WHERE ID = @id";
+                                         $"WHERE ID = {updatedCustomer.ID}";
 
-                using (SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection))
-                {
-                    sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedCustomer.Name;
-                    sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
-                    sqlCommand.Parameters.Add("@updatedPostCode", SqlDbType.Int).Value = updatedCustomer.PostCode;
-                    sqlCommand.Parameters.Add("@updatedPhone", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
-                    sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
-                    sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = id;
+                SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
 
-                    try
-                    {
-                        sqlConnection.Open();
-                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+                sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedCustomer.Name;
+                sqlCommand.Parameters.Add("@updatedAddress", SqlDbType.NVarChar).Value = updatedCustomer.Address;
+                sqlCommand.Parameters.Add("@updatedPhone", SqlDbType.NVarChar).Value = updatedCustomer.PhoneNo;
+                sqlCommand.Parameters.Add("@updatedEmail", SqlDbType.NVarChar).Value = updatedCustomer.Email;
 
-                        //if rowsAffected is greater than zero, then the program found the customer and has
-                        //deleted the customer, otherwise it is false and can't delete the customer
-                        return rowsAffected > 0;
-                    }
+                try {
+                    sqlConnection.Open();
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
 
-                    catch (Exception ex)
-                    {
-                        //Display an error message of the exception
-                        MessageBox.Show(ex.Message);
-
-                        //false indicates that the program fails to delete the customer
-                        return false;
-                    }
+                    //if rowsAffected is greater than zero, then the program found the customer and has
+                    //deleted the customer, otherwise it is false and can't delete the customer
+                    return rowsAffected > 0;
+                } catch (Exception ex) {
+                    //false indicates that the program fails to delete the customer
+                    return false;
                 }
+
             }
         }
 
@@ -241,10 +216,8 @@ namespace _1.SemesterProjekt.Repositories
         /// </summary>
         /// <param name="customer"></param>
         /// <returns>true if customer is found and query is executed</returns>
-        public bool IsDeletedCustomerByID(Customer customer)
-        {
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-            {
+        public bool IsDeletedCustomerByID(Customer customer) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
                 string isDeletedSqlString = "UPDATE Customers SET " +
                                          "Name = @Name, " +
                                          "Address = IS NULL, " +
@@ -254,8 +227,7 @@ namespace _1.SemesterProjekt.Repositories
                                          "IsDeleted = 1 " +
                                          "WHERE id = @id";
 
-                using (SqlCommand sqlCommand = new SqlCommand(isDeletedSqlString, sqlConnection))
-                {
+                using (SqlCommand sqlCommand = new SqlCommand(isDeletedSqlString, sqlConnection)) {
                     sqlCommand.Parameters.Add("@Name", SqlDbType.NVarChar).Value = customer.Name;
                     sqlCommand.Parameters.Add("@Address", SqlDbType.NVarChar).Value = customer.Address;
                     sqlCommand.Parameters.Add("@PostCode", SqlDbType.Int).Value = customer.PostCode;
@@ -264,18 +236,14 @@ namespace _1.SemesterProjekt.Repositories
                     sqlCommand.Parameters.Add("@IsDeleted", SqlDbType.NVarChar).Value = customer.IsDeleted;
                     sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = customer.ID;
 
-                    try
-                    {
+                    try {
                         sqlConnection.Open();
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
 
                         //if rowsAffected is greater than zero, then the program found the customer and has
                         //deleted the customer, otherwise it is false and can't delete the customer
                         return rowsAffected > 0;
-                    }
-
-                    catch (Exception ex)
-                    {
+                    } catch (Exception ex) {
                         //Display an error message of the exception
                         MessageBox.Show(ex.Message);
 
@@ -293,23 +261,19 @@ namespace _1.SemesterProjekt.Repositories
         /// <param name="customerId"></param>
         /// <param name="deleteCustomer"></param>
         /// <returns></returns>
-        public bool DeleteCustomerById(Customer customer)
-        {
+        public bool DeleteCustomerById(Customer customer) {
             // //This using statement ensures that the SqlConnection object
             //is disposed of properly after its usage. It establishes a connection to the database
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-            {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
                 string deleteSqlString = "DELETE FROM Customers WHERE Id = @customerId";
 
-                using (SqlCommand sqlCommand = new SqlCommand(deleteSqlString, sqlConnection))
-                {
+                using (SqlCommand sqlCommand = new SqlCommand(deleteSqlString, sqlConnection)) {
                     //add parameters with customer ID and a database type
                     sqlCommand.Parameters.Add("@customerId", SqlDbType.Int);
                     //add a value to the above parameter
                     sqlCommand.Parameters["@customerId"].Value = customer.ID;
 
-                    try
-                    {
+                    try {
                         sqlConnection.Open();
                         int rowsAffected = sqlCommand.ExecuteNonQuery();
 
@@ -317,9 +281,7 @@ namespace _1.SemesterProjekt.Repositories
                         //deleted the customer, otherwise it is false and can't delete the customer
                         return rowsAffected > 0;
 
-                    }
-                    catch (Exception ex)
-                    {
+                    } catch (Exception ex) {
                         //Display an error message of the exception
                         MessageBox.Show(ex.Message);
 
@@ -391,13 +353,13 @@ namespace _1.SemesterProjekt.Repositories
                     Brand brand = new Brand(id, name, productGroupId);
                     brands.Add(brand);
                 }
-                
+
             }
 
 
             return brands;
         }
- 
+
         public List<Store> SelectStoresFromDatabase() {
             List<Store> stores = new List<Store>();
 
