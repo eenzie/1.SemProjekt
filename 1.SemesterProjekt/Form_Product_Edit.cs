@@ -16,5 +16,10 @@ namespace _1.SemesterProjekt
         {
             InitializeComponent();
         }
+
+        private void bt_SaveProduct_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

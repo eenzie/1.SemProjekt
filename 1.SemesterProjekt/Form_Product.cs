@@ -21,5 +21,30 @@ namespace _1.SemesterProjekt
         {
 
         }
+
+        private void bt_SearchProuct_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_ShowAllProducts_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_NewProduct_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_UpdateProduct_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_DeleteProduct_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
