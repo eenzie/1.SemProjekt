@@ -472,7 +472,7 @@ namespace _1.SemesterProjekt.Repositories
             }
 
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
-                string insertSqlString = $"insert into Products (Name, Brand, Price, ProductGroupID) output inserted.ID values (@name, {product.Brand.ID}, {product.Price}, {product.ProductGroupId})";
+                string insertSqlString = $"insert into Products (Name, Brand, Price, ProductGroupID) output inserted.ID values (@name, {product.Brand.ID}, {product.Price}, {product.ProductGroupID})";
                 SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
                 sqlCommand.Parameters.Add("@name", SqlDbType.NChar).Value = product.Name;
 

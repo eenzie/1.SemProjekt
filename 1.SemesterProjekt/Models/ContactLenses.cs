@@ -19,7 +19,7 @@ namespace _1.SemesterProjekt.Models
         /// <param name="strength"></param>
         /// <param name="hasUVFilter"></param>
         /// <param name="type"></param>
-        public ContactLenses(int id, string name, string brand, decimal price, double strength, bool hasUVFilter, string type) : base(id, name, brand, price)
+        public ContactLenses(int id, string name, Brand brand, decimal price, double strength, bool hasUVFilter, string type) : base(id, name, brand, price)
         {
             this.Strength = strength;
             this.HasUVFilter = hasUVFilter;
@@ -29,5 +29,6 @@ namespace _1.SemesterProjekt.Models
         public double Strength { get; set; }
         public bool HasUVFilter { get; set; }
         public string Type { get; set; }
+        public override int ProductGroupID => 2;
     }
 }

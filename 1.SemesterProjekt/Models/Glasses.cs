@@ -21,7 +21,7 @@ namespace _1.SemesterProjekt.Models
         /// <param name="glassType"></param>
         /// <param name="coating"></param>
         /// <param name="isSunglasses"></param>
-     public Glasses(int id, string name, string brand, decimal price, double strength, string glassType, string coating, bool isSunglasses) : base(id, name, brand, price)
+     public Glasses(int id, string name, Brand brand, decimal price, double strength, string glassType, string coating, bool isSunglasses) : base(id, name, brand, price)
         {
             Strength = strength;
             GlassType = glassType;
@@ -33,6 +33,8 @@ namespace _1.SemesterProjekt.Models
         public string GlassType { get; set; }
         public string Coating { get; set; }
         public bool IsSunglasses { get; set; }
+
+        public override int ProductGroupID => 3;
 
     }
 }

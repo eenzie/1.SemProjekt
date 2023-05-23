@@ -16,7 +16,7 @@ namespace _1.SemesterProjekt.Models
         /// <param name="brand"></param>
         /// <param name="price"></param>
         /// <param name="stock"></param>
-        public Product(int id, string name, string brand, decimal price) 
+        public Product(int id, string name, Brand brand, decimal price) 
         { 
             this.ID = id;
             this.Name = name;
@@ -26,7 +26,7 @@ namespace _1.SemesterProjekt.Models
 
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Brand { get; set; }
+        public Brand Brand { get; set; }
         public decimal Price { get; set; }
         public virtual int ProductGroupID { get; }
 
