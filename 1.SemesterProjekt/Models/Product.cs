@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1.SemesterProjekt.Models
 {
-    public abstract class Product
+    public class Product
     {
         /// <summary>
         /// Written by Anh

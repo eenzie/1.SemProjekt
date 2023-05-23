@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Net;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -444,7 +444,7 @@ namespace _1.SemesterProjekt.Repositories
                     int id = sqlDataReader.GetInt32(0);
                     string name = sqlDataReader.GetString(1);
                     string brand = sqlDataReader.GetString(2);
-                    double price = sqlDataReader.GetDouble(3);
+                    decimal price = sqlDataReader.GetDecimal(3);
                     int stock = sqlDataReader.GetInt32(4);
 
                     Product product = new Product(id, name, brand, price, stock);
@@ -452,6 +452,47 @@ namespace _1.SemesterProjekt.Repositories
                 }
 
                 return products;
+            }
+        }
+
+
+        /// <summary>
+        /// Written By Anton
+        /// This will insert the common product info into the super product table
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns>The database generated ID, zero if failed</returns>
+        private bool InsertProductIntoDatabase(Product product) {
+            if (product.Price <= 0) {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(product.Name)) {
+                return false;
+            }
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string insertSqlString = $"insert into Products (Name, Brand, Price, ProductGroupID) output inserted.ID values (@name, {product.Brand.ID}, {product.Price}, {product.ProductGroupId})";
+                SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
+                sqlCommand.Parameters.Add("@name", SqlDbType.NChar).Value = product.Name;
+
+                product.ID = (int)sqlCommand.ExecuteScalar();
+                return true;
+            }
+        }
+
+
+        public bool InsertGlassesIntoDatabase(Glasses glasses) {
+            if (!InsertProductIntoDatabase(glasses)) {
+                return false;
+            }
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string insertqlString = $"insert into Glass (ID, Strength, GlassType, Coating, IsSunglasses) output inserted.ID values ({glasses.ID}, {glasses.Strength}, {glasses.GlassType}, {glasses.Coating}, {glasses.IsSunglasses});";
+                SqlCommand sqlCommand = new SqlCommand(insertqlString, sqlConnection);
+
+                glasses.ID = (int)sqlCommand.ExecuteScalar();
+                return true;
             }
         }
     }
