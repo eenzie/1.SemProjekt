@@ -16,20 +16,19 @@ namespace _1.SemesterProjekt.Models
         /// <param name="brand"></param>
         /// <param name="price"></param>
         /// <param name="stock"></param>
-        public Product(int id, string name, string brand, decimal price, int stock) 
+        public Product(int id, string name, string brand, decimal price) 
         { 
             this.ID = id;
             this.Name = name;
             this.Brand = brand;
             this.Price = price;
-            this.Stock = stock;
         }
 
         public int ID { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
         public decimal Price { get; set; }
-        public int Stock { get; set; }
+        public virtual int ProductGroupID { get; }
 
     }
 }
