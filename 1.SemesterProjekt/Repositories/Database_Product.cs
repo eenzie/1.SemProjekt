@@ -17,6 +17,7 @@ namespace _1.SemesterProjekt.Repositories {
     public class Database_Product {
         private readonly string ConnectionString = @"Server=mssql3.unoeuro.com;Database=tripshop_dk_db_project;User Id=tripshop_dk;Password=wDafdGbx6ynAkcRzprmt;TrustServerCertificate=True";
 
+#region Create
         private bool InsertProductIntoDatabase(Product product) {
             if (product.Price <= 0) {
                 return false;
@@ -38,6 +39,8 @@ namespace _1.SemesterProjekt.Repositories {
         }
 
 
+
+
         public bool InsertGlassesIntoDatabase(Glasses glasses) {
             if (!InsertProductIntoDatabase(glasses)) {
                 return false;
@@ -52,6 +55,11 @@ namespace _1.SemesterProjekt.Repositories {
                 return true;
             }
         }
+
+        #endregion
+
+
+#region Read
 
         public List<Brand> SelectBrandsFromDatabase() {
             List<Brand> brands = new List<Brand>();
@@ -139,5 +147,8 @@ namespace _1.SemesterProjekt.Repositories {
 
             return productStocks;
         }
+
+        #endregion
+
     }
 }

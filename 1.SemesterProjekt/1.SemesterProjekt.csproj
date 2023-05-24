@@ -58,6 +58,12 @@
     <Compile Include="Form_Customer_Edit.Designer.cs">
       <DependentUpon>Form_Customer_Edit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Intelligent_Advisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Intelligent_Advisor.Designer.cs">
+      <DependentUpon>Form_Intelligent_Advisor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Product.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Customer_Edit.resx">
       <DependentUpon>Form_Customer_Edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Intelligent_Advisor.resx">
+      <DependentUpon>Form_Intelligent_Advisor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Order.resx">
       <DependentUpon>Form_Order.cs</DependentUpon>
