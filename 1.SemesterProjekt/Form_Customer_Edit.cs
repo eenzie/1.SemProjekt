@@ -24,6 +24,7 @@ namespace _1.SemesterProjekt
             InitializeComponent();
             _customerService = new CustomerService();
             groupBox1.Visible = false;
+            num_postcode.Controls.RemoveAt(0);
         }
 
         public Form_Customer_Edit(Customer customer)
@@ -31,6 +32,7 @@ namespace _1.SemesterProjekt
             InitializeComponent();
             _customerService = new CustomerService();
             _customer = customer;
+            num_postcode.Controls.RemoveAt(0);
 
             tb_CustomerName.Text = _customer.Name;
             tb_CustomerAddress.Text = _customer.Address;
