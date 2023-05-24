@@ -11,7 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace _1.SemesterProjekt.Service {
     public class ProductService 
     {
-        private Database _database = new Database();
+        private Database_Product _database = new Database_Product();
 
         public bool CreatedProduct(Product product)
         {

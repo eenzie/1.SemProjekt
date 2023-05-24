@@ -95,12 +95,16 @@
     <Compile Include="Models\OrderLine.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductStock.cs" />
-    <Compile Include="Models\Store.cs" />
+    <Compile Include="Models\Shop.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Database.cs" />
+    <Compile Include="Repositories\Database_Order.cs" />
+    <Compile Include="Repositories\Database_Product.cs" />
+    <Compile Include="Repositories\Database_Customer.cs" />
+    <Compile Include="Repositories\Database_Shop.cs" />
     <Compile Include="Services\CustomerService.cs" />
-    <Compile Include="Services\EmployeeService.cs" />
+    <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\ShopService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Form_StartPage.cs">
       <SubType>Form</SubType>

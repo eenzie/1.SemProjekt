@@ -11,7 +11,7 @@ namespace _1.SemesterProjekt.Service
 {
     public class CustomerService 
     {
-        private Database _database = new Database();
+        private Database_Customer _database = new Database_Customer();
 
         public bool CreateCustomer(Customer customer) {
             return _database.CreateCustomer(customer);
@@ -48,6 +48,12 @@ namespace _1.SemesterProjekt.Service
             return _database.GetCustomerById(id);
         }
 
+        public List<Customer> ReadCustomerByEmail(string email)
+        {
+            return _database.GetCustomerByEmail(email);
+        }
+
+
 
         /// <summary>
         /// Written by Ina
@@ -55,9 +61,9 @@ namespace _1.SemesterProjekt.Service
         /// </summary>
         /// <param name="Customer"></param>
         /// <returns>true if customer is found and method call is successful</returns>
-        public bool IsDeletedCustomerByID(Customer Customer)
+        public bool SetCustomerAsIsDeleted(Customer customer)
         {
-            bool isUpdated = _database.IsDeletedCustomerByID(Customer);
+            bool isUpdated = _database.MarkCustomerAsIsDeleted(customer);
             return isUpdated;
         }
 
@@ -67,9 +73,9 @@ namespace _1.SemesterProjekt.Service
         /// </summary>
         /// <param name="customer"></param>
         /// <returns>return true if customer was succesfully deleted otherwise false</returns>
-        public bool DeleteCustomerById(Customer customer)
+        public bool DeleteCustomer(Customer customer)
         {
-            bool isDeleted = _database.DeleteCustomerById(customer);
+            bool isDeleted = _database.DeleteCustomer(customer);
             return isDeleted;
         }
     }

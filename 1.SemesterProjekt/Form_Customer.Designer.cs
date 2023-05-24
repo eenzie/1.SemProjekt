@@ -102,7 +102,7 @@
             // 
             this.tb_CustomerSearch.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_CustomerSearch.Location = new System.Drawing.Point(167, 15);
-            this.tb_CustomerSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_CustomerSearch.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustomerSearch.Name = "tb_CustomerSearch";
             this.tb_CustomerSearch.Size = new System.Drawing.Size(260, 32);
             this.tb_CustomerSearch.TabIndex = 2;
@@ -121,6 +121,7 @@
             this.bt_DeleteCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bt_DeleteCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.bt_DeleteCustomer.UseVisualStyleBackColor = true;
+            this.bt_DeleteCustomer.Click += new System.EventHandler(this.bt_DeleteCustomer_Click);
             // 
             // bt_SearchCustomer
             // 
@@ -159,9 +160,9 @@
             this.label2.Location = new System.Drawing.Point(163, 52);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(165, 21);
+            this.label2.Size = new System.Drawing.Size(103, 21);
             this.label2.TabIndex = 24;
-            this.label2.Text = "ID, navn, adresse, mail";
+            this.label2.Text = "ID, navn, mail";
             // 
             // label3
             // 
@@ -179,7 +180,7 @@
             this.cmBox_PostCode.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_PostCode.FormattingEnabled = true;
             this.cmBox_PostCode.Location = new System.Drawing.Point(167, 84);
-            this.cmBox_PostCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmBox_PostCode.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_PostCode.Name = "cmBox_PostCode";
             this.cmBox_PostCode.Size = new System.Drawing.Size(260, 32);
             this.cmBox_PostCode.TabIndex = 28;
@@ -201,7 +202,7 @@
             this.Controls.Add(this.tb_CustomerSearch);
             this.Controls.Add(this.bt_SearchCustomer);
             this.Controls.Add(this.bt_DeleteCustomer);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_Customer";
             this.Text = "Kundesøgning";
             this.Load += new System.EventHandler(this.Form_Customer_Load);

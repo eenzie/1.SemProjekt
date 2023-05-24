@@ -82,7 +82,22 @@ namespace _1.SemesterProjekt
                 SaveCustomer();
             }
             else {
-                UpdateCustomer();
+                if (ckBox_IsDeleted.Checked)
+                {
+                    if (_customerService.SetCustomerAsIsDeleted(_customer))
+                    {
+                        MessageBox.Show("Marking customer as deleted", "Success", MessageBoxButtons.OK);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to mark customer as deleted", "Failed", MessageBoxButtons.OK);
+                    }
+                }
+                else
+                {
+                    UpdateCustomer();
+                }
             }
         }
     }

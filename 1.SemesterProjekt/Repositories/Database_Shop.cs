@@ -1,0 +1,71 @@
+﻿using _1.SemesterProjekt.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _1.SemesterProjekt.Repositories
+{
+    public class Database_Shop
+    {
+        private readonly string ConnectionString = @"Server=mssql3.unoeuro.com;Database=tripshop_dk_db_project;User Id=tripshop_dk;Password=wDafdGbx6ynAkcRzprmt;TrustServerCertificate=True";
+
+        public List<Shop> GetAllShops()
+        {
+            List<Shop> shops = new List<Shop>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string selectSqlString = $"select * from Shops";
+                SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    int id = sqlDataReader.GetInt32(0);
+                    string address = sqlDataReader.GetString(1);
+                    int postCode = sqlDataReader.GetInt32(2);
+
+                    Shop store = new Shop(id, address, postCode);
+                    shops.Add(store);
+                }
+            }
+
+
+            return shops;
+        }
+
+        public List<Employee> GetAllEmployees()
+        {
+            List<Employee> employees = new List<Employee>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string selectSqlString = $"select * from Employees";
+                SqlCommand sqlCommand = new SqlCommand( selectSqlString, sqlConnection);
+
+                sqlConnection.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                List<Shop> shops = GetAllShops();
+
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    string name = reader.GetString(1);
+                    string phone = reader.GetString(2);
+                    int shopID = reader.GetInt32(3);
+                    Shop shop = shops.Find(x => x.ID == shopID);
+
+                    Employee employee = new Employee(id, name, phone, shop);
+                }
+            }
+
+            return employees;
+        }
+
+    }
+}

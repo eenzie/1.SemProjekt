@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _1.SemesterProjekt.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,12 @@ namespace _1.SemesterProjekt
 {
     public partial class Form_Product : Form
     {
-        public Form_Product()
+        private Shop _currentShop;
+        public Form_Product(Shop currentShop)
         {
             InitializeComponent();
+            _currentShop = currentShop;
+            lb_Shop.Text = _currentShop.ToString();
         }
 
         private void Form_Product_Load(object sender, EventArgs e)
