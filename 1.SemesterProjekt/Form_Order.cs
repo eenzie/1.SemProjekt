@@ -32,6 +32,11 @@ namespace _1.SemesterProjekt
 
         }
 
+        private void cmBox_ProductType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void bt_SearchProduct_Click(object sender, EventArgs e)
         {
 

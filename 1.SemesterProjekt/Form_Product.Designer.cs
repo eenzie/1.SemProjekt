@@ -104,7 +104,7 @@
             // 
             this.tb_ProductNumSearch.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_ProductNumSearch.Location = new System.Drawing.Point(177, 17);
-            this.tb_ProductNumSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_ProductNumSearch.Margin = new System.Windows.Forms.Padding(4);
             this.tb_ProductNumSearch.Name = "tb_ProductNumSearch";
             this.tb_ProductNumSearch.Size = new System.Drawing.Size(260, 32);
             this.tb_ProductNumSearch.TabIndex = 2;
@@ -178,7 +178,7 @@
             this.comboBox1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(177, 91);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(260, 32);
             this.comboBox1.TabIndex = 27;
@@ -187,12 +187,12 @@
             // 
             this.lb_Shop.AutoSize = true;
             this.lb_Shop.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Shop.Location = new System.Drawing.Point(752, 94);
+            this.lb_Shop.Location = new System.Drawing.Point(648, 94);
             this.lb_Shop.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_Shop.Name = "lb_Shop";
-            this.lb_Shop.Size = new System.Drawing.Size(140, 24);
+            this.lb_Shop.Size = new System.Drawing.Size(58, 24);
             this.lb_Shop.TabIndex = 28;
-            this.lb_Shop.Text = "Produktsøgning";
+            this.lb_Shop.Text = "[filial]";
             // 
             // Form_Product
             // 

@@ -15,7 +15,6 @@ namespace _1.SemesterProjekt.Models
         /// <param name="name"></param>
         /// <param name="brand"></param>
         /// <param name="price"></param>
-        /// <param name="stock"></param>
         public Product(int id, string name, Brand brand, decimal price, int productGroupID) 
         { 
             this.ID = id;
