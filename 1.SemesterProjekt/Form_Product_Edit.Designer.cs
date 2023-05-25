@@ -360,7 +360,6 @@
             this.btn_lenses_save.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_lenses_save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_lenses_save.UseVisualStyleBackColor = true;
-            this.btn_lenses_save.Click += new System.EventHandler(this.btn_lenses_save_Click);
             // 
             // gb_binoculars
             // 
@@ -465,7 +464,6 @@
             // 
             // tb_Acces_Type
             // 
-<<<<<<< HEAD
             this.tb_Acces_Type.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Acces_Type.Location = new System.Drawing.Point(218, 63);
             this.tb_Acces_Type.Margin = new System.Windows.Forms.Padding(4);
@@ -473,14 +471,7 @@
             this.tb_Acces_Type.Size = new System.Drawing.Size(260, 32);
             this.tb_Acces_Type.TabIndex = 30;
             this.tb_Acces_Type.Text = "IIII (OOOO)";
-=======
-            this.textBox3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(164, 51);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(196, 27);
-            this.textBox3.TabIndex = 30;
-            this.textBox3.Text = "IIII (OOOO)";
->>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
+
             // 
             // label9
             // 
@@ -494,7 +485,6 @@
             // 
             // tb_Acces_Colour
             // 
-<<<<<<< HEAD
             this.tb_Acces_Colour.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Acces_Colour.Location = new System.Drawing.Point(218, 26);
             this.tb_Acces_Colour.Margin = new System.Windows.Forms.Padding(4);
@@ -502,17 +492,7 @@
             this.tb_Acces_Colour.Size = new System.Drawing.Size(260, 32);
             this.tb_Acces_Colour.TabIndex = 28;
             this.tb_Acces_Colour.Text = "IIII (OOOO)";
-=======
-            this.textBox7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(164, 21);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(196, 27);
-            this.textBox7.TabIndex = 28;
-            this.textBox7.Text = "IIII (OOOO)";
->>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
-            // 
-            // label13
-            // 
+
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(112, 24);
@@ -668,7 +648,6 @@
             this.btn_frames_save.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_frames_save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_frames_save.UseVisualStyleBackColor = true;
-            this.btn_frames_save.Click += new System.EventHandler(this.btn_frames_save_Click);
             // 
             // cbBox_Brand
             // 

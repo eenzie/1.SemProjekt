@@ -39,8 +39,13 @@ namespace _1.SemesterProjekt.Repositories {
             }
         }
 
-        
 
+
+        /// <summary>
+        /// Written by Anton
+        /// </summary>
+        /// <param name="glasses"></param>
+        /// <returns></returns>
         public bool InsertGlassesIntoDatabase(Glasses glasses) {
             if (!InsertProductIntoDatabase(glasses)) {
                 return false;
@@ -58,32 +63,26 @@ namespace _1.SemesterProjekt.Repositories {
         }
 
         /// <summary>
-<<<<<<< HEAD
         /// Written by Ina
         /// Method to Create new Accessory product
         /// </summary>
         /// <param name="accessories"></param>
         /// <returns>Returns true if success, false otherwise</returns>
-        public bool InsertAccessoriesIntoDatabase(Accessories accessories)
-        {
-            if (!InsertProductIntoDatabase(accessories))
-            {
+        public bool InsertAccessoriesIntoDatabase(Accessories accessories) {
+            if (!InsertProductIntoDatabase(accessories)) {
                 return false;
             }
 
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-            {
-                string insertqlString = $"insert into Accessories (ID, Colour, Type) output inserted.ID values ({accessories.ID}, '{accessories.Type}', '{accessories.Colour}');";
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string insertqlString = $"insert into Accessories (ID, Colour, Type) output inserted.ID values ({accessories.ID}, '{accessories.Colour}', '{accessories.Type}');";
                 SqlCommand sqlCommand = new SqlCommand(insertqlString, sqlConnection);
 
                 sqlConnection.Open();
                 accessories.ID = (int)sqlCommand.ExecuteScalar();
-=======
-        /// Written by Anh
-        /// Creating new frames into database
-        /// </summary>
-        /// <param name="frames"></param>
-        /// <returns></returns>
+                return true;
+            }
+        }
+
         public bool InsertFramesIntoDatabase(Frames frames)
         {
             if (!InsertProductIntoDatabase(frames))
@@ -97,13 +96,10 @@ namespace _1.SemesterProjekt.Repositories {
 
                 sqlConnection.Open();
                 frames.ID = (int)sqlCommand.ExecuteScalar();
->>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
                 return true;
             }
         }
 
-<<<<<<< HEAD
-=======
         /// <summary>
         /// Written by Anh
         /// Creating new contactlenses into database
@@ -152,7 +148,7 @@ namespace _1.SemesterProjekt.Repositories {
                 return true;
             }
         }
->>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
+
         #endregion
 
 

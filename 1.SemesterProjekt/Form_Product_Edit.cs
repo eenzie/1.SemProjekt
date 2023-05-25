@@ -80,10 +80,6 @@ namespace _1.SemesterProjekt
             }
         }
 
-<<<<<<< HEAD
-        private void btn_bino_save_Click(object sender, EventArgs e)
-        {
-=======
         /// <summary>
         /// Written by Anh
         /// Creating new frames
@@ -199,7 +195,6 @@ namespace _1.SemesterProjekt
             {
 
             }
->>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
 
         }
 
@@ -306,10 +301,5 @@ namespace _1.SemesterProjekt
             gb_binoculars.Visible = false;
             gb_Accessories.Visible = false;
         }
-<<<<<<< HEAD
-
-=======
-     
->>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
     }
 }
