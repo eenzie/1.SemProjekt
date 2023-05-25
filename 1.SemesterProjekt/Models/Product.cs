@@ -24,6 +24,13 @@ namespace _1.SemesterProjekt.Models
             this.ProductGroupID = productGroupID;
         }
 
+        public Product(string name, Brand brand, decimal price, int productGroupID) {
+            this.Name = name;
+            this.Brand = brand;
+            this.Price = price;
+            this.ProductGroupID = productGroupID;
+        }
+
         public int ID { get; set; }
         public string Name { get; set; }
         public Brand Brand { get; set; }

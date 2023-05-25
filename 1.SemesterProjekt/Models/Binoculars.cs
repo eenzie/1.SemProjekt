@@ -26,6 +26,6 @@ namespace _1.SemesterProjekt.Models
         public string Type { get; set; }
         public string Zoom { get; set; }
         public bool IsWaterproof { get; set; }
-        public override int ProductGroupID => 5;
+        public override int ProductGroupID => 4;
     }
 }

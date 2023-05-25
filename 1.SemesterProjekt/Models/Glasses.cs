@@ -5,10 +5,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _1.SemesterProjekt.Models
-{
-    public class Glasses : Product
-    {
+namespace _1.SemesterProjekt.Models {
+    public class Glasses : Product {
         /// <summary>
         /// Written by Anh
         /// </summary>
@@ -21,15 +19,14 @@ namespace _1.SemesterProjekt.Models
         /// <param name="glassType"></param>
         /// <param name="coating"></param>
         /// <param name="isSunglasses"></param>
-     public Glasses(int id, string name, Brand brand, decimal price, double strength, string glassType, string coating, bool isSunglasses) : base(id, name, brand, price, 3)
-        {
+        public Glasses(int id, string name, Brand brand, decimal price, decimal strength, string glassType, string coating, bool isSunglasses) : base(id, name, brand, price, 3) {
             Strength = strength;
             GlassType = glassType;
             Coating = coating;
             IsSunglasses = isSunglasses;
         }
 
-        public double Strength { get; set; }
+        public decimal Strength { get; set; }
         public string GlassType { get; set; }
         public string Coating { get; set; }
         public bool IsSunglasses { get; set; }

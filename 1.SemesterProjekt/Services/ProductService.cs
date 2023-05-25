@@ -12,6 +12,8 @@ namespace _1.SemesterProjekt.Service {
     public class ProductService 
     {
         private Database_Product _database = new Database_Product();
+        public Dictionary<int, string> Categories => _database.SelectProductType();
+        public List<Brand> Brands => _database.SelectBrands();
 
         public bool CreatedProduct(Product product)
         {
@@ -22,16 +24,5 @@ namespace _1.SemesterProjekt.Service {
 
             return false;
         }
-
-        /// <summary>
-        /// Written by Ina
-        /// Service layer method to get all products in stock
-        /// </summary>
-        /// <returns>true if customer is found and method call is successful</returns>
-        public List<ProductStock> ReadAllProductsInStock()
-        {
-            return _database.SelectProductsInStockFromDatabase();
-        }
-
     }
 }

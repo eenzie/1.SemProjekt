@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography.X509Certificates;
+using System.Globalization;
 
 namespace _1.SemesterProjekt.Repositories {
     public class Database_Product {
@@ -28,9 +29,9 @@ namespace _1.SemesterProjekt.Repositories {
             }
 
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
-                string insertSqlString = $"insert into Products (Name, Brand, Price, ProductGroupID) output inserted.ID values (@name, {product.Brand.ID}, {product.Price}, {product.ProductGroupID})";
+                string insertSqlString = $"insert into Products (Name, Brand, Price, ProductGroupID) output inserted.ID values (@name, {product.Brand.ID}, {product.Price}, {product.ProductGroupID});";
                 SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
-                sqlCommand.Parameters.Add("@name", SqlDbType.NChar).Value = product.Name;
+                sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = product.Name;
 
                 sqlConnection.Open();
                 product.ID = (int)sqlCommand.ExecuteScalar();
@@ -47,7 +48,8 @@ namespace _1.SemesterProjekt.Repositories {
             }
 
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
-                string insertqlString = $"insert into Glass (ID, Strength, GlassType, Coating, IsSunglasses) output inserted.ID values ({glasses.ID}, {glasses.Strength}, {glasses.GlassType}, {glasses.Coating}, {glasses.IsSunglasses});";
+                int booltoint = (glasses.IsSunglasses) ? 1 : 0;
+                string insertqlString = $"insert into Glass (ID, Strength, GlassType, Coating, IsSunglasses) output inserted.ID values ({glasses.ID}, {glasses.Strength.ToString(CultureInfo.InvariantCulture)}, '{glasses.GlassType}', '{glasses.Coating}', {booltoint});";
                 SqlCommand sqlCommand = new SqlCommand(insertqlString, sqlConnection);
 
                 sqlConnection.Open();
@@ -61,7 +63,7 @@ namespace _1.SemesterProjekt.Repositories {
 
 #region Read
 
-        public List<Brand> SelectBrandsFromDatabase() {
+        public List<Brand> SelectBrands() {
             List<Brand> brands = new List<Brand>();
 
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
@@ -87,7 +89,7 @@ namespace _1.SemesterProjekt.Repositories {
         }
 
         public List<Product> SelectProductsFromDatabase() {
-            List<Brand> brands = SelectBrandsFromDatabase();
+            List<Brand> brands = SelectBrands();
             List<Product> products = new List<Product>();
 
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
@@ -111,41 +113,26 @@ namespace _1.SemesterProjekt.Repositories {
             return products;
         }
 
-        public List<ProductStock> SelectProductsInStockFromDatabase() {
-            Database_Shop database_Shop = new Database_Shop();
-            List<ProductStock> productStocks = new List<ProductStock>();
-
+        public Dictionary<int, string> SelectProductType() {
+            Dictionary<int, string> data = new Dictionary<int, string>();
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
 
-                string selectSqlString = $"select * from ProductCount;";
+                string selectSqlString = $"select * from ProductGroups";
+
                 SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
 
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                List<Product> products = SelectProductsFromDatabase();
-                List<Shop> stores = database_Shop.GetAllShops();
-
                 while (sqlDataReader.Read()) {
-                    int productId = sqlDataReader.GetInt32(0);
-                    int shopId = sqlDataReader.GetInt32(1);
-                    int quantity = sqlDataReader.GetInt32(2);
+                    int id = sqlDataReader.GetInt32(0);
+                    string name = sqlDataReader.GetString(1);
 
-                    Product product = products.Find(c => c.ID == productId);
-                    Shop store = stores.Find(c => c.ID == shopId);
-
-                    ProductStock productStock = new ProductStock() {
-                        Product = product,
-                        Store = store,
-                        Stock = quantity
-                    };
-
-                    productStocks.Add(productStock);
+                    data.Add(id, name);
                 }
             }
 
-
-            return productStocks;
+            return data;
         }
 
         #endregion

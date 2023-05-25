@@ -26,6 +26,6 @@ namespace _1.SemesterProjekt.Models
         }
         public string Type { get; set; }
         public string Colour { get; set; }
-        public override int ProductGroupID => 6;
+        public override int ProductGroupID => 5;
     }
 }
