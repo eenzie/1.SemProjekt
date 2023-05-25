@@ -20,7 +20,7 @@ namespace _1.SemesterProjekt.Models
         /// <param name="colour"></param>
         /// <param name="material"></param>
         /// <param name="shape"></param>
-        public Frames(int id, string name, Brand brand, decimal price, string length, string width, string colour, string material, string shape) : base(id, name, brand, price, 1)
+        public Frames(int id, string name, Brand brand, decimal price, decimal length, decimal width, string colour, string material, string shape) : base(id, name, brand, price, 1)
         {
             this.ID = id;
             this.Name = name;
@@ -30,14 +30,14 @@ namespace _1.SemesterProjekt.Models
             this.Width = width;
             this.Colour = colour;
             this.Material = material;
-            this.Shap = shape;
+            this.Shape = shape;
          }
-        public string Length { get; set; }
-        public string Width { get; set; }
+        public decimal Length { get; set; }
+        public decimal Width { get; set; }
         public string Colour { get; set; }
 
         public string Material { get; set; }
-        public string Shap { get; set; }
+        public string Shape { get; set; }
 
         public int productGroupID => 1;
     }

@@ -39,8 +39,7 @@ namespace _1.SemesterProjekt.Repositories {
             }
         }
 
-
-
+        
 
         public bool InsertGlassesIntoDatabase(Glasses glasses) {
             if (!InsertProductIntoDatabase(glasses)) {
@@ -59,6 +58,7 @@ namespace _1.SemesterProjekt.Repositories {
         }
 
         /// <summary>
+<<<<<<< HEAD
         /// Written by Ina
         /// Method to Create new Accessory product
         /// </summary>
@@ -78,10 +78,81 @@ namespace _1.SemesterProjekt.Repositories {
 
                 sqlConnection.Open();
                 accessories.ID = (int)sqlCommand.ExecuteScalar();
+=======
+        /// Written by Anh
+        /// Creating new frames into database
+        /// </summary>
+        /// <param name="frames"></param>
+        /// <returns></returns>
+        public bool InsertFramesIntoDatabase(Frames frames)
+        {
+            if (!InsertProductIntoDatabase(frames))
+            {
+                return false;
+            }
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string insertqlString = $"insert into Frames (ID, Length, Width, Colour, Material, Shape) output inserted.ID values ({frames.ID}, {frames.Length.ToString(CultureInfo.InvariantCulture)}, {frames.Width.ToString(CultureInfo.InvariantCulture)}, '{frames.Colour}', '{frames.Material}', '{frames.Shape}');";
+                SqlCommand sqlCommand = new SqlCommand(insertqlString, sqlConnection);
+
+                sqlConnection.Open();
+                frames.ID = (int)sqlCommand.ExecuteScalar();
+>>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
                 return true;
             }
         }
 
+<<<<<<< HEAD
+=======
+        /// <summary>
+        /// Written by Anh
+        /// Creating new contactlenses into database
+        /// </summary>
+        /// <param name="contactlenses"></param>
+        /// <returns></returns>
+        public bool InsertContactlensesIntoDatabase(ContactLenses contactlenses)
+        {
+            if (!InsertProductIntoDatabase(contactlenses))
+            {
+                return false;
+            }
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                int booltoint = (contactlenses.HasUVFilter) ? 1 : 0;
+                string insertqlString = $"insert into ContactLenses (ID, Duration, Strength, HasUVFilter) output inserted.ID values ({contactlenses.ID}, '{contactlenses.Duration}', {contactlenses.Strength.ToString(CultureInfo.InvariantCulture)}, {booltoint});";
+
+                SqlCommand sqlCommand = new SqlCommand(insertqlString, sqlConnection);
+
+                sqlConnection.Open();
+                contactlenses.ID = (int)sqlCommand.ExecuteScalar();
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Written by Anh
+        /// Creating new binoculars into database
+        /// </summary>
+        /// <param name="binoculars"></param>
+        /// <returns></returns>
+        public bool InsertBinocularsIntoDatabase(Binoculars binoculars)
+        {
+            if (!InsertProductIntoDatabase(binoculars))
+            {
+                return false;
+            }
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                int booltoint = (binoculars.IsWaterproof) ? 1 : 0;
+                string insertqlString = $"insert into Binoculars (ID, Type, Zoom, IsWaterproof) output inserted.ID values ({binoculars.ID}, '{binoculars.Type}', '{binoculars.Zoom}', {booltoint});";
+                SqlCommand sqlCommand = new SqlCommand(insertqlString, sqlConnection);
+
+                sqlConnection.Open();
+                binoculars.ID = (int)sqlCommand.ExecuteScalar();
+                return true;
+            }
+        }
+>>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
         #endregion
 
 

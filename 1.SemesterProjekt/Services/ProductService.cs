@@ -18,12 +18,26 @@ namespace _1.SemesterProjekt.Service
 
         public bool CreatedProduct(Product product)
         {
+<<<<<<< HEAD
             switch (product.ProductGroupID)
             {
                 case 3:
                     return _database.InsertGlassesIntoDatabase((Glasses)product);
                 case 5:
                     return _database.InsertAccessoriesIntoDatabase((Accessories)product);
+=======
+            switch (product.ProductGroupID) {
+
+                case 1:
+                    return _database.InsertFramesIntoDatabase((Frames)product);
+                case 2: 
+                    return _database.InsertContactlensesIntoDatabase((ContactLenses)product);
+                case 3:
+                    return _database.InsertGlassesIntoDatabase((Glasses)product);
+
+                case 4: 
+                    return _database.InsertBinocularsIntoDatabase((Binoculars)product);
+>>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
             }
 
             return false;

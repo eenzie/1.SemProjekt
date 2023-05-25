@@ -80,8 +80,126 @@ namespace _1.SemesterProjekt
             }
         }
 
+<<<<<<< HEAD
         private void btn_bino_save_Click(object sender, EventArgs e)
         {
+=======
+        /// <summary>
+        /// Written by Anh
+        /// Creating new frames
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_frames_save_Click(object sender, EventArgs e)
+        {
+            // We create a new product
+            if (Model == default)
+            {
+                Product product = SaveProductFromForm(1);
+
+                string lengthstr = tb_frames_length.Text;
+                decimal length;
+                string widthstr = tb_frames_width.Text;
+                decimal width;
+                string colour = tb_frames_colour.Text;
+                string shape = tb_frames_shape.Text;
+                string material = tb_frames_material.Text;
+
+                if (!decimal.TryParse(lengthstr, out length))
+                {
+                    Console.WriteLine("");
+                    return;
+                }
+
+                if (!decimal.TryParse(widthstr, out width))
+                {
+                    Console.WriteLine("");
+                    return;
+                }
+
+                Model = new Frames(product.ID, product.Name, product.Brand, product.Price,
+                    length, width, colour, shape, material);
+
+                _productService.CreatedProduct(Model);
+
+
+            }
+            // We update existing product
+            else
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Written by Anh
+        /// Creating new contactlinses
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_lenses_save_Click(object sender, EventArgs e)
+        {
+            // We create a new product
+            if (Model == default)
+            {
+                Product product = SaveProductFromForm(2);
+
+                string duration = tb_contactlenses_duration.Text;
+                string strengthstr = tb_contactlenses_strength.Text;
+                double strength;
+                bool hasUVFilter = cb_Contactlenses_hasUVFilter.Checked;
+
+                if (!double.TryParse(strengthstr, out strength))
+                {
+                    Console.WriteLine("");
+                    return;
+                }
+
+
+                Model = new ContactLenses(product.ID, product.Name, product.Brand, product.Price,
+                    duration, strength, hasUVFilter);
+
+                _productService.CreatedProduct(Model);
+
+
+            }
+            // We update existing product
+            else
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Written by Anh
+        /// Creating new binoculars
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_bino_save_Click(object sender, EventArgs e) 
+        {
+            // We create a new product
+            if (Model == default)
+            {
+                Product product = SaveProductFromForm(4);
+
+                string zoom = tb_binoculars_zoom.Text;
+                string type = tb_binoculars_type.Text;
+                bool isWaterproof = cb_binoculars_isWaterproof.Checked;
+
+                Model = new Binoculars(product.ID, product.Name, product.Brand, product.Price,
+                    zoom, type, isWaterproof);
+
+                _productService.CreatedProduct(Model);
+
+
+            }
+            // We update existing product
+            else
+            {
+
+            }
+>>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
 
         }
 
@@ -188,6 +306,10 @@ namespace _1.SemesterProjekt
             gb_binoculars.Visible = false;
             gb_Accessories.Visible = false;
         }
+<<<<<<< HEAD
 
+=======
+     
+>>>>>>> 035640e (SUI-37: Method creating new frames, contactlenses and binoculars for dabase and services)
     }
 }
