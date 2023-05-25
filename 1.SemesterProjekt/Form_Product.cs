@@ -38,8 +38,11 @@ namespace _1.SemesterProjekt
 
         private void bt_NewProduct_Click(object sender, EventArgs e)
         {
-
+            Form_Product_Edit form_Product_Edit = new Form_Product_Edit();
+            form_Product_Edit.ShowDialog();
         }
+
+
 
         private void bt_UpdateProduct_Click(object sender, EventArgs e)
         {

@@ -110,7 +110,7 @@ namespace _1.SemesterProjekt
                 int index = Customers.IndexOf(old);
                 Customers.Remove(old);
                 Customers.Insert(index, e);
-
+                dgv_Customers.Rows[index].Selected = true;
             }
         }
 

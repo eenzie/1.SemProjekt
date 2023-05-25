@@ -38,15 +38,8 @@ namespace _1.SemesterProjekt.Repositories
                     int employeeID = reader.GetInt32(4);
                     int shopID = reader.GetInt32(5);
 
-                    Order order = new Order()
-                    {
-                        ID = id,
-                        Date = dateTime,
-                        SubTotal = subTotal,
-                        Customer = customer,
-                        Shop = shops.Find(x => x.ID == shopID),
-                        Employee = employees.Find(x => x.ID == employeeID)
-                    };
+                    Order order = new Order(id, dateTime, subTotal, customer, employees.Find(x => x.ID == employeeID), shops.Find(x => x.ID == shopID));
+                   
 
                     orders.Add(order);
                 }
