@@ -35,9 +35,9 @@ namespace _1.SemesterProjekt
             form_Customer.ShowDialog();
         }
 
-        private void bt_Form_Employee_Click(object sender, EventArgs e)
+        private void lbx_Shops_SelectedValueChanged(object sender, EventArgs e)
         {
-
+            SelectedShop = (Shop)lbx_Shops.SelectedValue;
         }
 
         private void bt_Form_Products_Click(object sender, EventArgs e)
@@ -46,19 +46,23 @@ namespace _1.SemesterProjekt
             form_Product.ShowDialog();
         }
 
-        private void bt_Form_Eyetest_Click(object sender, EventArgs e)
+        private void bt_Orders_Click(object sender, EventArgs e)
         {
-
+            Form_Order form_Order = new Form_Order();
+            form_Order.ShowDialog();
         }
 
         private void bt_Form_Statistics_Click(object sender, EventArgs e)
         {
-
+            Form_Statistics form_Statistics = new Form_Statistics();
+            form_Statistics.ShowDialog();
         }
 
-        private void lbx_Shops_SelectedValueChanged(object sender, EventArgs e)
+        private void bt_Form_IR_Click(object sender, EventArgs e)
         {
-            SelectedShop = (Shop)lbx_Shops.SelectedValue;
+            Form_Intelligent_Advisor form_IntelligentAdvisor = new Form_Intelligent_Advisor();
+            form_IntelligentAdvisor.ShowDialog();
         }
+
     }
 }
