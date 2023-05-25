@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace _1.SemesterProjekt.Service {
-    public class ProductService 
+namespace _1.SemesterProjekt.Service
+{
+    public class ProductService
     {
         private Database_Product _database = new Database_Product();
         public Dictionary<int, string> Categories => _database.SelectProductType();
@@ -17,9 +18,12 @@ namespace _1.SemesterProjekt.Service {
 
         public bool CreatedProduct(Product product)
         {
-            switch (product.ProductGroupID) {
+            switch (product.ProductGroupID)
+            {
                 case 3:
                     return _database.InsertGlassesIntoDatabase((Glasses)product);
+                case 5:
+                    return _database.InsertAccessoriesIntoDatabase((Accessories)product);
             }
 
             return false;

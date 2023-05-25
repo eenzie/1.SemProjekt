@@ -62,9 +62,9 @@
             this.label14 = new System.Windows.Forms.Label();
             this.btn_bino_save = new System.Windows.Forms.Button();
             this.gb_Accessories = new System.Windows.Forms.GroupBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tb_Acces_Type = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.tb_Acces_Colour = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.btn_acces_save = new System.Windows.Forms.Button();
             this.gb_frames = new System.Windows.Forms.GroupBox();
@@ -460,9 +460,9 @@
             // 
             // gb_Accessories
             // 
-            this.gb_Accessories.Controls.Add(this.textBox3);
+            this.gb_Accessories.Controls.Add(this.tb_Acces_Type);
             this.gb_Accessories.Controls.Add(this.label9);
-            this.gb_Accessories.Controls.Add(this.textBox7);
+            this.gb_Accessories.Controls.Add(this.tb_Acces_Colour);
             this.gb_Accessories.Controls.Add(this.label13);
             this.gb_Accessories.Controls.Add(this.btn_acces_save);
             this.gb_Accessories.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
@@ -474,15 +474,15 @@
             this.gb_Accessories.Text = "Tilbehør";
             this.gb_Accessories.Visible = false;
             // 
-            // textBox3
+            // tb_Acces_Type
             // 
-            this.textBox3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(218, 63);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(260, 32);
-            this.textBox3.TabIndex = 30;
-            this.textBox3.Text = "IIII (OOOO)";
+            this.tb_Acces_Type.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_Acces_Type.Location = new System.Drawing.Point(218, 63);
+            this.tb_Acces_Type.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_Acces_Type.Name = "tb_Acces_Type";
+            this.tb_Acces_Type.Size = new System.Drawing.Size(260, 32);
+            this.tb_Acces_Type.TabIndex = 30;
+            this.tb_Acces_Type.Text = "IIII (OOOO)";
             // 
             // label9
             // 
@@ -495,15 +495,15 @@
             this.label9.TabIndex = 29;
             this.label9.Text = "Type";
             // 
-            // textBox7
+            // tb_Acces_Colour
             // 
-            this.textBox7.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(218, 26);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(260, 32);
-            this.textBox7.TabIndex = 28;
-            this.textBox7.Text = "IIII (OOOO)";
+            this.tb_Acces_Colour.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_Acces_Colour.Location = new System.Drawing.Point(218, 26);
+            this.tb_Acces_Colour.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_Acces_Colour.Name = "tb_Acces_Colour";
+            this.tb_Acces_Colour.Size = new System.Drawing.Size(260, 32);
+            this.tb_Acces_Colour.TabIndex = 28;
+            this.tb_Acces_Colour.Text = "IIII (OOOO)";
             // 
             // label13
             // 
@@ -529,6 +529,7 @@
             this.btn_acces_save.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_acces_save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btn_acces_save.UseVisualStyleBackColor = true;
+            this.btn_acces_save.Click += new System.EventHandler(this.btn_acces_save_Click);
             // 
             // gb_frames
             // 
@@ -757,9 +758,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btn_bino_save;
         private System.Windows.Forms.GroupBox gb_Accessories;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tb_Acces_Type;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox tb_Acces_Colour;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btn_acces_save;
         private System.Windows.Forms.GroupBox gb_frames;

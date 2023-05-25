@@ -58,10 +58,34 @@ namespace _1.SemesterProjekt.Repositories {
             }
         }
 
+        /// <summary>
+        /// Written by Ina
+        /// Method to Create new Accessory product
+        /// </summary>
+        /// <param name="accessories"></param>
+        /// <returns>Returns true if success, false otherwise</returns>
+        public bool InsertAccessoriesIntoDatabase(Accessories accessories)
+        {
+            if (!InsertProductIntoDatabase(accessories))
+            {
+                return false;
+            }
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string insertqlString = $"insert into Accessories (ID, Colour, Type) output inserted.ID values ({accessories.ID}, '{accessories.Type}', '{accessories.Colour}');";
+                SqlCommand sqlCommand = new SqlCommand(insertqlString, sqlConnection);
+
+                sqlConnection.Open();
+                accessories.ID = (int)sqlCommand.ExecuteScalar();
+                return true;
+            }
+        }
+
         #endregion
 
 
-#region Read
+        #region Read
 
         public List<Brand> SelectBrands() {
             List<Brand> brands = new List<Brand>();
