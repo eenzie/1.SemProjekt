@@ -17,21 +17,21 @@ namespace _1.SemesterProjekt.Models
         /// <param name="productID"></param>
         /// <param name="eyetestID"></param>
         /// <param name="orderID"></param>
-        public OrderLine(int id, int quantity, decimal salesPrice, int productID, int eyetestID, int orderID)
+        public OrderLine(int id, int quantity, decimal salesPrice, Product product, Eyetest eyetest, Order order)
         {
             this.ID = id;
             this.Quantity = quantity;
             this.SalesPrice = salesPrice;
-            this.ProductID = productID;
-            this.eyetestID = eyetestID;
-            this.orderID = orderID;
+            this.Product = product;
+            this.Eyetest = eyetest;
+            this.Order = order;
         }
 
         public int ID { get; set; }
         public int Quantity { get; set; }
         public decimal SalesPrice { get; set; }
-        public int ProductID { get; set; }
-        public int eyetestID { get; set; }
-        public int orderID { get; set; }
+        public Product Product { get; set; }
+        public Eyetest Eyetest { get; set; }
+        public Order Order { get; set; }
     }
 }
