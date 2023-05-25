@@ -16,5 +16,20 @@ namespace _1.SemesterProjekt
         {
             InitializeComponent();
         }
+
+        private void Form_Statistics_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_GetSales_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_PrintToFile_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
