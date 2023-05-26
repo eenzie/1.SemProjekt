@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace _1.SemesterProjekt
 {
@@ -16,6 +17,9 @@ namespace _1.SemesterProjekt
     {
         private Shop _shop;
         private readonly ShopService _shopService = new ShopService();
+        private readonly CustomerService _customerService = new CustomerService();
+        public BindingList<Customer> Customers = new BindingList<Customer>();
+
         public Form_Order(Shop shop)
         {
             InitializeComponent();
@@ -33,12 +37,40 @@ namespace _1.SemesterProjekt
 
         private void bt_SearchCustomer_Click(object sender, EventArgs e)
         {
+            string input = tb_CustomerSearch.Text;
 
+
+            if (int.TryParse(input, out int parsedInt)) {
+                Customers = new BindingList<Customer>() { _customerService.ReadCustomerById(parsedInt) };
+            }
+            else {
+                if (input.Contains("@")) {
+                    Customers = new BindingList<Customer>(_customerService.ReadCustomerByEmail(input));
+                }
+                else {
+                    Customers = new BindingList<Customer>(_customerService.ReadCustomersByName(input));
+                }
+            }
+
+            dgv_Customers.DataSource = Customers;
+            dgv_Customers.Columns["IsDeleted"].Visible = false;
         }
 
         private void bt_SelectCustomer_Click(object sender, EventArgs e)
         {
+            if (dgv_Customers.SelectedRows.Count == 0) {
+                return;
+            }
 
+            Customer customer = (Customer)dgv_Customers.SelectedRows[0].DataBoundItem;
+            FillCustomerForm(customer);
+        }
+
+        private void FillCustomerForm(Customer customer) {
+            tb_CustAdressOut.Text = customer.Address;
+            tb_CustMailOut.Text = customer.Email;
+            tb_CustNameOut.Text = customer.Name;
+            tb_CustPhoneOut.Text = customer.PhoneNo;
         }
 
         private void cmBox_ProductType_SelectedIndexChanged(object sender, EventArgs e)

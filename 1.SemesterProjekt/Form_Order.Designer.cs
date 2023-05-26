@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Order));
             this.bt_SelectCustomer = new System.Windows.Forms.Button();
             this.tb_CustomerSearch = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_Customers = new System.Windows.Forms.DataGridView();
             this.bt_SearchCustomer = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.bt_SelectProduct = new System.Windows.Forms.Button();
@@ -61,7 +61,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.cmBox = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Customers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_OrderLines)).BeginInit();
             this.SuspendLayout();
@@ -91,16 +91,19 @@
             this.tb_CustomerSearch.TabIndex = 20;
             this.tb_CustomerSearch.Text = "IIIIIIIIIII";
             // 
-            // dataGridView1
+            // dgv_Customers
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 55);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(740, 154);
-            this.dataGridView1.TabIndex = 19;
+            this.dgv_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Customers.Location = new System.Drawing.Point(13, 55);
+            this.dgv_Customers.Margin = new System.Windows.Forms.Padding(4);
+            this.dgv_Customers.MultiSelect = false;
+            this.dgv_Customers.Name = "dgv_Customers";
+            this.dgv_Customers.ReadOnly = true;
+            this.dgv_Customers.RowHeadersWidth = 51;
+            this.dgv_Customers.RowTemplate.Height = 24;
+            this.dgv_Customers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Customers.Size = new System.Drawing.Size(740, 154);
+            this.dgv_Customers.TabIndex = 19;
             // 
             // bt_SearchCustomer
             // 
@@ -158,9 +161,12 @@
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(16, 359);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(737, 145);
             this.dataGridView2.TabIndex = 24;
             // 
@@ -225,8 +231,10 @@
             this.dgv_OrderLines.Location = new System.Drawing.Point(816, 144);
             this.dgv_OrderLines.Margin = new System.Windows.Forms.Padding(4);
             this.dgv_OrderLines.Name = "dgv_OrderLines";
+            this.dgv_OrderLines.ReadOnly = true;
             this.dgv_OrderLines.RowHeadersWidth = 51;
             this.dgv_OrderLines.RowTemplate.Height = 24;
+            this.dgv_OrderLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_OrderLines.Size = new System.Drawing.Size(733, 241);
             this.dgv_OrderLines.TabIndex = 31;
             // 
@@ -463,14 +471,14 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.bt_SelectCustomer);
             this.Controls.Add(this.tb_CustomerSearch);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv_Customers);
             this.Controls.Add(this.bt_SearchCustomer);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_Order";
             this.Text = "Order Form";
             this.Load += new System.EventHandler(this.Form_Order_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Customers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_OrderLines)).EndInit();
             this.ResumeLayout(false);
@@ -482,7 +490,7 @@
 
         private System.Windows.Forms.Button bt_SelectCustomer;
         private System.Windows.Forms.TextBox tb_CustomerSearch;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_Customers;
         private System.Windows.Forms.Button bt_SearchCustomer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bt_SelectProduct;
