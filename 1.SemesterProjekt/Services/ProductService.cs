@@ -46,13 +46,20 @@ namespace _1.SemesterProjekt.Service
 
         public bool EditProduct(Product updatedProduct)
         {
-
             switch (updatedProduct.ProductGroupID)
             {
                 case 1:
                     return _database.UpdateFrame((Frames)updatedProduct);
-
+                case 2:
+                    return _database.UpdateContactLense((ContactLenses)updatedProduct);
+                case 3:
+                    return _database.UpdateGlass((Glasses)updatedProduct);
+                case 4:
+                    return _database.UpdateBinocular((Binoculars)updatedProduct);
+                case 5:
+                    return _database.UpdateAccessories((Accessories)updatedProduct);
             }
+
             return false;
         }
     }

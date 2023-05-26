@@ -328,7 +328,7 @@ namespace _1.SemesterProjekt.Repositories {
             }
         }
 
-        public bool UpdateGlas(Glasses updatedGlass)
+        public bool UpdateGlass(Glasses updatedGlass)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {

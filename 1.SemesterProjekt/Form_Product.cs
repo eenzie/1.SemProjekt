@@ -22,7 +22,6 @@ namespace _1.SemesterProjekt
         {
             InitializeComponent();
             _currentShop = currentShop;
-            lb_Shop.Text = _currentShop.ToString();
         }
 
         private void Form_Product_Load(object sender, EventArgs e)
@@ -30,7 +29,7 @@ namespace _1.SemesterProjekt
 
         }
 
-        private void bt_SearchProuct_Click(object sender, EventArgs e)
+        private void bt_SearchProduct_Click(object sender, EventArgs e)
         {
             string input = tb_ProductNumSearch.Text;
 
