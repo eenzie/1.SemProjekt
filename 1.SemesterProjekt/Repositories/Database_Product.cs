@@ -330,9 +330,7 @@ namespace _1.SemesterProjekt.Repositories {
 
             }
         }
-    }
-}
-        #endregion
 
+        #endregion
     }
 }

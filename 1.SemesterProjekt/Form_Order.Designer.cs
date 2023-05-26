@@ -408,6 +408,7 @@
             // 
             // cmBox
             // 
+            this.cmBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox.FormattingEnabled = true;
             this.cmBox.Location = new System.Drawing.Point(815, 453);

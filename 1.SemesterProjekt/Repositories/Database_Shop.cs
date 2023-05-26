@@ -67,5 +67,30 @@ namespace _1.SemesterProjekt.Repositories
             return employees;
         }
 
+        public List<Employee> GetAllEmployees(Shop shop) {
+            List<Employee> employees = new List<Employee>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string selectSqlString = $"select * from Employees where ShopId = {shop.ID};";
+                SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
+
+                sqlConnection.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                List<Shop> shops = GetAllShops();
+
+                while (reader.Read()) {
+                    int id = reader.GetInt32(0);
+                    string name = reader.GetString(1);
+                    string phone = reader.GetString(2);
+
+                    Employee employee = new Employee(id, name, phone, shop);
+                    employees.Add(employee);
+                }
+            }
+
+            return employees;
+        }
+
     }
 }

@@ -48,7 +48,7 @@ namespace _1.SemesterProjekt
 
         private void bt_Orders_Click(object sender, EventArgs e)
         {
-            Form_Order form_Order = new Form_Order();
+            Form_Order form_Order = new Form_Order(SelectedShop);
             form_Order.ShowDialog();
         }
 

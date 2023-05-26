@@ -1,4 +1,6 @@
-﻿using System;
+﻿using _1.SemesterProjekt.Models;
+using _1.SemesterProjekt.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +14,16 @@ namespace _1.SemesterProjekt
 {
     public partial class Form_Order : Form
     {
-        public Form_Order()
+        private Shop _shop;
+        private readonly ShopService _shopService = new ShopService();
+        public Form_Order(Shop shop)
         {
             InitializeComponent();
+            _shop = shop;
+            List<Employee> employees = _shopService.GetEmployees(_shop);
+
+            cmBox.DataSource = employees;
+            cmBox.DisplayMember = "Name";
         }
 
         private void Form_Order_Load(object sender, EventArgs e)
