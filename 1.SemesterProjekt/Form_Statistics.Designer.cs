@@ -51,7 +51,6 @@
             this.btn_PrintToFile = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.cnBox_Stat_Shop = new System.Windows.Forms.ComboBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Stat_OrderResults)).BeginInit();
             this.SuspendLayout();
             // 
@@ -351,6 +350,5 @@
         private System.Windows.Forms.Button btn_PrintToFile;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cnBox_Stat_Shop;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
