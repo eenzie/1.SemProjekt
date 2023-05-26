@@ -38,5 +38,22 @@ namespace _1.SemesterProjekt.Service
         public List<Frames> GetFrames() {
             return _database.SelectFrames();
         }
+
+        public List<Product> GetProducts()
+        {
+            return _database.SelectProductsFromDatabase();
+        }
+
+        public bool EditProduct(Product updatedProduct)
+        {
+
+            switch (updatedProduct.ProductGroupID)
+            {
+                case 1:
+                    return _database.UpdateFrame((Frames)updatedProduct);
+
+            }
+            return false;
+        }
     }
 }

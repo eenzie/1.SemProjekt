@@ -122,7 +122,7 @@ namespace _1.SemesterProjekt
             // We update existing product
             else
             {
-
+                _productService.EditProduct((Frames)Model);
             }
         }
 

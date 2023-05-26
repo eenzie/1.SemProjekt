@@ -152,7 +152,7 @@ namespace _1.SemesterProjekt.Repositories {
         #endregion
 
 
-        #region Read
+#region Read
 
         public List<Brand> SelectBrands() {
             List<Brand> brands = new List<Brand>();
@@ -254,6 +254,84 @@ namespace _1.SemesterProjekt.Repositories {
             return frames;
         }
 
+        #endregion
+
+
+        #region Update
+        public bool UpdateProduct(Product updatedProduct)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string updateSqlString = "UPDATE Product SET " +
+                                         "Name = @updatedName, " +
+                                         "Brand = @updatedBrand, " +
+                                         "Price = @updatedPrice" +
+                                         $"WHERE ID = {updatedProduct.ID};";
+
+                SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
+
+                sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedProduct.Name;
+                sqlCommand.Parameters.Add("@updatedBrand", SqlDbType.Int).Value = updatedProduct.Brand;
+                sqlCommand.Parameters.Add("@updatedPrice", SqlDbType.Decimal).Value = updatedProduct.Price;
+
+                try
+                {
+                    sqlConnection.Open();
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                    //if rowsAffected is greater than zero, then the program found the product and has
+                    //updated the customer, otherwise it is false and can't update the product
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    //false indicates that the program fails to update the product
+                    return false;
+                }
+
+            }
+        }
+
+
+        public bool UpdateFrame(Frames updatedFrame)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string updateSqlString = "UPDATE Frames SET " +
+                                         "Length = @updatedLength, " +
+                                         "Width = @updatedWidth, " +
+                                         "Colour = @updatedColour" +
+                                         "Material = @updatedMaterial" +
+                                         "Shape = @updatedShape" +
+                                         $"WHERE ID = {updatedFrame.ID};";
+
+                SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
+
+                sqlCommand.Parameters.Add("@updatedLength", SqlDbType.Decimal).Value = updatedFrame.Length;
+                sqlCommand.Parameters.Add("@updatedWidth", SqlDbType.Decimal).Value = updatedFrame.Width;
+                sqlCommand.Parameters.Add("@updatedColour", SqlDbType.NVarChar).Value = updatedFrame.Colour;
+                sqlCommand.Parameters.Add("@updatedMaterial", SqlDbType.NVarChar).Value = updatedFrame.Material;
+                sqlCommand.Parameters.Add("@updatedShape", SqlDbType.NVarChar).Value = updatedFrame.Shape;
+
+                try
+                {
+                    sqlConnection.Open();
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                    //if rowsAffected is greater than zero, then the program found the product and has
+                    //updated the customer, otherwise it is false and can't update the product
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    //false indicates that the program fails to update the product
+                    return false;
+                }
+
+            }
+        }
+    }
+}
         #endregion
 
     }

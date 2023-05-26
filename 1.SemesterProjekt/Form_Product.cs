@@ -1,4 +1,5 @@
 ﻿using _1.SemesterProjekt.Models;
+using _1.SemesterProjekt.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace _1.SemesterProjekt
     public partial class Form_Product : Form
     {
         private Shop _currentShop;
+        private ProductService _productService = new ProductService();
+        public BindingList<Product> Products { get; set; } = new BindingList<Product>();
         public Form_Product(Shop currentShop)
         {
             InitializeComponent();
@@ -29,12 +32,15 @@ namespace _1.SemesterProjekt
 
         private void bt_SearchProuct_Click(object sender, EventArgs e)
         {
-
+            string input = tb_ProductNumSearch.Text;
+            // string productType = cmBox_ProductType;
         }
 
         private void bt_ShowAllProducts_Click(object sender, EventArgs e)
         {
+            Products = new BindingList<Product>(_productService.GetProducts());
 
+            dgv_Products.DataSource = Products;
         }
 
         private void bt_NewProduct_Click(object sender, EventArgs e)
