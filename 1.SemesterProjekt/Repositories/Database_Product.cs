@@ -40,7 +40,6 @@ namespace _1.SemesterProjekt.Repositories {
         }
 
 
-
         /// <summary>
         /// Written by Anton
         /// </summary>
@@ -257,7 +256,7 @@ namespace _1.SemesterProjekt.Repositories {
         #endregion
 
 
-        #region Update
+#region Update
         public bool UpdateProduct(Product updatedProduct)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
@@ -288,7 +287,6 @@ namespace _1.SemesterProjekt.Repositories {
                     //false indicates that the program fails to update the product
                     return false;
                 }
-
             }
         }
 
@@ -327,10 +325,142 @@ namespace _1.SemesterProjekt.Repositories {
                     //false indicates that the program fails to update the product
                     return false;
                 }
+            }
+        }
+
+        public bool UpdateGlas(Glasses updatedGlass)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string updateSqlString = "UPDATE Glass SET " +
+                                         "Strength = @updatedStrength, " +
+                                         "GlassType = @updatedGlassType, " +
+                                         "Coating = @updatedCoating" +
+                                         "IsSunglasses = @updatedIsSunglasses" +
+                                         $"WHERE ID = {updatedGlass.ID};";
+
+                SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
+
+                sqlCommand.Parameters.Add("@updatedStrength", SqlDbType.Decimal).Value = updatedGlass.Strength;
+                sqlCommand.Parameters.Add("@updatedGlassType", SqlDbType.NVarChar).Value = updatedGlass.GlassType;
+                sqlCommand.Parameters.Add("@updatedCoating", SqlDbType.NVarChar).Value = updatedGlass.Coating;
+                sqlCommand.Parameters.Add("@updatedIsSunglasses", SqlDbType.Bit).Value = updatedGlass.IsSunglasses;
+
+                try
+                {
+                    sqlConnection.Open();
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                    //if rowsAffected is greater than zero, then the program found the product and has
+                    //updated the customer, otherwise it is false and can't update the product
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    //false indicates that the program fails to update the product
+                    return false;
+                }
 
             }
         }
 
+        public bool UpdateContactLense(ContactLenses updatedContactLense)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string updateSqlString = "UPDATE ContactLenses SET " +
+                                         "Duration = @updatedDuration, " +
+                                         "Strength = @updatedStrength, " +
+                                         "HasUVFilter = @updatedHasUVFilter" +
+                                         $"WHERE ID = {updatedContactLense.ID};";
+
+                SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
+
+                sqlCommand.Parameters.Add("@updatedDuration", SqlDbType.NVarChar).Value = updatedContactLense.Duration;
+                sqlCommand.Parameters.Add("@updatedStrength", SqlDbType.Decimal).Value = updatedContactLense.Strength;
+                sqlCommand.Parameters.Add("@updatedHasUVFilter", SqlDbType.Bit).Value = updatedContactLense.HasUVFilter;
+
+                try
+                {
+                    sqlConnection.Open();
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                    //if rowsAffected is greater than zero, then the program found the product and has
+                    //updated the customer, otherwise it is false and can't update the product
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    //false indicates that the program fails to update the product
+                    return false;
+                }
+
+            }
+        }
+
+        public bool UpdateBinocular(Binoculars updatedBinocular)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string updateSqlString = "UPDATE Binoculars SET " +
+                                         "Type = @updatedType, " +
+                                         "Zoom = @updatedZoom, " +
+                                         "IsWaterproof = @updatedIsWaterproof" +
+                                         $"WHERE ID = {updatedBinocular.ID};";
+
+                SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
+
+                sqlCommand.Parameters.Add("@updatedType", SqlDbType.NVarChar).Value = updatedBinocular.Type;
+                sqlCommand.Parameters.Add("@updatedZoom", SqlDbType.NVarChar).Value = updatedBinocular.Zoom;
+                sqlCommand.Parameters.Add("@updatedIsWaterproof", SqlDbType.TinyInt).Value = updatedBinocular.IsWaterproof;
+
+                try
+                {
+                    sqlConnection.Open();
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                    //if rowsAffected is greater than zero, then the program found the product and has
+                    //updated the customer, otherwise it is false and can't update the product
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    //false indicates that the program fails to update the product
+                    return false;
+                }
+            }
+        }
+
+        public bool UpdateAccessories(Accessories updatedAccessorie)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string updateSqlString = "UPDATE Accessories SET " +
+                                         "Colour = @updatedColour, " +
+                                         "Type = @updatedType, " +
+                                         $"WHERE ID = {updatedAccessorie.ID};";
+
+                SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
+
+                sqlCommand.Parameters.Add("@updatedColour", SqlDbType.NVarChar).Value = updatedAccessorie.Colour;
+                sqlCommand.Parameters.Add("@updatedType", SqlDbType.NVarChar).Value = updatedAccessorie.Type;
+
+                try
+                {
+                    sqlConnection.Open();
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                    //if rowsAffected is greater than zero, then the program found the product and has
+                    //updated the customer, otherwise it is false and can't update the product
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    //false indicates that the program fails to update the product
+                    return false;
+                }
+            }
+        }
         #endregion
     }
 }

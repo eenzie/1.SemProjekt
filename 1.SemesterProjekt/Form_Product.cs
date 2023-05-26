@@ -33,7 +33,18 @@ namespace _1.SemesterProjekt
         private void bt_SearchProuct_Click(object sender, EventArgs e)
         {
             string input = tb_ProductNumSearch.Text;
-            // string productType = cmBox_ProductType;
+
+            if (int.TryParse(input, out int parsedInt))
+            {
+                Products = new BindingList<Product>() { _productService.GetProducts().FirstOrDefault(x => x.ID == parsedInt) };
+            }
+            else
+            {
+                Products = new BindingList<Product>(_productService.GetProducts().Where(x => x.Name.ToLower().Contains(input.ToLower())).ToList());
+            }
+
+            dgv_Products.DataSource = Products;
+
         }
 
         private void bt_ShowAllProducts_Click(object sender, EventArgs e)
@@ -53,12 +64,14 @@ namespace _1.SemesterProjekt
 
         private void bt_UpdateProduct_Click(object sender, EventArgs e)
         {
-            if (dgv_Products.SelectedRows.Count == 0) {
+            if (dgv_Products.SelectedRows.Count == 0)
+            {
                 return;
             }
 
             var selectedItem = (Product)dgv_Products.SelectedRows[0].DataBoundItem;
-            if (selectedItem == default) {
+            if (selectedItem == default)
+            {
                 return;
             }
 

@@ -239,7 +239,6 @@ namespace _1.SemesterProjekt
                 return default;
             }
 
-
             Product product = new Product(name, brand, price, productGroupID);
             return product;
         }
