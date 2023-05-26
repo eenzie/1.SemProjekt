@@ -34,5 +34,9 @@ namespace _1.SemesterProjekt.Service
 
             return false;
         }
+
+        public List<Frames> GetFrames() {
+            return _database.SelectFrames();
+        }
     }
 }

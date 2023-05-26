@@ -134,7 +134,7 @@
             this.cmBox_IR_Colour.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_IR_Colour.FormattingEnabled = true;
             this.cmBox_IR_Colour.Location = new System.Drawing.Point(15, 148);
-            this.cmBox_IR_Colour.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmBox_IR_Colour.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_IR_Colour.Name = "cmBox_IR_Colour";
             this.cmBox_IR_Colour.Size = new System.Drawing.Size(327, 32);
             this.cmBox_IR_Colour.TabIndex = 7;
@@ -144,7 +144,7 @@
             this.cmBox_IR_Brand.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_IR_Brand.FormattingEnabled = true;
             this.cmBox_IR_Brand.Location = new System.Drawing.Point(18, 230);
-            this.cmBox_IR_Brand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmBox_IR_Brand.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_IR_Brand.Name = "cmBox_IR_Brand";
             this.cmBox_IR_Brand.Size = new System.Drawing.Size(327, 32);
             this.cmBox_IR_Brand.TabIndex = 8;
@@ -153,7 +153,12 @@
             // 
             this.num_IR_MinPrice.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num_IR_MinPrice.Location = new System.Drawing.Point(712, 303);
-            this.num_IR_MinPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.num_IR_MinPrice.Margin = new System.Windows.Forms.Padding(4);
+            this.num_IR_MinPrice.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.num_IR_MinPrice.Name = "num_IR_MinPrice";
             this.num_IR_MinPrice.Size = new System.Drawing.Size(108, 32);
             this.num_IR_MinPrice.TabIndex = 9;
@@ -162,7 +167,12 @@
             // 
             this.num_IR_MaxPrice.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num_IR_MaxPrice.Location = new System.Drawing.Point(896, 303);
-            this.num_IR_MaxPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.num_IR_MaxPrice.Margin = new System.Windows.Forms.Padding(4);
+            this.num_IR_MaxPrice.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.num_IR_MaxPrice.Name = "num_IR_MaxPrice";
             this.num_IR_MaxPrice.Size = new System.Drawing.Size(119, 32);
             this.num_IR_MaxPrice.TabIndex = 10;
@@ -171,7 +181,7 @@
             // 
             this.num_IR_Length.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num_IR_Length.Location = new System.Drawing.Point(1099, 152);
-            this.num_IR_Length.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.num_IR_Length.Margin = new System.Windows.Forms.Padding(4);
             this.num_IR_Length.Name = "num_IR_Length";
             this.num_IR_Length.Size = new System.Drawing.Size(160, 32);
             this.num_IR_Length.TabIndex = 11;
@@ -180,7 +190,7 @@
             // 
             this.num_IR_Width.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.num_IR_Width.Location = new System.Drawing.Point(1099, 193);
-            this.num_IR_Width.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.num_IR_Width.Margin = new System.Windows.Forms.Padding(4);
             this.num_IR_Width.Name = "num_IR_Width";
             this.num_IR_Width.Size = new System.Drawing.Size(160, 32);
             this.num_IR_Width.TabIndex = 12;
@@ -209,7 +219,7 @@
             // 
             this.dgv_IR_Result.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_IR_Result.Location = new System.Drawing.Point(15, 351);
-            this.dgv_IR_Result.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgv_IR_Result.Margin = new System.Windows.Forms.Padding(4);
             this.dgv_IR_Result.Name = "dgv_IR_Result";
             this.dgv_IR_Result.RowHeadersWidth = 51;
             this.dgv_IR_Result.Size = new System.Drawing.Size(1264, 254);
@@ -230,7 +240,7 @@
             this.cmBox_IR_Shape.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_IR_Shape.FormattingEnabled = true;
             this.cmBox_IR_Shape.Location = new System.Drawing.Point(491, 151);
-            this.cmBox_IR_Shape.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmBox_IR_Shape.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_IR_Shape.Name = "cmBox_IR_Shape";
             this.cmBox_IR_Shape.Size = new System.Drawing.Size(329, 32);
             this.cmBox_IR_Shape.TabIndex = 18;
@@ -250,7 +260,7 @@
             this.cmBox_IR_Material.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_IR_Material.FormattingEnabled = true;
             this.cmBox_IR_Material.Location = new System.Drawing.Point(491, 230);
-            this.cmBox_IR_Material.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmBox_IR_Material.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_IR_Material.Name = "cmBox_IR_Material";
             this.cmBox_IR_Material.Size = new System.Drawing.Size(329, 32);
             this.cmBox_IR_Material.TabIndex = 20;
@@ -279,7 +289,7 @@
             // 
             this.btn_IR_Search.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_IR_Search.Location = new System.Drawing.Point(1056, 298);
-            this.btn_IR_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_IR_Search.Margin = new System.Windows.Forms.Padding(4);
             this.btn_IR_Search.Name = "btn_IR_Search";
             this.btn_IR_Search.Size = new System.Drawing.Size(223, 41);
             this.btn_IR_Search.TabIndex = 22;

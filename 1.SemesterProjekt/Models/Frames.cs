@@ -32,6 +32,15 @@ namespace _1.SemesterProjekt.Models
             this.Material = material;
             this.Shape = shape;
          }
+
+        public Frames(Product product, decimal length, decimal width, string colour, string material, string shape) : base(product) 
+        {
+            this.Length = length;
+            this.Width = width;
+            this.Colour = colour;
+            this.Material = material;
+            this.Shape = shape;
+        }
         public decimal Length { get; set; }
         public decimal Width { get; set; }
         public string Colour { get; set; }

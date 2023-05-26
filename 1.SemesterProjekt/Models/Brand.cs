@@ -16,5 +16,9 @@ namespace _1.SemesterProjekt.Models {
             Name = name;
             ProductGroupId = productGroupId;
         }
+
+        public override string ToString() {
+            return Name;
+        }
     }
 }

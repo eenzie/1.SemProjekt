@@ -187,6 +187,7 @@ namespace _1.SemesterProjekt.Repositories {
                 string selectSqlString = $"select * from Products;";
 
                 SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
+                sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
                 while (sqlDataReader.Read()) {
@@ -198,6 +199,7 @@ namespace _1.SemesterProjekt.Repositories {
 
                     Brand brand = brands.Find(c => c.ID == brandID);
                     Product product = new Product(id, name, brand, price, productGroupID);
+                    products.Add(product);
                 }
             }
 
@@ -224,6 +226,32 @@ namespace _1.SemesterProjekt.Repositories {
             }
 
             return data;
+        }
+
+        public List<Frames> SelectFrames() {
+            List<Frames> frames = new List<Frames>();
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string sqlSelectString = $"select * from Frames;";
+
+                SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
+                sqlConnection.Open();
+                List<Product> products = SelectProductsFromDatabase();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read()) {
+                    int id = sqlDataReader.GetInt32(0);
+                    Product product = products.FirstOrDefault(c => c.ID == id);
+                    decimal length = sqlDataReader.GetDecimal(1);
+                    decimal width = sqlDataReader.GetDecimal(2);
+                    string colour = sqlDataReader.GetString(3);
+                    string material = sqlDataReader.GetString(4);
+                    string shape = sqlDataReader.GetString(5);
+                    Frames frame = new Frames(product, length, width, colour, material, shape);
+                    frames.Add(frame);
+                }
+            }
+
+            return frames;
         }
 
         #endregion
