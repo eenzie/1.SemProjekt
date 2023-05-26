@@ -59,6 +59,8 @@
             this.bt_SearchProduct = new System.Windows.Forms.Button();
             this.cmBox_ProductType = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.cmBox = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_OrderLines)).BeginInit();
@@ -69,7 +71,7 @@
             this.bt_SelectCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_SelectCustomer.Image = ((System.Drawing.Image)(resources.GetObject("bt_SelectCustomer.Image")));
             this.bt_SelectCustomer.Location = new System.Drawing.Point(653, 217);
-            this.bt_SelectCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_SelectCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.bt_SelectCustomer.Name = "bt_SelectCustomer";
             this.bt_SelectCustomer.Size = new System.Drawing.Size(100, 37);
             this.bt_SelectCustomer.TabIndex = 21;
@@ -83,7 +85,7 @@
             // 
             this.tb_CustomerSearch.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_CustomerSearch.Location = new System.Drawing.Point(261, 9);
-            this.tb_CustomerSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_CustomerSearch.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustomerSearch.Name = "tb_CustomerSearch";
             this.tb_CustomerSearch.Size = new System.Drawing.Size(379, 32);
             this.tb_CustomerSearch.TabIndex = 20;
@@ -93,7 +95,7 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(13, 55);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -105,7 +107,7 @@
             this.bt_SearchCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_SearchCustomer.Image = ((System.Drawing.Image)(resources.GetObject("bt_SearchCustomer.Image")));
             this.bt_SearchCustomer.Location = new System.Drawing.Point(653, 6);
-            this.bt_SearchCustomer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_SearchCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.bt_SearchCustomer.Name = "bt_SearchCustomer";
             this.bt_SearchCustomer.Size = new System.Drawing.Size(100, 37);
             this.bt_SearchCustomer.TabIndex = 18;
@@ -131,7 +133,7 @@
             this.bt_SelectProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_SelectProduct.Image = ((System.Drawing.Image)(resources.GetObject("bt_SelectProduct.Image")));
             this.bt_SelectProduct.Location = new System.Drawing.Point(612, 508);
-            this.bt_SelectProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_SelectProduct.Margin = new System.Windows.Forms.Padding(4);
             this.bt_SelectProduct.Name = "bt_SelectProduct";
             this.bt_SelectProduct.Size = new System.Drawing.Size(141, 37);
             this.bt_SelectProduct.TabIndex = 26;
@@ -145,7 +147,7 @@
             // 
             this.tb_ProductSearch.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_ProductSearch.Location = new System.Drawing.Point(261, 311);
-            this.tb_ProductSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_ProductSearch.Margin = new System.Windows.Forms.Padding(4);
             this.tb_ProductSearch.Name = "tb_ProductSearch";
             this.tb_ProductSearch.Size = new System.Drawing.Size(379, 32);
             this.tb_ProductSearch.TabIndex = 25;
@@ -155,7 +157,7 @@
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(16, 359);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
@@ -221,7 +223,7 @@
             // 
             this.dgv_OrderLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_OrderLines.Location = new System.Drawing.Point(816, 144);
-            this.dgv_OrderLines.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgv_OrderLines.Margin = new System.Windows.Forms.Padding(4);
             this.dgv_OrderLines.Name = "dgv_OrderLines";
             this.dgv_OrderLines.RowHeadersWidth = 51;
             this.dgv_OrderLines.RowTemplate.Height = 24;
@@ -232,7 +234,7 @@
             // 
             this.tb_Amount.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Amount.Location = new System.Drawing.Point(484, 512);
-            this.tb_Amount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_Amount.Margin = new System.Windows.Forms.Padding(4);
             this.tb_Amount.Name = "tb_Amount";
             this.tb_Amount.Size = new System.Drawing.Size(115, 32);
             this.tb_Amount.TabIndex = 32;
@@ -264,7 +266,7 @@
             // 
             this.tb_Subtotal.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Subtotal.Location = new System.Drawing.Point(1433, 393);
-            this.tb_Subtotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_Subtotal.Margin = new System.Windows.Forms.Padding(4);
             this.tb_Subtotal.Name = "tb_Subtotal";
             this.tb_Subtotal.Size = new System.Drawing.Size(115, 32);
             this.tb_Subtotal.TabIndex = 34;
@@ -285,7 +287,7 @@
             // 
             this.tb_VAT.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_VAT.Location = new System.Drawing.Point(1433, 432);
-            this.tb_VAT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_VAT.Margin = new System.Windows.Forms.Padding(4);
             this.tb_VAT.Name = "tb_VAT";
             this.tb_VAT.Size = new System.Drawing.Size(115, 32);
             this.tb_VAT.TabIndex = 36;
@@ -295,7 +297,7 @@
             // 
             this.tb_TotalSale.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_TotalSale.Location = new System.Drawing.Point(1433, 469);
-            this.tb_TotalSale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_TotalSale.Margin = new System.Windows.Forms.Padding(4);
             this.tb_TotalSale.Name = "tb_TotalSale";
             this.tb_TotalSale.Size = new System.Drawing.Size(115, 32);
             this.tb_TotalSale.TabIndex = 38;
@@ -316,7 +318,7 @@
             // 
             this.tb_CustNameOut.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_CustNameOut.Location = new System.Drawing.Point(1007, 23);
-            this.tb_CustNameOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_CustNameOut.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustNameOut.Name = "tb_CustNameOut";
             this.tb_CustNameOut.Size = new System.Drawing.Size(541, 32);
             this.tb_CustNameOut.TabIndex = 40;
@@ -326,7 +328,7 @@
             // 
             this.tb_CustAdressOut.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_CustAdressOut.Location = new System.Drawing.Point(1007, 55);
-            this.tb_CustAdressOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_CustAdressOut.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustAdressOut.Name = "tb_CustAdressOut";
             this.tb_CustAdressOut.Size = new System.Drawing.Size(541, 32);
             this.tb_CustAdressOut.TabIndex = 41;
@@ -336,7 +338,7 @@
             // 
             this.tb_CustPhoneOut.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_CustPhoneOut.Location = new System.Drawing.Point(1007, 91);
-            this.tb_CustPhoneOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_CustPhoneOut.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustPhoneOut.Name = "tb_CustPhoneOut";
             this.tb_CustPhoneOut.Size = new System.Drawing.Size(185, 32);
             this.tb_CustPhoneOut.TabIndex = 42;
@@ -346,7 +348,7 @@
             // 
             this.tb_CustMailOut.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_CustMailOut.Location = new System.Drawing.Point(1331, 94);
-            this.tb_CustMailOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_CustMailOut.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustMailOut.Name = "tb_CustMailOut";
             this.tb_CustMailOut.Size = new System.Drawing.Size(217, 32);
             this.tb_CustMailOut.TabIndex = 43;
@@ -357,7 +359,7 @@
             this.bt_Payment.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_Payment.Image = ((System.Drawing.Image)(resources.GetObject("bt_Payment.Image")));
             this.bt_Payment.Location = new System.Drawing.Point(1433, 506);
-            this.bt_Payment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_Payment.Margin = new System.Windows.Forms.Padding(4);
             this.bt_Payment.Name = "bt_Payment";
             this.bt_Payment.Size = new System.Drawing.Size(116, 37);
             this.bt_Payment.TabIndex = 44;
@@ -372,7 +374,7 @@
             this.bt_SearchProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_SearchProduct.Image = ((System.Drawing.Image)(resources.GetObject("bt_SearchProduct.Image")));
             this.bt_SearchProduct.Location = new System.Drawing.Point(653, 308);
-            this.bt_SearchProduct.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.bt_SearchProduct.Margin = new System.Windows.Forms.Padding(4);
             this.bt_SearchProduct.Name = "bt_SearchProduct";
             this.bt_SearchProduct.Size = new System.Drawing.Size(100, 37);
             this.bt_SearchProduct.TabIndex = 45;
@@ -404,12 +406,35 @@
             this.label11.TabIndex = 47;
             this.label11.Text = "Vælg produkttype";
             // 
+            // cmBox
+            // 
+            this.cmBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmBox.FormattingEnabled = true;
+            this.cmBox.Location = new System.Drawing.Point(815, 453);
+            this.cmBox.Margin = new System.Windows.Forms.Padding(4);
+            this.cmBox.Name = "cmBox";
+            this.cmBox.Size = new System.Drawing.Size(345, 32);
+            this.cmBox.TabIndex = 48;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(812, 425);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(124, 24);
+            this.label12.TabIndex = 49;
+            this.label12.Text = "Medarbejder:";
+            // 
             // Form_Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
             this.ClientSize = new System.Drawing.Size(1565, 554);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.cmBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.cmBox_ProductType);
             this.Controls.Add(this.bt_SearchProduct);
@@ -440,7 +465,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.bt_SearchCustomer);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_Order";
             this.Text = "Order Form";
             this.Load += new System.EventHandler(this.Form_Order_Load);
@@ -484,5 +509,7 @@
         private System.Windows.Forms.Button bt_SearchProduct;
         private System.Windows.Forms.ComboBox cmBox_ProductType;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmBox;
+        private System.Windows.Forms.Label label12;
     }
 }

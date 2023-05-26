@@ -17,5 +17,14 @@ namespace _1.SemesterProjekt
             InitializeComponent();
         }
 
+        private void Form_Intelligent_Advisor_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_IR_Search_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

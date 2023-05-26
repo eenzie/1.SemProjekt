@@ -45,12 +45,13 @@
             this.tb_Stat_TotalSales = new System.Windows.Forms.TextBox();
             this.tb_Stat_SalesCount = new System.Windows.Forms.TextBox();
             this.tb_Stat_AverageDay = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cmBox_Stat_ProductType = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tb_Stat_AverageOrder = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btn_PrintToFile = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cnBox_Stat_Shop = new System.Windows.Forms.ComboBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Stat_OrderResults)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,8 +59,8 @@
             // 
             this.cmBox_Stat_Employee.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_Stat_Employee.FormattingEnabled = true;
-            this.cmBox_Stat_Employee.Location = new System.Drawing.Point(181, 343);
-            this.cmBox_Stat_Employee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmBox_Stat_Employee.Location = new System.Drawing.Point(182, 268);
+            this.cmBox_Stat_Employee.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_Stat_Employee.Name = "cmBox_Stat_Employee";
             this.cmBox_Stat_Employee.Size = new System.Drawing.Size(327, 32);
             this.cmBox_Stat_Employee.TabIndex = 12;
@@ -68,8 +69,8 @@
             // 
             this.cmBox_Stat_Customer.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_Stat_Customer.FormattingEnabled = true;
-            this.cmBox_Stat_Customer.Location = new System.Drawing.Point(181, 270);
-            this.cmBox_Stat_Customer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmBox_Stat_Customer.Location = new System.Drawing.Point(182, 203);
+            this.cmBox_Stat_Customer.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_Stat_Customer.Name = "cmBox_Stat_Customer";
             this.cmBox_Stat_Customer.Size = new System.Drawing.Size(327, 32);
             this.cmBox_Stat_Customer.TabIndex = 11;
@@ -78,7 +79,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(15, 270);
+            this.label6.Location = new System.Drawing.Point(16, 203);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(76, 29);
             this.label6.TabIndex = 10;
@@ -98,7 +99,7 @@
             // 
             this.dtp_Stat_From.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtp_Stat_From.Location = new System.Drawing.Point(245, 79);
-            this.dtp_Stat_From.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtp_Stat_From.Margin = new System.Windows.Forms.Padding(4);
             this.dtp_Stat_From.Name = "dtp_Stat_From";
             this.dtp_Stat_From.Size = new System.Drawing.Size(263, 32);
             this.dtp_Stat_From.TabIndex = 13;
@@ -127,7 +128,7 @@
             // 
             this.dtp_Stat_To.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtp_Stat_To.Location = new System.Drawing.Point(245, 128);
-            this.dtp_Stat_To.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtp_Stat_To.Margin = new System.Windows.Forms.Padding(4);
             this.dtp_Stat_To.Name = "dtp_Stat_To";
             this.dtp_Stat_To.Size = new System.Drawing.Size(263, 32);
             this.dtp_Stat_To.TabIndex = 17;
@@ -136,7 +137,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(15, 348);
+            this.label4.Location = new System.Drawing.Point(16, 271);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(143, 29);
             this.label4.TabIndex = 18;
@@ -145,8 +146,8 @@
             // btn_GetSales
             // 
             this.btn_GetSales.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_GetSales.Location = new System.Drawing.Point(305, 411);
-            this.btn_GetSales.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_GetSales.Location = new System.Drawing.Point(305, 382);
+            this.btn_GetSales.Margin = new System.Windows.Forms.Padding(4);
             this.btn_GetSales.Name = "btn_GetSales";
             this.btn_GetSales.Size = new System.Drawing.Size(204, 48);
             this.btn_GetSales.TabIndex = 19;
@@ -158,7 +159,7 @@
             // 
             this.dgv_Stat_OrderResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Stat_OrderResults.Location = new System.Drawing.Point(564, 15);
-            this.dgv_Stat_OrderResults.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgv_Stat_OrderResults.Margin = new System.Windows.Forms.Padding(4);
             this.dgv_Stat_OrderResults.Name = "dgv_Stat_OrderResults";
             this.dgv_Stat_OrderResults.RowHeadersWidth = 51;
             this.dgv_Stat_OrderResults.Size = new System.Drawing.Size(745, 321);
@@ -198,7 +199,7 @@
             // 
             this.tb_Stat_TotalSales.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Stat_TotalSales.Location = new System.Drawing.Point(692, 363);
-            this.tb_Stat_TotalSales.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_Stat_TotalSales.Margin = new System.Windows.Forms.Padding(4);
             this.tb_Stat_TotalSales.Name = "tb_Stat_TotalSales";
             this.tb_Stat_TotalSales.Size = new System.Drawing.Size(145, 32);
             this.tb_Stat_TotalSales.TabIndex = 24;
@@ -208,7 +209,7 @@
             // 
             this.tb_Stat_SalesCount.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Stat_SalesCount.Location = new System.Drawing.Point(692, 411);
-            this.tb_Stat_SalesCount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_Stat_SalesCount.Margin = new System.Windows.Forms.Padding(4);
             this.tb_Stat_SalesCount.Name = "tb_Stat_SalesCount";
             this.tb_Stat_SalesCount.Size = new System.Drawing.Size(145, 32);
             this.tb_Stat_SalesCount.TabIndex = 25;
@@ -218,31 +219,11 @@
             // 
             this.tb_Stat_AverageDay.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Stat_AverageDay.Location = new System.Drawing.Point(1163, 363);
-            this.tb_Stat_AverageDay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_Stat_AverageDay.Margin = new System.Windows.Forms.Padding(4);
             this.tb_Stat_AverageDay.Name = "tb_Stat_AverageDay";
             this.tb_Stat_AverageDay.Size = new System.Drawing.Size(145, 32);
             this.tb_Stat_AverageDay.TabIndex = 26;
             this.tb_Stat_AverageDay.Text = "oooo";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(15, 199);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(134, 29);
-            this.label9.TabIndex = 27;
-            this.label9.Text = "Produkttype";
-            // 
-            // cmBox_Stat_ProductType
-            // 
-            this.cmBox_Stat_ProductType.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmBox_Stat_ProductType.FormattingEnabled = true;
-            this.cmBox_Stat_ProductType.Location = new System.Drawing.Point(181, 199);
-            this.cmBox_Stat_ProductType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cmBox_Stat_ProductType.Name = "cmBox_Stat_ProductType";
-            this.cmBox_Stat_ProductType.Size = new System.Drawing.Size(327, 32);
-            this.cmBox_Stat_ProductType.TabIndex = 28;
             // 
             // label10
             // 
@@ -258,7 +239,7 @@
             // 
             this.tb_Stat_AverageOrder.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Stat_AverageOrder.Location = new System.Drawing.Point(1163, 411);
-            this.tb_Stat_AverageOrder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tb_Stat_AverageOrder.Margin = new System.Windows.Forms.Padding(4);
             this.tb_Stat_AverageOrder.Name = "tb_Stat_AverageOrder";
             this.tb_Stat_AverageOrder.Size = new System.Drawing.Size(145, 32);
             this.tb_Stat_AverageOrder.TabIndex = 31;
@@ -277,7 +258,7 @@
             // btn_PrintToFile
             // 
             this.btn_PrintToFile.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_PrintToFile.Location = new System.Drawing.Point(304, 467);
+            this.btn_PrintToFile.Location = new System.Drawing.Point(1105, 476);
             this.btn_PrintToFile.Margin = new System.Windows.Forms.Padding(4);
             this.btn_PrintToFile.Name = "btn_PrintToFile";
             this.btn_PrintToFile.Size = new System.Drawing.Size(204, 48);
@@ -286,18 +267,38 @@
             this.btn_PrintToFile.UseVisualStyleBackColor = true;
             this.btn_PrintToFile.Click += new System.EventHandler(this.btn_PrintToFile_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(16, 331);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(63, 29);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "Butik";
+            // 
+            // cnBox_Stat_Shop
+            // 
+            this.cnBox_Stat_Shop.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cnBox_Stat_Shop.FormattingEnabled = true;
+            this.cnBox_Stat_Shop.Location = new System.Drawing.Point(182, 332);
+            this.cnBox_Stat_Shop.Margin = new System.Windows.Forms.Padding(4);
+            this.cnBox_Stat_Shop.Name = "cnBox_Stat_Shop";
+            this.cnBox_Stat_Shop.Size = new System.Drawing.Size(327, 32);
+            this.cnBox_Stat_Shop.TabIndex = 34;
+            // 
             // Form_Statistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1325, 549);
+            this.Controls.Add(this.cnBox_Stat_Shop);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.btn_PrintToFile);
             this.Controls.Add(this.tb_Stat_AverageOrder);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.cmBox_Stat_ProductType);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.tb_Stat_AverageDay);
             this.Controls.Add(this.tb_Stat_SalesCount);
             this.Controls.Add(this.tb_Stat_TotalSales);
@@ -315,7 +316,7 @@
             this.Controls.Add(this.cmBox_Stat_Customer);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_Statistics";
             this.Text = "Statistik";
             this.Load += new System.EventHandler(this.Form_Statistics_Load);
@@ -344,11 +345,12 @@
         private System.Windows.Forms.TextBox tb_Stat_TotalSales;
         private System.Windows.Forms.TextBox tb_Stat_SalesCount;
         private System.Windows.Forms.TextBox tb_Stat_AverageDay;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cmBox_Stat_ProductType;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tb_Stat_AverageOrder;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btn_PrintToFile;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cnBox_Stat_Shop;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

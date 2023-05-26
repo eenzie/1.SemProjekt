@@ -114,10 +114,9 @@ namespace _1.SemesterProjekt
                 }
 
                 Model = new Frames(product.ID, product.Name, product.Brand, product.Price,
-                    length, width, colour, shape, material);
+                    length, width, colour, material, shape);
 
                 _productService.CreatedProduct(Model);
-
 
             }
             // We update existing product
