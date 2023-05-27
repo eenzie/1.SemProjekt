@@ -463,6 +463,11 @@ namespace _1.SemesterProjekt.Repositories {
         }
         #endregion
 
+        /// <summary>
+        /// Written by Anh
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         public bool DeleteProduct(Product product)
         {
             // //This using statement ensures that the SqlConnection object

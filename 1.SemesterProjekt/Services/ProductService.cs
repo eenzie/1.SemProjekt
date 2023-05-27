@@ -63,6 +63,12 @@ namespace _1.SemesterProjekt.Service
             return false;
         }
 
+
+        /// <summary>
+        /// Written by Anh
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         public bool DeleteProduct(Product product)
         {
             bool isDeleted = _database.DeleteProduct(product);
