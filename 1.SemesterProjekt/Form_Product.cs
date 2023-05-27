@@ -77,11 +77,27 @@ namespace _1.SemesterProjekt
             Form_Product_Edit form_Product_Edit = new Form_Product_Edit(selectedItem);
             form_Product_Edit.ShowDialog();
 
+
         }
 
+        /// <summary>
+        /// Written by Anh
+        /// This deletes the selected row of a product
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_DeleteProduct_Click(object sender, EventArgs e)
         {
+                if (dgv_Products.SelectedRows.Count == 0)
+                {
+                    return;
+                }
 
+                DataGridViewRow selectedRow = dgv_Products.SelectedRows[0];
+                Product selectedProduct = (Product)selectedRow.DataBoundItem;
+
+                // Fjerner det valgte produktlinje 
+                dgv_Products.Rows.Remove(selectedRow);
+            }
         }
     }
-}
