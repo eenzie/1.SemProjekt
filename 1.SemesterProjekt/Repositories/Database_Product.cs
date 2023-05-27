@@ -462,5 +462,35 @@ namespace _1.SemesterProjekt.Repositories {
             }
         }
         #endregion
+
+        public bool DeleteProduct(Product product)
+        {
+            // //This using statement ensures that the SqlConnection object
+            //is disposed of properly after its usage. It establishes a connection to the database
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string deleteSqlString = $"DELETE FROM Products WHERE Id = {product.ID}";
+
+                using (SqlCommand sqlCommand = new SqlCommand(deleteSqlString, sqlConnection))
+                {
+
+                    try
+                    {
+                        sqlConnection.Open();
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                        //if rowsAffected is greater than zero, then the program found the customer and has
+                        //deleted the customer, otherwise it is false and can't delete the customer
+                        return rowsAffected > 0;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        //false indicates that the program fails to delete the customer
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }

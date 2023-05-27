@@ -62,5 +62,11 @@ namespace _1.SemesterProjekt.Service
 
             return false;
         }
+
+        public bool DeleteProduct(Product product)
+        {
+            bool isDeleted = _database.DeleteProduct(product);
+            return isDeleted;
+        }
     }
 }
