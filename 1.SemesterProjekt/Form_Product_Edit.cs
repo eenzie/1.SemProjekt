@@ -20,6 +20,7 @@ namespace _1.SemesterProjekt
         // This will store the existing Product
         public Product Model { get; set; }
         private readonly ProductService _productService = new ProductService();
+        public event EventHandler<Product> ProductUpdated;
 
 
         /// <summary>
@@ -122,7 +123,7 @@ namespace _1.SemesterProjekt
             // We update existing product
             else
             {
-                _productService.EditProduct((Frames)Model);
+                //_productService.EditProduct((Frames)Model);
             }
         }
 
@@ -161,7 +162,7 @@ namespace _1.SemesterProjekt
             // We update existing product
             else
             {
-
+                MessageBox.Show("There was a problem updating the product, make sure the input is correct!", "There was a problem!", MessageBoxButtons.OK);
             }
         }
 

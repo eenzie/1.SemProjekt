@@ -60,7 +60,11 @@ namespace _1.SemesterProjekt
         }
 
 
-
+        /// <summary>
+        /// Written by Anh
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_UpdateProduct_Click(object sender, EventArgs e)
         {
             if (dgv_Products.SelectedRows.Count == 0)
@@ -68,16 +72,33 @@ namespace _1.SemesterProjekt
                 return;
             }
 
-            var selectedItem = (Product)dgv_Products.SelectedRows[0].DataBoundItem;
-            if (selectedItem == default)
-            {
-                return;
-            }
+            // Find en måde at få den selected customer i datagridrow
+            var row = dgv_Products.SelectedRows[0];
+            Product product = (Product)row.DataBoundItem;
 
-            Form_Product_Edit form_Product_Edit = new Form_Product_Edit(selectedItem);
+
+            var form_Product_Edit = new Form_Product_Edit(product);
+            form_Product_Edit.ProductUpdated += Form_Product_Edit_ProductUpdated;
             form_Product_Edit.ShowDialog();
+            form_Product_Edit.ProductUpdated -= Form_Product_Edit_ProductUpdated;
 
+        }
 
+        /// <summary>
+        /// Written by Anh
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form_Product_Edit_ProductUpdated(object sender, Product e)
+        {
+            Product old = Products.FirstOrDefault(p => p.ID == e.ID);
+            if (old != default)
+            {
+                int index = Products.IndexOf(old);
+                Products.Remove(old);
+                Products.Insert(index, e);
+                dgv_Products.Rows[index].Selected = true;
+            }
         }
 
         /// <summary>
