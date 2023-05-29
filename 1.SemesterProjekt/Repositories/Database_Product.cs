@@ -15,9 +15,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Globalization;
 
 namespace _1.SemesterProjekt.Repositories {
-    public class Database_Product {
-        private readonly string ConnectionString = @"Server=mssql3.unoeuro.com;Database=tripshop_dk_db_project;User Id=tripshop_dk;Password=wDafdGbx6ynAkcRzprmt;TrustServerCertificate=True";
-
+    public class Database_Product : Database_Abstract {
+        
 #region Create
         private bool InsertProductIntoDatabase(Product product) {
             if (product.Price <= 0) {

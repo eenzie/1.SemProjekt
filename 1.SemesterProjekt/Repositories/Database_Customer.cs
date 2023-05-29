@@ -6,10 +6,9 @@ using System.Data.SqlClient;
 
 namespace _1.SemesterProjekt.Repositories
 {
-    public class Database_Customer
+    public class Database_Customer : Database_Abstract
     {
-        private readonly string ConnectionString = @"Server=mssql3.unoeuro.com;Database=tripshop_dk_db_project;User Id=tripshop_dk;Password=wDafdGbx6ynAkcRzprmt;TrustServerCertificate=True";
-
+        
         public List<Customer> GetCustomerByEmail(string email)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))

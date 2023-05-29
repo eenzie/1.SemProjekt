@@ -103,6 +103,7 @@
     <Compile Include="Models\Shop.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Database_Abstract.cs" />
     <Compile Include="Repositories\Database_Order.cs" />
     <Compile Include="Repositories\Database_Product.cs" />
     <Compile Include="Repositories\Database_Customer.cs" />

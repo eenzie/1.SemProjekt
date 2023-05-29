@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace _1.SemesterProjekt.Repositories
 {
-    public class Database_Shop
+    public class Database_Shop : Database_Abstract
     {
-        private readonly string ConnectionString = @"Server=mssql3.unoeuro.com;Database=tripshop_dk_db_project;User Id=tripshop_dk;Password=wDafdGbx6ynAkcRzprmt;TrustServerCertificate=True";
-
         public List<Shop> GetAllShops()
         {
             List<Shop> shops = new List<Shop>();
