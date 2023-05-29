@@ -51,9 +51,7 @@ namespace _1.SemesterProjekt.Services
         public bool CreateOrder(Order order) {
             // Opret først Order i order tabellen
 
-
-            // Derefter opret hver orderline i order.OrderLines
-            return true;
+            return database_Order.InsertOrder(order);
         }
 
     }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,40 @@ namespace _1.SemesterProjekt.Repositories
     {
         Database_Shop Database_Shop = new Database_Shop();
         Database_Product Database_Product = new Database_Product();
+
+
+        public bool InsertOrder(Order order) {
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+
+                string insertSqlString = $"insert into Orders (Date, Subtotal, CustomerID, employeeID, ShopID)  output inserted.ID values ('{order.Date.ToString(CultureInfo.InvariantCulture)}',{order.SubTotal.ToString(CultureInfo.InvariantCulture)},{order.Customer.ID},{order.Employee.ID},{order.Shop.ID});";
+
+                SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
+
+                sqlConnection.Open();
+                order.ID = (int)sqlCommand.ExecuteScalar();
+            }
+
+            InsertOrderLines(order);
+            return order.ID != 0;
+
+        }
+
+        private bool InsertOrderLines(Order order) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                sqlConnection.Open();
+                foreach (OrderLine orderLine in order.OrderLines) {
+                    string insertSqlString = $"insert into OrderLine (Quantity, SalesPrice, ProductID, OrderID) output inserted.ID values ({orderLine.Quantity},{orderLine.SalesPrice.ToString(CultureInfo.InvariantCulture)},{orderLine.Product.ID},{order.ID});";
+
+                    SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
+
+                    orderLine.ID = (int)sqlCommand.ExecuteScalar();
+                }
+
+                return true;
+            }
+        }
+
 
         /// <summary>
         /// Written By Anton

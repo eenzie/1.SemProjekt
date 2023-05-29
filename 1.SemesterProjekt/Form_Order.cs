@@ -262,13 +262,15 @@ namespace _1.SemesterProjekt
         /// <param name="e"></param>
         private void bt_Payment_Click(object sender, EventArgs e)
         {
-            DateTime today = DateTime.Today;
+            DateTime today = DateTime.Now;
 
             Order order = new Order(today, CalculateSubtotal(), _selectedCustomer, _selectedEmployee, _shop);
             order.OrderLines = this.OrderLines.ToList();
 
             if (_orderService.CreateOrder(order)) {
                 MessageBox.Show("Order has been submitted to the database!", "Success", MessageBoxButtons.OK);
+                OrderLines.Clear();
+                _order = new Order(_shop);
             }
             else {
                 MessageBox.Show("Failed to commit the order!", "Failed", MessageBoxButtons.OK);
