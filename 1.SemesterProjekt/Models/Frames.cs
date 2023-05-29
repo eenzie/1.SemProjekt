@@ -20,7 +20,7 @@ namespace _1.SemesterProjekt.Models
         /// <param name="colour"></param>
         /// <param name="material"></param>
         /// <param name="shape"></param>
-        public Frames(int id, string name, Brand brand, decimal price, decimal length, decimal width, string colour, string material, string shape) : base(id, name, brand, price, 1)
+        public Frames(int id, string name, Brand brand, decimal price, decimal length, decimal width, string colour, string material, string shape) : base(id, name, brand, price, PGID)
         {
             this.ID = id;
             this.Name = name;
@@ -48,7 +48,8 @@ namespace _1.SemesterProjekt.Models
         public string Material { get; set; }
         public string Shape { get; set; }
 
-        public int productGroupID => 1;
+        public int productGroupID => PGID;
+        private const int PGID = 1;
     }
 }
 

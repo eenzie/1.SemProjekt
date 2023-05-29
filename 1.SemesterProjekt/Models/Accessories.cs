@@ -19,13 +19,14 @@ namespace _1.SemesterProjekt.Models
         /// <param name="price"></param>
         /// <param name="stock"></param>
         /// <param name="type"></param>
-        public Accessories(int id, string name, Brand brand, decimal price, string type, string colour) : base(id, name, brand, price, 6)
+        public Accessories(int id, string name, Brand brand, decimal price, string type, string colour) : base(id, name, brand, price, PGID)
         {
             this.Type = type;
             this.Colour = colour;
         }
         public string Type { get; set; }
         public string Colour { get; set; }
-        public override int ProductGroupID => 5;
+        public override int ProductGroupID => PGID;
+        private const int PGID = 5;
     }
 }

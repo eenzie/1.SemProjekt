@@ -16,6 +16,7 @@ namespace _1.SemesterProjekt.Service
         public Dictionary<int, string> Categories => _database.SelectProductType();
         public List<Brand> Brands => _database.SelectBrands();
 
+
         public bool CreatedProduct(Product product)
         {
             switch (product.ProductGroupID)

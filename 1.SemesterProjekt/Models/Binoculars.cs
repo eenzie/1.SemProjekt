@@ -17,7 +17,7 @@ namespace _1.SemesterProjekt.Models
         /// <param name="price"></param>
         /// <param name="stock"></param>
         /// <param name="type"></param>
-        public Binoculars(int id, string name, Brand brand, decimal price, string type, string zoom, bool isWaterproof) : base(id, name, brand, price, 5)
+        public Binoculars(int id, string name, Brand brand, decimal price, string type, string zoom, bool isWaterproof) : base(id, name, brand, price, PGID)
         {
             this.Type = type;
             this.Zoom = zoom;
@@ -26,6 +26,7 @@ namespace _1.SemesterProjekt.Models
         public string Type { get; set; }
         public string Zoom { get; set; }
         public bool IsWaterproof { get; set; }
-        public override int ProductGroupID => 4;
+        public override int ProductGroupID => PGID;
+        private const int PGID = 4; 
     }
 }
