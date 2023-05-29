@@ -4,6 +4,7 @@ using _1.SemesterProjekt.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Windows.Forms;
@@ -144,6 +145,27 @@ namespace _1.SemesterProjekt
                 MessageBox.Show("Kunden er nu blevet slettet fra systemet", "Kunden slettet", MessageBoxButtons.OK);
             }
 
+        }
+
+        /// <summary>
+        /// Written by Ina
+        /// Link label method to open local Help File for the Customer windows
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void link_CustomerHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string fileName = "Kunde Hjælp.pdf";
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+
+            try
+            {
+                Process.Start(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

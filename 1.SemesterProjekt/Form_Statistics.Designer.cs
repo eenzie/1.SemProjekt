@@ -51,6 +51,7 @@
             this.btn_PrintToFile = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.cnBox_Stat_Shop = new System.Windows.Forms.ComboBox();
+            this.link_StatesticsHelp = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Stat_OrderResults)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             // 
             this.cmBox_Stat_Employee.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_Stat_Employee.FormattingEnabled = true;
-            this.cmBox_Stat_Employee.Location = new System.Drawing.Point(182, 268);
+            this.cmBox_Stat_Employee.Location = new System.Drawing.Point(179, 304);
             this.cmBox_Stat_Employee.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_Stat_Employee.Name = "cmBox_Stat_Employee";
             this.cmBox_Stat_Employee.Size = new System.Drawing.Size(327, 32);
@@ -68,7 +69,7 @@
             // 
             this.cmBox_Stat_Customer.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_Stat_Customer.FormattingEnabled = true;
-            this.cmBox_Stat_Customer.Location = new System.Drawing.Point(182, 203);
+            this.cmBox_Stat_Customer.Location = new System.Drawing.Point(179, 239);
             this.cmBox_Stat_Customer.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_Stat_Customer.Name = "cmBox_Stat_Customer";
             this.cmBox_Stat_Customer.Size = new System.Drawing.Size(327, 32);
@@ -78,7 +79,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(16, 203);
+            this.label6.Location = new System.Drawing.Point(13, 239);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(76, 29);
             this.label6.TabIndex = 10;
@@ -88,7 +89,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 79);
+            this.label3.Location = new System.Drawing.Point(12, 115);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 29);
             this.label3.TabIndex = 9;
@@ -97,7 +98,7 @@
             // dtp_Stat_From
             // 
             this.dtp_Stat_From.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp_Stat_From.Location = new System.Drawing.Point(245, 79);
+            this.dtp_Stat_From.Location = new System.Drawing.Point(242, 115);
             this.dtp_Stat_From.Margin = new System.Windows.Forms.Padding(4);
             this.dtp_Stat_From.Name = "dtp_Stat_From";
             this.dtp_Stat_From.Size = new System.Drawing.Size(263, 32);
@@ -107,7 +108,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(176, 86);
+            this.label1.Location = new System.Drawing.Point(173, 122);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 24);
             this.label1.TabIndex = 15;
@@ -117,7 +118,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(176, 135);
+            this.label2.Location = new System.Drawing.Point(173, 171);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 24);
             this.label2.TabIndex = 16;
@@ -126,7 +127,7 @@
             // dtp_Stat_To
             // 
             this.dtp_Stat_To.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp_Stat_To.Location = new System.Drawing.Point(245, 128);
+            this.dtp_Stat_To.Location = new System.Drawing.Point(242, 164);
             this.dtp_Stat_To.Margin = new System.Windows.Forms.Padding(4);
             this.dtp_Stat_To.Name = "dtp_Stat_To";
             this.dtp_Stat_To.Size = new System.Drawing.Size(263, 32);
@@ -136,7 +137,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(16, 271);
+            this.label4.Location = new System.Drawing.Point(13, 307);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(143, 29);
             this.label4.TabIndex = 18;
@@ -145,7 +146,7 @@
             // btn_GetSales
             // 
             this.btn_GetSales.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_GetSales.Location = new System.Drawing.Point(305, 382);
+            this.btn_GetSales.Location = new System.Drawing.Point(302, 418);
             this.btn_GetSales.Margin = new System.Windows.Forms.Padding(4);
             this.btn_GetSales.Name = "btn_GetSales";
             this.btn_GetSales.Size = new System.Drawing.Size(204, 48);
@@ -228,7 +229,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(13, 11);
+            this.label10.Location = new System.Drawing.Point(10, 47);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(274, 37);
             this.label10.TabIndex = 29;
@@ -270,7 +271,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(16, 331);
+            this.label9.Location = new System.Drawing.Point(13, 367);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 29);
             this.label9.TabIndex = 33;
@@ -280,11 +281,23 @@
             // 
             this.cnBox_Stat_Shop.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cnBox_Stat_Shop.FormattingEnabled = true;
-            this.cnBox_Stat_Shop.Location = new System.Drawing.Point(182, 332);
+            this.cnBox_Stat_Shop.Location = new System.Drawing.Point(179, 368);
             this.cnBox_Stat_Shop.Margin = new System.Windows.Forms.Padding(4);
             this.cnBox_Stat_Shop.Name = "cnBox_Stat_Shop";
             this.cnBox_Stat_Shop.Size = new System.Drawing.Size(327, 32);
             this.cnBox_Stat_Shop.TabIndex = 34;
+            // 
+            // link_StatesticsHelp
+            // 
+            this.link_StatesticsHelp.AutoSize = true;
+            this.link_StatesticsHelp.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_StatesticsHelp.Location = new System.Drawing.Point(14, 9);
+            this.link_StatesticsHelp.Name = "link_StatesticsHelp";
+            this.link_StatesticsHelp.Size = new System.Drawing.Size(234, 24);
+            this.link_StatesticsHelp.TabIndex = 51;
+            this.link_StatesticsHelp.TabStop = true;
+            this.link_StatesticsHelp.Text = "Få hjælp til denne funktion";
+            this.link_StatesticsHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_StatesticsHelp_LinkClicked);
             // 
             // Form_Statistics
             // 
@@ -292,6 +305,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1325, 549);
+            this.Controls.Add(this.link_StatesticsHelp);
             this.Controls.Add(this.cnBox_Stat_Shop);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btn_PrintToFile);
@@ -350,5 +364,6 @@
         private System.Windows.Forms.Button btn_PrintToFile;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox cnBox_Stat_Shop;
+        private System.Windows.Forms.LinkLabel link_StatesticsHelp;
     }
 }

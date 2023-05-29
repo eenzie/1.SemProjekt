@@ -61,6 +61,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.cmBox = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.link_OrderHelp = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Customers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_OrderLines)).BeginInit();
@@ -70,7 +71,7 @@
             // 
             this.bt_SelectCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_SelectCustomer.Image = ((System.Drawing.Image)(resources.GetObject("bt_SelectCustomer.Image")));
-            this.bt_SelectCustomer.Location = new System.Drawing.Point(653, 217);
+            this.bt_SelectCustomer.Location = new System.Drawing.Point(650, 251);
             this.bt_SelectCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.bt_SelectCustomer.Name = "bt_SelectCustomer";
             this.bt_SelectCustomer.Size = new System.Drawing.Size(100, 37);
@@ -84,7 +85,7 @@
             // tb_CustomerSearch
             // 
             this.tb_CustomerSearch.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_CustomerSearch.Location = new System.Drawing.Point(261, 9);
+            this.tb_CustomerSearch.Location = new System.Drawing.Point(258, 43);
             this.tb_CustomerSearch.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustomerSearch.Name = "tb_CustomerSearch";
             this.tb_CustomerSearch.Size = new System.Drawing.Size(379, 32);
@@ -94,7 +95,7 @@
             // dgv_Customers
             // 
             this.dgv_Customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Customers.Location = new System.Drawing.Point(13, 55);
+            this.dgv_Customers.Location = new System.Drawing.Point(10, 89);
             this.dgv_Customers.Margin = new System.Windows.Forms.Padding(4);
             this.dgv_Customers.MultiSelect = false;
             this.dgv_Customers.Name = "dgv_Customers";
@@ -109,7 +110,7 @@
             // 
             this.bt_SearchCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_SearchCustomer.Image = ((System.Drawing.Image)(resources.GetObject("bt_SearchCustomer.Image")));
-            this.bt_SearchCustomer.Location = new System.Drawing.Point(653, 6);
+            this.bt_SearchCustomer.Location = new System.Drawing.Point(650, 40);
             this.bt_SearchCustomer.Margin = new System.Windows.Forms.Padding(4);
             this.bt_SearchCustomer.Name = "bt_SearchCustomer";
             this.bt_SearchCustomer.Size = new System.Drawing.Size(100, 37);
@@ -124,7 +125,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 12);
+            this.label1.Location = new System.Drawing.Point(10, 46);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(202, 24);
@@ -135,7 +136,7 @@
             // 
             this.bt_SelectProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_SelectProduct.Image = ((System.Drawing.Image)(resources.GetObject("bt_SelectProduct.Image")));
-            this.bt_SelectProduct.Location = new System.Drawing.Point(612, 508);
+            this.bt_SelectProduct.Location = new System.Drawing.Point(609, 542);
             this.bt_SelectProduct.Margin = new System.Windows.Forms.Padding(4);
             this.bt_SelectProduct.Name = "bt_SelectProduct";
             this.bt_SelectProduct.Size = new System.Drawing.Size(141, 37);
@@ -149,7 +150,7 @@
             // tb_ProductSearch
             // 
             this.tb_ProductSearch.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_ProductSearch.Location = new System.Drawing.Point(261, 311);
+            this.tb_ProductSearch.Location = new System.Drawing.Point(258, 345);
             this.tb_ProductSearch.Margin = new System.Windows.Forms.Padding(4);
             this.tb_ProductSearch.Name = "tb_ProductSearch";
             this.tb_ProductSearch.Size = new System.Drawing.Size(379, 32);
@@ -159,7 +160,7 @@
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(16, 359);
+            this.dataGridView2.Location = new System.Drawing.Point(13, 393);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
@@ -174,7 +175,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 315);
+            this.label2.Location = new System.Drawing.Point(9, 349);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(217, 24);
@@ -185,7 +186,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(811, 28);
+            this.label3.Location = new System.Drawing.Point(814, 42);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 24);
@@ -196,7 +197,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(811, 60);
+            this.label4.Location = new System.Drawing.Point(814, 74);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(137, 24);
@@ -207,7 +208,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(811, 96);
+            this.label5.Location = new System.Drawing.Point(814, 110);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(151, 24);
@@ -218,7 +219,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(1201, 96);
+            this.label6.Location = new System.Drawing.Point(1204, 110);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(109, 24);
@@ -228,20 +229,20 @@
             // dgv_OrderLines
             // 
             this.dgv_OrderLines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_OrderLines.Location = new System.Drawing.Point(816, 144);
+            this.dgv_OrderLines.Location = new System.Drawing.Point(819, 173);
             this.dgv_OrderLines.Margin = new System.Windows.Forms.Padding(4);
             this.dgv_OrderLines.Name = "dgv_OrderLines";
             this.dgv_OrderLines.ReadOnly = true;
             this.dgv_OrderLines.RowHeadersWidth = 51;
             this.dgv_OrderLines.RowTemplate.Height = 24;
             this.dgv_OrderLines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_OrderLines.Size = new System.Drawing.Size(733, 241);
+            this.dgv_OrderLines.Size = new System.Drawing.Size(733, 247);
             this.dgv_OrderLines.TabIndex = 31;
             // 
             // tb_Amount
             // 
             this.tb_Amount.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_Amount.Location = new System.Drawing.Point(484, 512);
+            this.tb_Amount.Location = new System.Drawing.Point(481, 546);
             this.tb_Amount.Margin = new System.Windows.Forms.Padding(4);
             this.tb_Amount.Name = "tb_Amount";
             this.tb_Amount.Size = new System.Drawing.Size(115, 32);
@@ -252,7 +253,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(417, 519);
+            this.label7.Location = new System.Drawing.Point(414, 553);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(57, 24);
@@ -263,7 +264,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(1337, 396);
+            this.label8.Location = new System.Drawing.Point(1340, 431);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 24);
@@ -273,7 +274,7 @@
             // tb_Subtotal
             // 
             this.tb_Subtotal.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_Subtotal.Location = new System.Drawing.Point(1433, 393);
+            this.tb_Subtotal.Location = new System.Drawing.Point(1436, 428);
             this.tb_Subtotal.Margin = new System.Windows.Forms.Padding(4);
             this.tb_Subtotal.Name = "tb_Subtotal";
             this.tb_Subtotal.Size = new System.Drawing.Size(115, 32);
@@ -284,7 +285,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(1352, 436);
+            this.label9.Location = new System.Drawing.Point(1355, 471);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(67, 24);
@@ -294,7 +295,7 @@
             // tb_VAT
             // 
             this.tb_VAT.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_VAT.Location = new System.Drawing.Point(1433, 432);
+            this.tb_VAT.Location = new System.Drawing.Point(1436, 467);
             this.tb_VAT.Margin = new System.Windows.Forms.Padding(4);
             this.tb_VAT.Name = "tb_VAT";
             this.tb_VAT.Size = new System.Drawing.Size(115, 32);
@@ -304,7 +305,7 @@
             // tb_TotalSale
             // 
             this.tb_TotalSale.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_TotalSale.Location = new System.Drawing.Point(1433, 469);
+            this.tb_TotalSale.Location = new System.Drawing.Point(1436, 504);
             this.tb_TotalSale.Margin = new System.Windows.Forms.Padding(4);
             this.tb_TotalSale.Name = "tb_TotalSale";
             this.tb_TotalSale.Size = new System.Drawing.Size(115, 32);
@@ -315,7 +316,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(1365, 473);
+            this.label10.Location = new System.Drawing.Point(1368, 508);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(56, 24);
@@ -325,7 +326,7 @@
             // tb_CustNameOut
             // 
             this.tb_CustNameOut.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_CustNameOut.Location = new System.Drawing.Point(1007, 23);
+            this.tb_CustNameOut.Location = new System.Drawing.Point(1010, 37);
             this.tb_CustNameOut.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustNameOut.Name = "tb_CustNameOut";
             this.tb_CustNameOut.Size = new System.Drawing.Size(541, 32);
@@ -335,7 +336,7 @@
             // tb_CustAdressOut
             // 
             this.tb_CustAdressOut.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_CustAdressOut.Location = new System.Drawing.Point(1007, 55);
+            this.tb_CustAdressOut.Location = new System.Drawing.Point(1010, 69);
             this.tb_CustAdressOut.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustAdressOut.Name = "tb_CustAdressOut";
             this.tb_CustAdressOut.Size = new System.Drawing.Size(541, 32);
@@ -345,7 +346,7 @@
             // tb_CustPhoneOut
             // 
             this.tb_CustPhoneOut.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_CustPhoneOut.Location = new System.Drawing.Point(1007, 91);
+            this.tb_CustPhoneOut.Location = new System.Drawing.Point(1010, 105);
             this.tb_CustPhoneOut.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustPhoneOut.Name = "tb_CustPhoneOut";
             this.tb_CustPhoneOut.Size = new System.Drawing.Size(185, 32);
@@ -355,7 +356,7 @@
             // tb_CustMailOut
             // 
             this.tb_CustMailOut.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_CustMailOut.Location = new System.Drawing.Point(1331, 94);
+            this.tb_CustMailOut.Location = new System.Drawing.Point(1334, 108);
             this.tb_CustMailOut.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CustMailOut.Name = "tb_CustMailOut";
             this.tb_CustMailOut.Size = new System.Drawing.Size(217, 32);
@@ -366,7 +367,7 @@
             // 
             this.bt_Payment.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_Payment.Image = ((System.Drawing.Image)(resources.GetObject("bt_Payment.Image")));
-            this.bt_Payment.Location = new System.Drawing.Point(1433, 506);
+            this.bt_Payment.Location = new System.Drawing.Point(1436, 541);
             this.bt_Payment.Margin = new System.Windows.Forms.Padding(4);
             this.bt_Payment.Name = "bt_Payment";
             this.bt_Payment.Size = new System.Drawing.Size(116, 37);
@@ -381,7 +382,7 @@
             // 
             this.bt_SearchProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bt_SearchProduct.Image = ((System.Drawing.Image)(resources.GetObject("bt_SearchProduct.Image")));
-            this.bt_SearchProduct.Location = new System.Drawing.Point(653, 308);
+            this.bt_SearchProduct.Location = new System.Drawing.Point(650, 342);
             this.bt_SearchProduct.Margin = new System.Windows.Forms.Padding(4);
             this.bt_SearchProduct.Name = "bt_SearchProduct";
             this.bt_SearchProduct.Size = new System.Drawing.Size(100, 37);
@@ -396,7 +397,7 @@
             // 
             this.cmBox_ProductType.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_ProductType.FormattingEnabled = true;
-            this.cmBox_ProductType.Location = new System.Drawing.Point(261, 271);
+            this.cmBox_ProductType.Location = new System.Drawing.Point(258, 305);
             this.cmBox_ProductType.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_ProductType.Name = "cmBox_ProductType";
             this.cmBox_ProductType.Size = new System.Drawing.Size(379, 32);
@@ -407,7 +408,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(13, 274);
+            this.label11.Location = new System.Drawing.Point(10, 308);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(157, 24);
@@ -419,7 +420,7 @@
             this.cmBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox.FormattingEnabled = true;
-            this.cmBox.Location = new System.Drawing.Point(815, 453);
+            this.cmBox.Location = new System.Drawing.Point(818, 488);
             this.cmBox.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox.Name = "cmBox";
             this.cmBox.Size = new System.Drawing.Size(345, 32);
@@ -429,19 +430,32 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(812, 425);
+            this.label12.Location = new System.Drawing.Point(815, 460);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(124, 24);
             this.label12.TabIndex = 49;
             this.label12.Text = "Medarbejder:";
             // 
+            // link_OrderHelp
+            // 
+            this.link_OrderHelp.AutoSize = true;
+            this.link_OrderHelp.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_OrderHelp.Location = new System.Drawing.Point(10, 9);
+            this.link_OrderHelp.Name = "link_OrderHelp";
+            this.link_OrderHelp.Size = new System.Drawing.Size(234, 24);
+            this.link_OrderHelp.TabIndex = 50;
+            this.link_OrderHelp.TabStop = true;
+            this.link_OrderHelp.Text = "Få hjælp til denne funktion";
+            this.link_OrderHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_OrderHelp_LinkClicked);
+            // 
             // Form_Order
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
-            this.ClientSize = new System.Drawing.Size(1565, 554);
+            this.ClientSize = new System.Drawing.Size(1565, 588);
+            this.Controls.Add(this.link_OrderHelp);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.cmBox);
             this.Controls.Add(this.label11);
@@ -520,5 +534,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cmBox;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.LinkLabel link_OrderHelp;
     }
 }
