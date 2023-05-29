@@ -251,18 +251,6 @@ namespace _1.SemesterProjekt
                 subtotal += orderLine.TotalPrice;
             }
 
-            // Gennemløb hver række i DataGridView
-            //foreach (DataGridViewRow row in dgv_OrderLines.Rows)
-            //{
-                
-            //        // Hent værdien i kolonnen "Pris" (antagelse om, at kolonnenavnet er "Pris")
-            //        decimal pris = Convert.ToDecimal(row.Cells["TotalPrice"].Value);
-
-            //        // Tilføj værdien til subtotalen
-            //        subtotal += pris;
-                
-            //}
-
             return subtotal;
         }
 
