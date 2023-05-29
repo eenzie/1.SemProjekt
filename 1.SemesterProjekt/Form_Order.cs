@@ -208,8 +208,48 @@ namespace _1.SemesterProjekt
             }
         }
 
+        /// <summary>
+        /// Written By Anh
+        /// This method calculates the subtotal of the order
+        /// </summary>
+        /// <returns></returns>
+        private decimal CalculateSubtotal()
+        {
+            decimal subtotal = 0;
+
+            // Gennemløb hver række i DataGridView
+            foreach (DataGridViewRow row in dgv_OrderLines.Rows)
+            {
+                
+                    // Hent værdien i kolonnen "Pris" (antagelse om, at kolonnenavnet er "Pris")
+                    decimal pris = Convert.ToDecimal(row.Cells["TotalPrice"].Value);
+
+                    // Tilføj værdien til subtotalen
+                    subtotal += pris;
+                
+            }
+
+            return subtotal;
+        }
+
+        /// <summary>
+        /// Written by Anh
+        /// This method displays the total price
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bt_Payment_Click(object sender, EventArgs e)
         {
+            decimal subtotal = CalculateSubtotal();
+
+            decimal vatRate = 0.25M;
+
+            decimal moms = subtotal * vatRate;
+            decimal total = subtotal + moms;
+
+            tb_Subtotal.Text = subtotal.ToString();
+            tb_VAT.Text = moms.ToString();
+            tb_TotalSale.Text = total.ToString();
 
         }
 
