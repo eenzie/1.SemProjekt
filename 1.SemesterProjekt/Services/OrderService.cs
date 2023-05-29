@@ -48,5 +48,13 @@ namespace _1.SemesterProjekt.Services
             return orderLines;
         }
 
+        public bool CreateOrder(Order order) {
+            // Opret først Order i order tabellen
+
+
+            // Derefter opret hver orderline i order.OrderLines
+            return true;
+        }
+
     }
 }

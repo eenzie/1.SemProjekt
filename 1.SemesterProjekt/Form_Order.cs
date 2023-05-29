@@ -1,5 +1,6 @@
 ﻿using _1.SemesterProjekt.Models;
 using _1.SemesterProjekt.Service;
+using _1.SemesterProjekt.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,9 +21,12 @@ namespace _1.SemesterProjekt
         private readonly ShopService _shopService = new ShopService();
         private readonly CustomerService _customerService = new CustomerService();
         private readonly ProductService _productService = new ProductService();
+        private readonly OrderService _orderService = new OrderService();
         public BindingList<Customer> Customers = new BindingList<Customer>();
         private ProductCategory _currentCategory = null;
         public BindingList<OrderLine> OrderLines = new BindingList<OrderLine>();
+        private Customer _selectedCustomer;
+        private Employee _selectedEmployee;
 
         private Order _order;
 
@@ -45,6 +49,29 @@ namespace _1.SemesterProjekt
             dgv_OrderLines.Columns["ID"].Visible = false;
             dgv_OrderLines.Columns["Order"].Visible = false;
             dgv_OrderLines.Columns["Eyetest"].Visible = false;
+
+            OrderLines.ListChanged += OrderLines_ListChanged;
+        }
+
+
+        /// <summary>
+        /// This bind to BindingList's event ListChanged
+        /// This will be triggered when our OrderLine List has changed, will update taxes and totals
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OrderLines_ListChanged(object sender, ListChangedEventArgs e) {
+            decimal subtotal = CalculateSubtotal();
+
+            decimal vatRate = 0.25M;
+
+            decimal moms = subtotal * vatRate;
+            decimal total = subtotal + moms;
+
+            tb_Subtotal.Text = subtotal.ToString();
+            tb_VAT.Text = moms.ToString();
+            tb_TotalSale.Text = total.ToString();
+
         }
 
         private void Form_Order_Load(object sender, EventArgs e)
@@ -85,6 +112,7 @@ namespace _1.SemesterProjekt
         }
 
         private void FillCustomerForm(Customer customer) {
+            _selectedCustomer = customer;
             tb_CustAdressOut.Text = customer.Address;
             tb_CustMailOut.Text = customer.Email;
             tb_CustNameOut.Text = customer.Name;
@@ -217,17 +245,23 @@ namespace _1.SemesterProjekt
         {
             decimal subtotal = 0;
 
-            // Gennemløb hver række i DataGridView
-            foreach (DataGridViewRow row in dgv_OrderLines.Rows)
-            {
-                
-                    // Hent værdien i kolonnen "Pris" (antagelse om, at kolonnenavnet er "Pris")
-                    decimal pris = Convert.ToDecimal(row.Cells["TotalPrice"].Value);
-
-                    // Tilføj værdien til subtotalen
-                    subtotal += pris;
-                
+            // Gennemløb OrderLine instancer som er bindet til vores DataGridView
+            foreach (OrderLine orderLine in OrderLines) {
+                // Tilføj værdien til subtotalen
+                subtotal += orderLine.TotalPrice;
             }
+
+            // Gennemløb hver række i DataGridView
+            //foreach (DataGridViewRow row in dgv_OrderLines.Rows)
+            //{
+                
+            //        // Hent værdien i kolonnen "Pris" (antagelse om, at kolonnenavnet er "Pris")
+            //        decimal pris = Convert.ToDecimal(row.Cells["TotalPrice"].Value);
+
+            //        // Tilføj værdien til subtotalen
+            //        subtotal += pris;
+                
+            //}
 
             return subtotal;
         }
@@ -240,17 +274,19 @@ namespace _1.SemesterProjekt
         /// <param name="e"></param>
         private void bt_Payment_Click(object sender, EventArgs e)
         {
-            decimal subtotal = CalculateSubtotal();
+            DateTime today = DateTime.Today;
 
-            decimal vatRate = 0.25M;
+            Order order = new Order(today, CalculateSubtotal(), _selectedCustomer, _selectedEmployee, _shop);
+            order.OrderLines = this.OrderLines.ToList();
 
-            decimal moms = subtotal * vatRate;
-            decimal total = subtotal + moms;
+            if (_orderService.CreateOrder(order)) {
+                MessageBox.Show("Order has been submitted to the database!", "Success", MessageBoxButtons.OK);
+            }
+            else {
+                MessageBox.Show("Failed to commit the order!", "Failed", MessageBoxButtons.OK);
+            }
 
-            tb_Subtotal.Text = subtotal.ToString();
-            tb_VAT.Text = moms.ToString();
-            tb_TotalSale.Text = total.ToString();
-
+            
         }
 
         /// <summary>
@@ -275,7 +311,7 @@ namespace _1.SemesterProjekt
         }
 
         private void cmBox_Employee_SelectedIndexChanged(object sender, EventArgs e) {
-
+            _selectedEmployee = (Employee)cmBox_Employee.SelectedValue;
         }
     }
 }

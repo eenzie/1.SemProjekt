@@ -27,6 +27,16 @@ namespace _1.SemesterProjekt.Models
             this.Shop = shop;
         }
 
+
+        public Order(DateTime date, decimal subTotal, Customer customer, Employee employee, Shop shop) {
+            this.Date = date;
+            this.SubTotal = subTotal;
+            this.Customer = customer;
+            this.Employee = employee;
+            this.Shop = shop;
+        }
+
+
         public Order(Shop shop)
         {
             this.Shop = shop;
