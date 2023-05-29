@@ -1,5 +1,6 @@
 ﻿using _1.SemesterProjekt.Models;
 using _1.SemesterProjekt.Service;
+using _1.SemesterProjekt.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace _1.SemesterProjekt
     public partial class Form_Product : Form
     {
         private Shop _currentShop;
+        private OrderService _orderService = new OrderService();
         private ProductService _productService = new ProductService();
         public BindingList<Product> Products { get; set; } = new BindingList<Product>();
         public Form_Product(Shop currentShop)
@@ -103,8 +105,8 @@ namespace _1.SemesterProjekt
         }
 
         /// <summary>
-        /// Written by Anh
-        /// This deletes the selected row of a product
+        /// Written by Ina
+        /// Deletes product, if product is not on an order lines
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -118,8 +120,23 @@ namespace _1.SemesterProjekt
             DataGridViewRow selectedRow = dgv_Products.SelectedRows[0];
             Product selectedProduct = (Product)selectedRow.DataBoundItem;
 
-            // Fjerner det valgte produktlinje 
-            dgv_Products.Rows.Remove(selectedRow);
+            //get list of orders that include the product.... Method to be written
+            List<OrderLine> productOrders = _orderService.GetProductOrderLines(selectedProduct);
+
+            if (productOrders.Count > 0)
+            {
+                MessageBox.Show("Produktet kan ikke slettes fra systemet, i det der er nogle ordre tilknyttet til produktet", "Kan ikke slette produktet", MessageBoxButtons.OK);
+                return;
+            }
+
+            var dialogResponse = MessageBox.Show($"Er du sikker på du vil slette produktet {selectedProduct.Name}", "Er du sikker?", MessageBoxButtons.YesNo);
+
+            if (dialogResponse == DialogResult.Yes)
+            {
+                Products.Remove(selectedProduct);
+                _productService.DeleteProduct(selectedProduct);
+                MessageBox.Show("Produktet er nu blevet slettet fra systemet", "Produkt slettet", MessageBoxButtons.OK);
+            }
         }
 
         /// <summary>

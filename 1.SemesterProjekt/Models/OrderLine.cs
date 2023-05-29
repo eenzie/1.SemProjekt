@@ -9,14 +9,14 @@ namespace _1.SemesterProjekt.Models
     public class OrderLine
     {
         /// <summary>
-        /// Witten by Ina
+        /// Written by Ina
         /// </summary>
         /// <param name="id"></param>
         /// <param name="quantity"></param>
         /// <param name="salesPrice"></param>
-        /// <param name="productID"></param>
-        /// <param name="eyetestID"></param>
-        /// <param name="orderID"></param>
+        /// <param name="product"></param>
+        /// <param name="eyetest"></param>
+        /// <param name="order"></param>
         public OrderLine(int id, int quantity, decimal salesPrice, Product product, Eyetest eyetest, Order order)
         {
             this.ID = id;

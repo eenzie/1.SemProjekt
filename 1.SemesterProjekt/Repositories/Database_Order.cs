@@ -11,7 +11,7 @@ namespace _1.SemesterProjekt.Repositories
     public class Database_Order : Database_Abstract
     {
         Database_Shop Database_Shop = new Database_Shop();
-
+        Database_Product Database_Product = new Database_Product();
 
         /// <summary>
         /// Written By Anton
@@ -80,6 +80,60 @@ namespace _1.SemesterProjekt.Repositories
             return orders;
         }
 
+        /// <summary>
+        /// Written by Ina
+        /// Method for reading all order lines that include a specific product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns>List of order lines containing product</returns>
+        public List<OrderLine> SelectProductOrderLines(Product selectedProduct = null)
+        {
+            var orderLines = new List<OrderLine>();
+           
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string selectSQLString = $"select * from OrderLine";
 
+                if (selectedProduct != null)
+                {
+                    selectSQLString += $" where ProductID = {selectedProduct.ID};";
+                }
+
+                SqlCommand cmd = new SqlCommand(selectSQLString, sqlConnection);
+
+                sqlConnection.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                List<Product> productList = Database_Product.SelectProductsFromDatabase();
+                List<Eyetest> eyetestList = Database_Product.SelectEyeTests();
+                List<Order> orderList = SelectOrders();
+
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    int quantity = reader.GetInt32(1);
+                    decimal salesPrice = reader.GetDecimal(2);
+                    int product = reader.GetInt32(3);
+                    int eyetest = reader.GetInt32(4);
+                    int order = reader.GetInt32(5);
+
+                    Product products = productList.Find(x => x.ID == product);
+                    Eyetest eyetests = eyetestList.Find(x => x.ID == eyetest);
+                    Order orders = orderList.Find(x => x.ID == order);
+
+                    if (products == null || eyetests == null)
+                    {
+                        // Some error handling here
+                        continue;
+                    }
+
+                    OrderLine orderLine = new OrderLine(id, quantity, salesPrice, products, eyetests, orders);
+
+                    orderLines.Add(orderLine);
+                }
+            }
+            return orderLines;
+        }
     }
 }

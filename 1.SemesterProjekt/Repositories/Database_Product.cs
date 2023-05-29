@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography.X509Certificates;
 using System.Globalization;
+using System.Drawing;
 
 namespace _1.SemesterProjekt.Repositories {
     public class Database_Product : Database_Abstract {
@@ -252,10 +253,42 @@ namespace _1.SemesterProjekt.Repositories {
             return frames;
         }
 
+        /// <summary>
+        /// Written by Ina
+        /// Method to read list of Eyetests
+        /// </summary>
+        /// <returns>List of eyetests</returns>
+        public List<Eyetest> SelectEyeTests()
+        {
+            List<Eyetest> eyetests = new List<Eyetest>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
+                string selectSqlString = $"select * from Eyetests;";
+
+                SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    int id = sqlDataReader.GetInt32(0);
+                    decimal price = sqlDataReader.GetDecimal(1);
+                    int customerID = sqlDataReader.GetInt32(2);
+
+                    Eyetest eyetest = new Eyetest(id, price, customerID);
+
+                    eyetests.Add(eyetest);
+                }
+            }
+
+            return eyetests;
+        }
+
         #endregion
 
 
-#region Update
+        #region Update
         public bool UpdateProduct(Product updatedProduct)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))

@@ -13,6 +13,7 @@ namespace _1.SemesterProjekt.Services
     public class OrderService
     {
         Database_Order database_Order = new Database_Order();
+
         /// <summary>
         /// This will return all orders or filter them by Customer
         /// </summary>
@@ -33,6 +34,17 @@ namespace _1.SemesterProjekt.Services
         /// <returns>A list of orders in a time period optionally filtered by a customer</returns>
         public List<Order> GetOrdersByDate(DateTime start, DateTime end, Customer customer = null) {
             return GetCustomerOrders(customer).Where(c => c.Date >= start && end >= c.Date).ToList();
+        }
+
+        /// <summary>
+        /// Written by Ina
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        public List<OrderLine> GetProductOrderLines(Product product = null)
+        {
+            var orderLines = database_Order.SelectProductOrderLines(product);
+            return orderLines;
         }
 
     }
