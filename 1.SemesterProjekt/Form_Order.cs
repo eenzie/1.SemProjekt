@@ -19,7 +19,12 @@ namespace _1.SemesterProjekt
         private Shop _shop;
         private readonly ShopService _shopService = new ShopService();
         private readonly CustomerService _customerService = new CustomerService();
+        private readonly ProductService _productService = new ProductService();
         public BindingList<Customer> Customers = new BindingList<Customer>();
+        private ProductCategory _currentCategory = null;
+        public BindingList<OrderLine> OrderLines = new BindingList<OrderLine>();
+
+        private Order _order;
 
         public Form_Order(Shop shop)
         {
@@ -27,8 +32,19 @@ namespace _1.SemesterProjekt
             _shop = shop;
             List<Employee> employees = _shopService.GetEmployees(_shop);
 
-            cmBox.DataSource = employees;
-            cmBox.DisplayMember = "Name";
+            cmBox_Employee.DataSource = employees;
+            cmBox_Employee.DisplayMember = "Name";
+
+            List<ProductCategory> categories = _productService.Categories;
+            categories = new List<ProductCategory>(categories.Prepend(new ProductCategory(0, "Alle kategorier")));
+            cmBox_ProductType.DataSource = categories;
+            cmBox_ProductType.DisplayMember = "Name";
+
+            _order = new Order(shop);
+            dgv_OrderLines.DataSource = OrderLines;
+            dgv_OrderLines.Columns["ID"].Visible = false;
+            dgv_OrderLines.Columns["Order"].Visible = false;
+            dgv_OrderLines.Columns["Eyetest"].Visible = false;
         }
 
         private void Form_Order_Load(object sender, EventArgs e)
@@ -65,6 +81,7 @@ namespace _1.SemesterProjekt
 
             Customer customer = (Customer)dgv_Customers.SelectedRows[0].DataBoundItem;
             FillCustomerForm(customer);
+            _order.Customer = customer;
         }
 
         private void FillCustomerForm(Customer customer) {
@@ -76,17 +93,119 @@ namespace _1.SemesterProjekt
 
         private void cmBox_ProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            ProductCategory selectCategory = (ProductCategory)cmBox_ProductType.SelectedItem;
+            bt_SearchProduct_Click(this, new EventArgs());
         }
 
         private void bt_SearchProduct_Click(object sender, EventArgs e)
         {
+            string input = tb_ProductSearch.Text;
+            int? number = null;
+            if (int.TryParse(input, out int n))
+                number = n;
 
+
+            ProductCategory selectCategory = (ProductCategory)cmBox_ProductType.SelectedItem;
+            if (selectCategory == null) {
+                List<Product> productss = _productService.GetProducts();
+                dgv_Products.DataSource = productss;
+                _currentCategory = null;
+                return;
+            }
+
+            _currentCategory = selectCategory;
+
+            switch (selectCategory.ID) {
+                case 1:
+
+                    List<Frames> productFrames = _productService.GetFrames();
+                    if (number is null) {
+                        productFrames = new List<Frames>(productFrames.Where(c => c.Name.ToLower().Contains(input.ToLower())));
+                    }
+                    else {
+                        productFrames = new List<Frames>() { productFrames.FirstOrDefault(c => c.ID == number.Value) };
+                    }
+
+                    dgv_Products.DataSource = productFrames;
+
+                    break;
+                case 2:
+                    List<ContactLenses> productLenses = _productService.GetLenses();
+                    if (number is null) {
+                        productLenses = new List<ContactLenses>(productLenses.Where(c => c.Name.ToLower().Contains(input.ToLower())));
+                    }
+                    else {
+                        productLenses = new List<ContactLenses>() { productLenses.FirstOrDefault(c => c.ID == number.Value) };
+                    }
+
+                    dgv_Products.DataSource = productLenses;
+
+                    break;
+                case 3:
+                    List<Glasses> productGlasses = _productService.GetGlasses();
+                    if (number is null) {
+                        productGlasses = new List<Glasses>(productGlasses.Where(c => c.Name.ToLower().Contains(input.ToLower())));
+                    }
+                    else {
+                        productGlasses = new List<Glasses>() { productGlasses.FirstOrDefault(c => c.ID == number.Value) };
+                    }
+
+                    dgv_Products.DataSource = productGlasses;
+
+                    break;
+                case 4:
+                    List<Binoculars> productBinos = _productService.GetBinoculars();
+                    if (number is null) {
+                        productBinos = new List<Binoculars>(productBinos.Where(c => c.Name.ToLower().Contains(input.ToLower())));
+                    }
+                    else {
+                        productBinos = new List<Binoculars>() { productBinos.FirstOrDefault(c => c.ID == number.Value) };
+                    }
+
+                    dgv_Products.DataSource = productBinos;
+
+                    break;
+                case 5:
+                    List<Accessories> productAcc = _productService.GetAccessories();
+                    if (number is null) {
+                        productAcc = new List<Accessories>(productAcc.Where(c => c.Name.ToLower().Contains(input.ToLower())));
+                    }
+                    else {
+                        productAcc = new List<Accessories>() { productAcc.FirstOrDefault(c => c.ID == number.Value) };
+                    }
+
+                    dgv_Products.DataSource = productAcc;
+
+                    break;
+                default:
+                    List<Product> products = _productService.GetProducts();
+                    if (number is null) {
+                        products = new List<Product>(products.Where(c => c.Name.ToLower().Contains(input.ToLower())));
+                    }
+                    else {
+                        products = new List<Product>() { products.FirstOrDefault(c => c.ID == number.Value) };
+                    }
+
+                    
+
+                    dgv_Products.DataSource = products;
+                    break;
+            }
         }
 
         private void bt_SelectProduct_Click(object sender, EventArgs e)
         {
 
+            if (dgv_Products.SelectedRows.Count == 0) {
+                return;
+            }
+
+            Product product = (Product)dgv_Products.SelectedRows[0].DataBoundItem;
+            if (int.TryParse(tb_Amount.Text, out int quantity)){
+                // int quantity, decimal salesPrice, Product product, Order order
+                OrderLine orderLine = new OrderLine(quantity, product.Price, product);
+                OrderLines.Add(orderLine);
+            }
         }
 
         private void bt_Payment_Click(object sender, EventArgs e)
@@ -113,6 +232,10 @@ namespace _1.SemesterProjekt
             {
                 MessageBox.Show($"Error opening the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void cmBox_Employee_SelectedIndexChanged(object sender, EventArgs e) {
+
         }
     }
 }

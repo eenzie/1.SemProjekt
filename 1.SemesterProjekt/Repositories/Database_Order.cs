@@ -69,7 +69,10 @@ namespace _1.SemesterProjekt.Repositories
                         continue;
                     }
 
+
                     Order order = new Order(id, dateTime, subTotal, customer, employee,shop);
+                    order.OrderLines = SelectOrderLinesByOrder(order);
+
 
                     // Add instance to the list returned
                     orders.Add(order);
@@ -128,12 +131,45 @@ namespace _1.SemesterProjekt.Repositories
                         continue;
                     }
 
-                    OrderLine orderLine = new OrderLine(id, quantity, salesPrice, products, eyetests, orders);
+                    OrderLine orderLine = new OrderLine(id, quantity, salesPrice, products, orders);
 
                     orderLines.Add(orderLine);
                 }
             }
             return orderLines;
+        }
+    
+    
+        public List<OrderLine> SelectOrderLinesByOrder(Order order) {
+            List<OrderLine> lines = new List<OrderLine>();
+
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string selectSqlString = $"select * from OrderLine where OrderID = {order.ID};";
+                SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
+
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                List<Product> products = Database_Product.SelectProductsFromDatabase();
+
+                while (sqlDataReader.Read()) {
+                    int id = sqlDataReader.GetInt32(0);
+                    int quantity = sqlDataReader.GetInt32(1);
+                    decimal salesPrice = sqlDataReader.GetDecimal(2);
+                    int productID = sqlDataReader.GetInt32(3);
+                    Product product = products.FirstOrDefault(c => c.ID == productID);
+                    if (product == null) {
+                        continue;
+                    }
+
+                    OrderLine orderLine = new OrderLine(id, quantity, salesPrice, product, order);
+                    lines.Add(orderLine);
+                }
+
+
+            }
+
+            return lines;
         }
     }
 }

@@ -27,6 +27,11 @@ namespace _1.SemesterProjekt.Models
             this.Shop = shop;
         }
 
+        public Order(Shop shop)
+        {
+            this.Shop = shop;
+        }
+
         /// <summary>
         /// Written by Anton
         /// </summary>
@@ -36,5 +41,6 @@ namespace _1.SemesterProjekt.Models
         public Customer Customer { get; set; }
         public Employee Employee { get; set; }
         public Shop Shop { get; set; }
+        public List<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
     }
 }

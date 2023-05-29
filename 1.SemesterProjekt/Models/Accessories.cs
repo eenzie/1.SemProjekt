@@ -24,6 +24,13 @@ namespace _1.SemesterProjekt.Models
             this.Type = type;
             this.Colour = colour;
         }
+
+        public Accessories(Product product, string type, string colour) : base(product)
+        {
+            this.Type = type;
+            this.Colour = colour;
+        }
+
         public string Type { get; set; }
         public string Colour { get; set; }
         public override int ProductGroupID => PGID;

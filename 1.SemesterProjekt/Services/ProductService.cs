@@ -3,6 +3,7 @@ using _1.SemesterProjekt.Repositories;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,9 @@ namespace _1.SemesterProjekt.Service
     public class ProductService
     {
         private Database_Product _database = new Database_Product();
-        public Dictionary<int, string> Categories => _database.SelectProductType();
+        public List<ProductCategory> Categories => _database.SelectProductType();
         public List<Brand> Brands => _database.SelectBrands();
+
 
 
         public bool CreatedProduct(Product product)
@@ -36,14 +38,18 @@ namespace _1.SemesterProjekt.Service
             return false;
         }
 
-        public List<Frames> GetFrames() {
-            return _database.SelectFrames();
-        }
+        public List<Frames> GetFrames() => _database.SelectFrames();
+        
+        public List<ContactLenses> GetLenses() => _database.SelectLenses();
 
-        public List<Product> GetProducts()
-        {
-            return _database.SelectProductsFromDatabase();
-        }
+        public List<Glasses> GetGlasses() => _database.SelectGlasses();
+
+        public List<Binoculars> GetBinoculars() => _database.SelectBinoculars();
+
+        public List<Accessories> GetAccessories() => _database.SelectAccessories();
+
+        public List<Product> GetProducts() => _database.SelectProductsFromDatabase();
+        
 
         public bool EditProduct(Product updatedProduct)
         {

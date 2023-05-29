@@ -205,8 +205,8 @@ namespace _1.SemesterProjekt.Repositories {
             return products;
         }
 
-        public Dictionary<int, string> SelectProductType() {
-            Dictionary<int, string> data = new Dictionary<int, string>();
+        public List<ProductCategory> SelectProductType() {
+            List<ProductCategory> categories = new List<ProductCategory>();
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
 
                 string selectSqlString = $"select * from ProductGroups";
@@ -220,11 +220,11 @@ namespace _1.SemesterProjekt.Repositories {
                     int id = sqlDataReader.GetInt32(0);
                     string name = sqlDataReader.GetString(1);
 
-                    data.Add(id, name);
+                    categories.Add(new ProductCategory(id, name));
                 }
             }
 
-            return data;
+            return categories;
         }
 
         public List<Frames> SelectFrames() {
@@ -252,6 +252,118 @@ namespace _1.SemesterProjekt.Repositories {
 
             return frames;
         }
+
+
+        public List<ContactLenses> SelectLenses() {
+            List<ContactLenses> lenses = new List<ContactLenses>();
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string sqlSelectString = $"select * from ContactLenses;";
+
+                SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
+                sqlConnection.Open();
+                List<Product> products = SelectProductsFromDatabase();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read()) {
+                    int id = sqlDataReader.GetInt32(0);
+                    string duration = sqlDataReader.GetString(1);
+                    decimal strength = sqlDataReader.GetDecimal(2);
+                    bool hasUV = sqlDataReader.GetBoolean(3);
+
+                    Product product = products.FirstOrDefault(c => c.ID == id);
+
+
+
+                    ContactLenses lense = new ContactLenses(product, duration, strength, hasUV);
+                    lenses.Add(lense);
+                }
+            }
+
+            return lenses;
+        }
+
+        public List<Glasses> SelectGlasses() {
+            List<Glasses> glasses = new List<Glasses>();
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string sqlSelectString = $"select * from Glass;";
+
+                SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
+                sqlConnection.Open();
+                List<Product> products = SelectProductsFromDatabase();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read()) {
+                    int id = sqlDataReader.GetInt32(0);
+                    decimal strength = sqlDataReader.GetDecimal(1);
+                    string glassType = sqlDataReader.GetString(2);
+                    string coating = sqlDataReader.GetString(3);
+                    bool isSunGlasses = sqlDataReader.GetBoolean(4);
+
+                    Product product = products.FirstOrDefault(c => c.ID == id);
+
+
+
+                    Glasses glass = new Glasses(product, strength,glassType, coating, isSunGlasses);
+                    glasses.Add(glass);
+                }
+            }
+
+            return glasses;
+        }
+
+
+        public List<Binoculars> SelectBinoculars() {
+            List<Binoculars> binos = new List<Binoculars>();
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string sqlSelectString = $"select * from Binoculars;";
+
+                SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
+                sqlConnection.Open();
+                List<Product> products = SelectProductsFromDatabase();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read()) {
+                    int id = sqlDataReader.GetInt32(0);
+                    string binoType = sqlDataReader.GetString(2);
+                    string zoom = sqlDataReader.GetString(2);
+                    bool waterproof = sqlDataReader.GetBoolean(3);
+
+                    Product product = products.FirstOrDefault(c => c.ID == id);
+
+                    Binoculars glass = new Binoculars(product, binoType, zoom, waterproof);
+                    binos.Add(glass);
+                }
+            }
+
+            return binos;
+        }
+
+
+        public List<Accessories> SelectAccessories() {
+            List<Accessories> accessories = new List<Accessories>();
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                string sqlSelectString = $"select * from Accessories;";
+
+                SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
+                sqlConnection.Open();
+                List<Product> products = SelectProductsFromDatabase();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read()) {
+                    int id = sqlDataReader.GetInt32(0);
+                    string color = sqlDataReader.GetString(1);
+                    string type = sqlDataReader.GetString(2);
+
+                    Product product = products.FirstOrDefault(c => c.ID == id);
+
+                    Accessories accessory = new Accessories(product, type, color);
+                    accessories.Add(accessory);
+                }
+            }
+
+            return accessories;
+        }
+
 
         /// <summary>
         /// Written by Ina

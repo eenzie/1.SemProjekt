@@ -36,7 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.bt_SelectProduct = new System.Windows.Forms.Button();
             this.tb_ProductSearch = new System.Windows.Forms.TextBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgv_Products = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -59,11 +59,11 @@
             this.bt_SearchProduct = new System.Windows.Forms.Button();
             this.cmBox_ProductType = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.cmBox = new System.Windows.Forms.ComboBox();
+            this.cmBox_Employee = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.link_OrderHelp = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Customers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Products)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_OrderLines)).BeginInit();
             this.SuspendLayout();
             // 
@@ -157,19 +157,19 @@
             this.tb_ProductSearch.TabIndex = 25;
             this.tb_ProductSearch.Text = "IIIIIIIIIIIIIIIIIII";
             // 
-            // dataGridView2
+            // dgv_Products
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(13, 393);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(737, 145);
-            this.dataGridView2.TabIndex = 24;
+            this.dgv_Products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Products.Location = new System.Drawing.Point(13, 393);
+            this.dgv_Products.Margin = new System.Windows.Forms.Padding(4);
+            this.dgv_Products.MultiSelect = false;
+            this.dgv_Products.Name = "dgv_Products";
+            this.dgv_Products.ReadOnly = true;
+            this.dgv_Products.RowHeadersWidth = 51;
+            this.dgv_Products.RowTemplate.Height = 24;
+            this.dgv_Products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Products.Size = new System.Drawing.Size(737, 145);
+            this.dgv_Products.TabIndex = 24;
             // 
             // label2
             // 
@@ -395,6 +395,7 @@
             // 
             // cmBox_ProductType
             // 
+            this.cmBox_ProductType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmBox_ProductType.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_ProductType.FormattingEnabled = true;
             this.cmBox_ProductType.Location = new System.Drawing.Point(258, 305);
@@ -415,16 +416,17 @@
             this.label11.TabIndex = 47;
             this.label11.Text = "Vælg produkttype";
             // 
-            // cmBox
+            // cmBox_Employee
             // 
-            this.cmBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmBox.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmBox.FormattingEnabled = true;
-            this.cmBox.Location = new System.Drawing.Point(818, 488);
-            this.cmBox.Margin = new System.Windows.Forms.Padding(4);
-            this.cmBox.Name = "cmBox";
-            this.cmBox.Size = new System.Drawing.Size(345, 32);
-            this.cmBox.TabIndex = 48;
+            this.cmBox_Employee.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmBox_Employee.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmBox_Employee.FormattingEnabled = true;
+            this.cmBox_Employee.Location = new System.Drawing.Point(818, 488);
+            this.cmBox_Employee.Margin = new System.Windows.Forms.Padding(4);
+            this.cmBox_Employee.Name = "cmBox_Employee";
+            this.cmBox_Employee.Size = new System.Drawing.Size(345, 32);
+            this.cmBox_Employee.TabIndex = 48;
+            this.cmBox_Employee.SelectedIndexChanged += new System.EventHandler(this.cmBox_Employee_SelectedIndexChanged);
             // 
             // label12
             // 
@@ -457,7 +459,7 @@
             this.ClientSize = new System.Drawing.Size(1565, 588);
             this.Controls.Add(this.link_OrderHelp);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.cmBox);
+            this.Controls.Add(this.cmBox_Employee);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.cmBox_ProductType);
             this.Controls.Add(this.bt_SearchProduct);
@@ -481,7 +483,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.bt_SelectProduct);
             this.Controls.Add(this.tb_ProductSearch);
-            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.dgv_Products);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.bt_SelectCustomer);
             this.Controls.Add(this.tb_CustomerSearch);
@@ -493,7 +495,7 @@
             this.Text = "Order Form";
             this.Load += new System.EventHandler(this.Form_Order_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Customers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Products)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_OrderLines)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -509,7 +511,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button bt_SelectProduct;
         private System.Windows.Forms.TextBox tb_ProductSearch;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgv_Products;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -532,7 +534,7 @@
         private System.Windows.Forms.Button bt_SearchProduct;
         private System.Windows.Forms.ComboBox cmBox_ProductType;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cmBox;
+        private System.Windows.Forms.ComboBox cmBox_Employee;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.LinkLabel link_OrderHelp;
     }

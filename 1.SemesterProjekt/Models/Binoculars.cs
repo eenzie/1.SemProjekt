@@ -23,6 +23,14 @@ namespace _1.SemesterProjekt.Models
             this.Zoom = zoom;
             this.IsWaterproof = isWaterproof;
         }
+
+        public Binoculars(Product product, string type, string zoom, bool isWaterproof) : base(product)
+        {
+            this.Type = type;
+            this.Zoom = zoom;
+            this.IsWaterproof = isWaterproof;
+        }
+
         public string Type { get; set; }
         public string Zoom { get; set; }
         public bool IsWaterproof { get; set; }

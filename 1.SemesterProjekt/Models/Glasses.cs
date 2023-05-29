@@ -26,6 +26,14 @@ namespace _1.SemesterProjekt.Models {
             IsSunglasses = isSunglasses;
         }
 
+        public Glasses(Product product, decimal strength, string glassType, string coating, bool isSunglasses) : base(product)
+        {
+            Strength = strength;
+            GlassType = glassType;
+            Coating = coating;
+            IsSunglasses = isSunglasses;
+        }
+
         public decimal Strength { get; set; }
         public string GlassType { get; set; }
         public string Coating { get; set; }

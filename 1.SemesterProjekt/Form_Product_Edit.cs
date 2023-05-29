@@ -52,7 +52,7 @@ namespace _1.SemesterProjekt
             // We create a new product
             if (Model == default)
             {
-                Product product = SaveProductFromForm(3);
+                Product product = ExtractProductInfoFromForm(3);
 
                 string coating = tb_glasses_coating.Text;
                 string type = tb_glasses_type.Text;
@@ -67,8 +67,7 @@ namespace _1.SemesterProjekt
                     return;
                 }
 
-                Model = new Glasses(product.ID, product.Name, product.Brand, product.Price,
-                    strength, type, coating, sunglasses);
+                Model = new Glasses(product,strength, type, coating, sunglasses);
 
                 _productService.CreatedProduct(Model);
 
@@ -92,7 +91,7 @@ namespace _1.SemesterProjekt
             // We create a new product
             if (Model == default)
             {
-                Product product = SaveProductFromForm(1);
+                Product product = ExtractProductInfoFromForm(1);
 
                 string lengthstr = tb_frames_length.Text;
                 decimal length;
@@ -114,8 +113,7 @@ namespace _1.SemesterProjekt
                     return;
                 }
 
-                Model = new Frames(product.ID, product.Name, product.Brand, product.Price,
-                    length, width, colour, material, shape);
+                Model = new Frames(product,length, width, colour, material, shape);
 
                 _productService.CreatedProduct(Model);
 
@@ -138,22 +136,21 @@ namespace _1.SemesterProjekt
             // We create a new product
             if (Model == default)
             {
-                Product product = SaveProductFromForm(2);
+                Product product = ExtractProductInfoFromForm(2);
 
                 string duration = tb_contactlenses_duration.Text;
                 string strengthstr = tb_contactlenses_strength.Text;
-                double strength;
+                decimal strength;
                 bool hasUVFilter = cb_Contactlenses_hasUVFilter.Checked;
 
-                if (!double.TryParse(strengthstr, out strength))
+                if (!decimal.TryParse(strengthstr, out strength))
                 {
                     Console.WriteLine("");
                     return;
                 }
 
 
-                Model = new ContactLenses(product.ID, product.Name, product.Brand, product.Price,
-                    duration, strength, hasUVFilter);
+                Model = new ContactLenses(product, duration, strength, hasUVFilter);
 
                 _productService.CreatedProduct(Model);
 
@@ -177,14 +174,13 @@ namespace _1.SemesterProjekt
             // We create a new product
             if (Model == default)
             {
-                Product product = SaveProductFromForm(4);
+                Product product = ExtractProductInfoFromForm(4);
 
                 string zoom = tb_binoculars_zoom.Text;
                 string type = tb_binoculars_type.Text;
                 bool isWaterproof = cb_binoculars_isWaterproof.Checked;
 
-                Model = new Binoculars(product.ID, product.Name, product.Brand, product.Price,
-                    zoom, type, isWaterproof);
+                Model = new Binoculars(product,type, zoom, isWaterproof);
 
                 _productService.CreatedProduct(Model);
 
@@ -209,13 +205,12 @@ namespace _1.SemesterProjekt
             // We create a new product
             if (Model == default)
             {
-                Product product = SaveProductFromForm(5);
+                Product product = ExtractProductInfoFromForm(5);
 
                 string colour = tb_Acces_Colour.Text;
                 string type = tb_Acces_Type.Text;
 
-                Model = new Accessories(product.ID, product.Name, product.Brand, product.Price,
-                    type, colour);
+                Model = new Accessories(product,type, colour);
 
                 _productService.CreatedProduct(Model);
             }
@@ -227,7 +222,7 @@ namespace _1.SemesterProjekt
         }
 
 
-        private Product SaveProductFromForm(int productGroupID)
+        private Product ExtractProductInfoFromForm(int productGroupID)
         {
             string name = tb_ProductName.Text;
             Brand brand = (Brand)cbBox_Brand.SelectedValue;
@@ -246,47 +241,42 @@ namespace _1.SemesterProjekt
 
         private void Form_Product_Edit_Load(object sender, EventArgs e)
         {
-            Dictionary<int, string> categories = _productService.Categories;
+            List<ProductCategory> categories = _productService.Categories;
             List<Brand> brands = _productService.Brands;
 
             cbBox_Brand.DataSource = brands;
             cbBox_Brand.DisplayMember = "Name";
 
             cbBox_ProductType.DataSource = categories.ToList();
-            cbBox_ProductType.DisplayMember = "Value";
+            cbBox_ProductType.DisplayMember = "Name";
         }
 
         private void cbBox_ProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var data = (KeyValuePair<int, string>)cbBox_ProductType.SelectedItem;
+            ProductCategory data = (ProductCategory)cbBox_ProductType.SelectedItem;
 
             HideAllBoxes();
 
-            switch (data.Key)
+            switch (data.ID)
             {
                 case 1: // frames
                     gb_frames.Visible = true;
-                    Console.WriteLine("");
                     break;
 
                 case 2: // lenses
                     gb_lenses.Visible = true;
-                    Console.WriteLine("");
                     break;
 
                 case 3: // Glasses
                     gb_glasses.Visible = true;
-                    Console.WriteLine("");
                     break;
 
                 case 4: // Bino
                     gb_binoculars.Visible = true;
-                    Console.WriteLine("");
                     break;
 
                 case 5: // Accessories
                     gb_Accessories.Visible = true;
-                    Console.WriteLine("");
                     break;
             }
         }
