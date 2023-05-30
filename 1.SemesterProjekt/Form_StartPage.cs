@@ -55,7 +55,7 @@ namespace _1.SemesterProjekt
 
         private void bt_Form_Statistics_Click(object sender, EventArgs e)
         {
-            Form_Statistics form_Statistics = new Form_Statistics();
+            Form_Statistics form_Statistics = new Form_Statistics(SelectedShop);
             form_Statistics.ShowDialog();
         }
 
@@ -73,7 +73,7 @@ namespace _1.SemesterProjekt
         /// < param name="e"></param>
         private void link_StartHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string fileName = "Start Hjælp.pdf";
+            string fileName = @"Start Hjælp.pdf";
 
             try
             {
