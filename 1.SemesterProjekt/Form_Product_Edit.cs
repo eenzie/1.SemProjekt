@@ -69,7 +69,17 @@ namespace _1.SemesterProjekt
 
                 Model = new Glasses(product,strength, type, coating, sunglasses);
 
-                _productService.CreatedProduct(Model);
+                bool success = _productService.CreatedProduct(Model);
+
+                if (success)
+                {
+                    MessageBox.Show("Glass was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close(); // Close the current form
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create a new glass. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
 
             }
