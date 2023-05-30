@@ -18,17 +18,9 @@ namespace _1.SemesterProjekt
 
         public BindingList<Customer> Customers { get; set; } = new BindingList<Customer>();
 
-
-        /// <summary>
-        /// Written by Anh
-        /// Creating a dropdown menu of Postcode
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Form_Customer_Load(object sender, EventArgs e)
         {
-            List<Customer> customerList = _customerService.ReadAllCustomers();
-            cmBox_PostCode.DataSource = customerList.Select(c => c.PostCode).Distinct().OrderBy(x => x).ToList();
+
         }
 
         public Form_Customer()
@@ -44,22 +36,17 @@ namespace _1.SemesterProjekt
             dgv_Customers.Columns["IsDeleted"].Visible = false;
         }
 
-        
-
         private void bt_SearchCustomer_Click(object sender, EventArgs e)
         {
             string input = tb_CustomerSearch.Text;
             string postcodeString = cmBox_PostCode.Text;
             int? postcode = null;
 
-          
-
             if (!string.IsNullOrWhiteSpace(postcodeString))
             {
                 if (int.TryParse(postcodeString, out int _postcode))
                 {
                     postcode = _postcode;
-                   
                 }
             }
 
