@@ -68,9 +68,9 @@ namespace _1.SemesterProjekt
             decimal moms = subtotal * vatRate;
             decimal total = subtotal + moms;
 
-            tb_Subtotal.Text = subtotal.ToString();
-            tb_VAT.Text = moms.ToString();
-            tb_TotalSale.Text = total.ToString();
+            tb_Subtotal.Text = subtotal.ToString("C");
+            tb_VAT.Text = moms.ToString("C");
+            tb_TotalSale.Text = total.ToString("C");
 
         }
 
