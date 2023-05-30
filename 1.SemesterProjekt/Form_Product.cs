@@ -79,7 +79,6 @@ namespace _1.SemesterProjekt
             var row = dgv_Products.SelectedRows[0];
             Product product = (Product)row.DataBoundItem;
 
-
             var form_Product_Edit = new Form_Product_Edit(product);
             form_Product_Edit.ProductUpdated += Form_Product_Edit_ProductUpdated;
             form_Product_Edit.ShowDialog();

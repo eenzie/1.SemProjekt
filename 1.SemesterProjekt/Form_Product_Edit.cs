@@ -19,9 +19,10 @@ namespace _1.SemesterProjekt
 
         // This will store the existing Product
         public Product Model { get; set; }
+        public Glasses Glasses { get; set; }
+
         private readonly ProductService _productService = new ProductService();
         public event EventHandler<Product> ProductUpdated;
-
 
         /// <summary>
         /// This constructor is when we want to Create a new product
@@ -31,7 +32,6 @@ namespace _1.SemesterProjekt
             InitializeComponent();
         }
 
-
         /// <summary>
         /// This constructor is when we want to update an existing product
         /// </summary>
@@ -40,9 +40,41 @@ namespace _1.SemesterProjekt
         {
             InitializeComponent();
             Model = product;
+
+            cbBox_ProductType.Text = Model.ProductGroupID.ToString();
+            tb_ProductName.Text = Model.Name;
+            cbBox_Brand.Text = Model.Brand.ToString();
+            tb_ProductPrice.Text = Model.Price.ToString();
         }
 
+        public Form_Product_Edit(Glasses glasses)
+        {
+            InitializeComponent();
+            Glasses = glasses;
+
+            tb_glasses_coating.Text = Glasses.Coating;
+            tb_glasses_type.Text = Glasses.GlassType;
+            tb_glasses_strength.Text = Glasses.Strength.ToString();
+            cb_glasses_sunglasses.Checked = Glasses.IsSunglasses;
+
+            //cbBox_ProductType.Text = Glasses.categories;
+        }
+
+        private void Form_Product_Edit_Load(object sender, EventArgs e)
+        {
+            List<ProductCategory> categories = _productService.Categories;
+            List<Brand> brands = _productService.Brands;
+
+            cbBox_Brand.DataSource = brands;
+            cbBox_Brand.DisplayMember = "Name";
+
+            cbBox_ProductType.DataSource = categories.ToList();
+            cbBox_ProductType.DisplayMember = "Name";
+        }
+
+
         /// <summary>
+        /// Written by Anh and Ina
         /// Glasses
         /// </summary>
         /// <param name="sender"></param>
@@ -59,7 +91,6 @@ namespace _1.SemesterProjekt
                 string strengthstr = tb_glasses_strength.Text;
                 decimal strength;
                 bool sunglasses = cb_glasses_sunglasses.Checked;
-
 
                 if (!decimal.TryParse(strengthstr, out strength))
                 {
@@ -80,13 +111,32 @@ namespace _1.SemesterProjekt
                 {
                     MessageBox.Show("Kunne desværre ikke oprette glas. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-
             }
             // We update existing product
             else
             {
+                Product product = ExtractProductInfoFromForm(3);
+                Model.Name = product.Name;
+                Model.Brand = product.Brand;
+                Model.Price = product.Price;
 
+                Glasses.Strength = decimal.Parse(tb_glasses_strength.Text);
+                Glasses.GlassType = tb_glasses_type.Text;
+                Glasses.Coating = tb_glasses_coating.Text;
+                Glasses.IsSunglasses = cb_glasses_sunglasses.Checked;
+
+                // Call the ProductService to update the product in the database
+                bool success = _productService.EditProduct(Model);
+
+                if (success)
+                {
+                    MessageBox.Show("Glas er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Kunne desværre ikke opdatere glas. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -141,7 +191,7 @@ namespace _1.SemesterProjekt
             // We update existing product
             else
             {
-                //_productService.EditProduct((Frames)Model);
+                
             }
         }
 
@@ -169,7 +219,6 @@ namespace _1.SemesterProjekt
                     return;
                 }
 
-
                 Model = new ContactLenses(product, duration, strength, hasUVFilter);
 
                 bool success = _productService.CreatedProduct(Model);
@@ -184,12 +233,11 @@ namespace _1.SemesterProjekt
                     MessageBox.Show("Kunne desværre ikke oprette kontaktlensen. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-
             }
             // We update existing product
             else
             {
-               // MessageBox.Show("There was a problem updating the product, make sure the input is correct!", "There was a problem!", MessageBoxButtons.OK);
+               
             }
         }
 
@@ -229,7 +277,7 @@ namespace _1.SemesterProjekt
             // We update existing product
             else
             {
-
+               
             }
 
         }
@@ -267,7 +315,7 @@ namespace _1.SemesterProjekt
             // We update existing product
             else
             {
-
+               
             }
         }
 
@@ -289,17 +337,6 @@ namespace _1.SemesterProjekt
             return product;
         }
 
-        private void Form_Product_Edit_Load(object sender, EventArgs e)
-        {
-            List<ProductCategory> categories = _productService.Categories;
-            List<Brand> brands = _productService.Brands;
-
-            cbBox_Brand.DataSource = brands;
-            cbBox_Brand.DisplayMember = "Name";
-
-            cbBox_ProductType.DataSource = categories.ToList();
-            cbBox_ProductType.DisplayMember = "Name";
-        }
 
         private void cbBox_ProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -330,7 +367,6 @@ namespace _1.SemesterProjekt
                     break;
             }
         }
-
 
         private void HideAllBoxes()
         {
