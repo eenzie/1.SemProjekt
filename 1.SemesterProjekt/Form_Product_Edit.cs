@@ -113,9 +113,19 @@ namespace _1.SemesterProjekt
                     return;
                 }
 
-                Model = new Frames(product,length, width, colour, material, shape);
+               Model = new Frames(product,length, width, colour, material, shape);
 
-                _productService.CreatedProduct(Model);
+               bool success = _productService.CreatedProduct(Model);
+
+                if (success)
+                {
+                    MessageBox.Show("Frame was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close(); // Close the current form
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create a new frame. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
             }
             // We update existing product
@@ -152,7 +162,17 @@ namespace _1.SemesterProjekt
 
                 Model = new ContactLenses(product, duration, strength, hasUVFilter);
 
-                _productService.CreatedProduct(Model);
+                bool success = _productService.CreatedProduct(Model);
+
+                if (success)
+                {
+                    MessageBox.Show("Contactlense was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close(); // Close the current form
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create a new contactlense. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
 
             }
@@ -182,7 +202,17 @@ namespace _1.SemesterProjekt
 
                 Model = new Binoculars(product,type, zoom, isWaterproof);
 
-                _productService.CreatedProduct(Model);
+                bool success = _productService.CreatedProduct(Model);
+
+                if (success)
+                {
+                    MessageBox.Show("Binocular was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close(); // Close the current form
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create a new Binocular. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
 
             }
@@ -195,7 +225,7 @@ namespace _1.SemesterProjekt
         }
 
         /// <summary>
-        /// Written by Ina
+        /// Written by Ina and Anh
         /// Save New Accessory event method
         /// </summary>
         /// <param name="sender"></param>
@@ -212,7 +242,17 @@ namespace _1.SemesterProjekt
 
                 Model = new Accessories(product,type, colour);
 
-                _productService.CreatedProduct(Model);
+                bool success = _productService.CreatedProduct(Model);
+
+                if (success)
+                {
+                    MessageBox.Show("Accessory was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close(); // Close the current form
+                }
+                else
+                {
+                    MessageBox.Show("Failed to create a new Accessorry. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             // We update existing product
             else
