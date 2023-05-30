@@ -39,8 +39,6 @@
             this.cmBox_IR_Brand = new System.Windows.Forms.ComboBox();
             this.num_IR_MinPrice = new System.Windows.Forms.NumericUpDown();
             this.num_IR_MaxPrice = new System.Windows.Forms.NumericUpDown();
-            this.num_IR_Length = new System.Windows.Forms.NumericUpDown();
-            this.num_IR_Width = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.dgv_IR_Result = new System.Windows.Forms.DataGridView();
@@ -53,11 +51,15 @@
             this.btn_IR_Search = new System.Windows.Forms.Button();
             this.cmBox_IR_SortPrice = new System.Windows.Forms.ComboBox();
             this.link_IRHelp = new System.Windows.Forms.LinkLabel();
+            this.num_IR_Width = new System.Windows.Forms.NumericUpDown();
+            this.num_IR_Length = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.num_IR_MinPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_IR_MaxPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_IR_Length)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_IR_Width)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_IR_Result)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_IR_Width)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_IR_Length)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -94,7 +96,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(998, 195);
+            this.label4.Location = new System.Drawing.Point(867, 199);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 24);
             this.label4.TabIndex = 3;
@@ -104,7 +106,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(998, 155);
+            this.label5.Location = new System.Drawing.Point(867, 159);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 24);
             this.label5.TabIndex = 4;
@@ -156,6 +158,12 @@
             // 
             this.cmBox_IR_Brand.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_IR_Brand.FormattingEnabled = true;
+            this.cmBox_IR_Brand.Items.AddRange(new object[] {
+            "Starline",
+            "The Crown",
+            "Stela",
+            "Clear",
+            "Framy"});
             this.cmBox_IR_Brand.Location = new System.Drawing.Point(18, 230);
             this.cmBox_IR_Brand.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_IR_Brand.Name = "cmBox_IR_Brand";
@@ -189,24 +197,6 @@
             this.num_IR_MaxPrice.Name = "num_IR_MaxPrice";
             this.num_IR_MaxPrice.Size = new System.Drawing.Size(119, 32);
             this.num_IR_MaxPrice.TabIndex = 10;
-            // 
-            // num_IR_Length
-            // 
-            this.num_IR_Length.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_IR_Length.Location = new System.Drawing.Point(1099, 152);
-            this.num_IR_Length.Margin = new System.Windows.Forms.Padding(4);
-            this.num_IR_Length.Name = "num_IR_Length";
-            this.num_IR_Length.Size = new System.Drawing.Size(160, 32);
-            this.num_IR_Length.TabIndex = 11;
-            // 
-            // num_IR_Width
-            // 
-            this.num_IR_Width.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_IR_Width.Location = new System.Drawing.Point(1099, 193);
-            this.num_IR_Width.Margin = new System.Windows.Forms.Padding(4);
-            this.num_IR_Width.Name = "num_IR_Width";
-            this.num_IR_Width.Size = new System.Drawing.Size(160, 32);
-            this.num_IR_Width.TabIndex = 12;
             // 
             // label8
             // 
@@ -256,7 +246,7 @@
             "Rund",
             "Oval",
             "Firkant"});
-            this.cmBox_IR_Shape.Location = new System.Drawing.Point(491, 151);
+            this.cmBox_IR_Shape.Location = new System.Drawing.Point(418, 152);
             this.cmBox_IR_Shape.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_IR_Shape.Name = "cmBox_IR_Shape";
             this.cmBox_IR_Shape.Size = new System.Drawing.Size(329, 32);
@@ -266,7 +256,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(486, 116);
+            this.label11.Location = new System.Drawing.Point(413, 117);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(396, 29);
             this.label11.TabIndex = 17;
@@ -277,9 +267,12 @@
             this.cmBox_IR_Material.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmBox_IR_Material.FormattingEnabled = true;
             this.cmBox_IR_Material.Items.AddRange(new object[] {
-            "Plastik",
-            "Metal"});
-            this.cmBox_IR_Material.Location = new System.Drawing.Point(491, 230);
+            "Kobber",
+            "Aluminium",
+            "Stål",
+            "Titanium",
+            "Plastik"});
+            this.cmBox_IR_Material.Location = new System.Drawing.Point(418, 231);
             this.cmBox_IR_Material.Margin = new System.Windows.Forms.Padding(4);
             this.cmBox_IR_Material.Name = "cmBox_IR_Material";
             this.cmBox_IR_Material.Size = new System.Drawing.Size(329, 32);
@@ -289,7 +282,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(486, 198);
+            this.label12.Location = new System.Drawing.Point(413, 199);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(192, 29);
             this.label12.TabIndex = 19;
@@ -299,7 +292,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(991, 113);
+            this.label13.Location = new System.Drawing.Point(860, 117);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(187, 29);
             this.label13.TabIndex = 21;
@@ -341,12 +334,94 @@
             this.link_IRHelp.Text = "Få hjælp til denne funktion";
             this.link_IRHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_IRHelp_LinkClicked);
             // 
+            // num_IR_Width
+            // 
+            this.num_IR_Width.DecimalPlaces = 1;
+            this.num_IR_Width.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_IR_Width.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.num_IR_Width.Location = new System.Drawing.Point(968, 197);
+            this.num_IR_Width.Margin = new System.Windows.Forms.Padding(4);
+            this.num_IR_Width.Maximum = new decimal(new int[] {
+            110,
+            0,
+            0,
+            65536});
+            this.num_IR_Width.Minimum = new decimal(new int[] {
+            80,
+            0,
+            0,
+            65536});
+            this.num_IR_Width.Name = "num_IR_Width";
+            this.num_IR_Width.Size = new System.Drawing.Size(160, 32);
+            this.num_IR_Width.TabIndex = 12;
+            this.num_IR_Width.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            65536});
+            // 
+            // num_IR_Length
+            // 
+            this.num_IR_Length.DecimalPlaces = 1;
+            this.num_IR_Length.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_IR_Length.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.num_IR_Length.Location = new System.Drawing.Point(968, 156);
+            this.num_IR_Length.Margin = new System.Windows.Forms.Padding(4);
+            this.num_IR_Length.Maximum = new decimal(new int[] {
+            160,
+            0,
+            0,
+            65536});
+            this.num_IR_Length.Minimum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            65536});
+            this.num_IR_Length.Name = "num_IR_Length";
+            this.num_IR_Length.Size = new System.Drawing.Size(160, 32);
+            this.num_IR_Length.TabIndex = 11;
+            this.num_IR_Length.Value = new decimal(new int[] {
+            120,
+            0,
+            0,
+            65536});
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(1135, 160);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(59, 21);
+            this.label14.TabIndex = 52;
+            this.label14.Text = "12 - 16";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(1135, 202);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(50, 21);
+            this.label15.TabIndex = 53;
+            this.label15.Text = "8 - 11";
+            // 
             // Form_Intelligent_Advisor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(1295, 623);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.link_IRHelp);
             this.Controls.Add(this.cmBox_IR_SortPrice);
             this.Controls.Add(this.btn_IR_Search);
@@ -378,9 +453,9 @@
             this.Load += new System.EventHandler(this.Form_Intelligent_Advisor_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_IR_MinPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_IR_MaxPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_IR_Length)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_IR_Width)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_IR_Result)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_IR_Width)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_IR_Length)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -399,8 +474,6 @@
         private System.Windows.Forms.ComboBox cmBox_IR_Brand;
         private System.Windows.Forms.NumericUpDown num_IR_MinPrice;
         private System.Windows.Forms.NumericUpDown num_IR_MaxPrice;
-        private System.Windows.Forms.NumericUpDown num_IR_Length;
-        private System.Windows.Forms.NumericUpDown num_IR_Width;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridView dgv_IR_Result;
@@ -413,5 +486,9 @@
         private System.Windows.Forms.Button btn_IR_Search;
         private System.Windows.Forms.ComboBox cmBox_IR_SortPrice;
         private System.Windows.Forms.LinkLabel link_IRHelp;
+        private System.Windows.Forms.NumericUpDown num_IR_Width;
+        private System.Windows.Forms.NumericUpDown num_IR_Length;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
     }
 }

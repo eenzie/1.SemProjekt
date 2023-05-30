@@ -18,6 +18,7 @@ namespace _1.SemesterProjekt
         public Form_Intelligent_Advisor()
         {
             InitializeComponent();
+            cmBox_IR_SortPrice.Text = "Høj til lav pris";
         }
 
         private void Form_Intelligent_Advisor_Load(object sender, EventArgs e)
@@ -25,50 +26,63 @@ namespace _1.SemesterProjekt
 
         }
 
+        /// <summary>
+        /// Written by Anh and Ina
+        /// Main search method that filters and sorts the results
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_IR_Search_Click(object sender, EventArgs e)
         {
             ProductService productService = new ProductService();
             List<Frames> frames =  productService.GetFrames();
 
-            string color = cmBox_IR_Colour.SelectedText.ToLower();
-            // Sort by color
+            string color = cmBox_IR_Colour.Text.ToLower();
+            // Filter by color
             if (!string.IsNullOrWhiteSpace(color))
                 frames = frames.Where(c => c.Colour.ToLower() == color).ToList();
 
-            Brand brand = (Brand)cmBox_IR_Brand.SelectedItem;
-            // Sort by brand
-            if (brand != null)
-                frames = frames.Where(c => c.Brand == brand).ToList();
+            string brand = cmBox_IR_Brand.Text.ToLower();
+            // Filter by brand
+            if (!string.IsNullOrWhiteSpace(brand))
+                frames = frames.Where(c => c.Brand.Name.ToLower() == brand).ToList();
 
-            string shape = cmBox_IR_Shape.SelectedText.ToLower();
-            // Sort by shape
+            string shape = cmBox_IR_Shape.Text.ToLower();
+            // Filter by shape
             if (!string.IsNullOrWhiteSpace(shape))
                 frames = frames.Where(c => c.Shape.ToLower() == shape).ToList();
 
-            string material = cmBox_IR_Material.SelectedText.ToLower();
-            // Sort by materiel
+            string material = cmBox_IR_Material.Text.ToLower();
+            // Filter by materiel
             if (!string.IsNullOrWhiteSpace(material))
                 frames = frames.Where(c => c.Material.ToLower() == material).ToList();
 
             decimal length = num_IR_Length.Value;
-            // Sort by length
+            // Filter by length
             if (length > 0)
                 frames = frames.Where(c => c.Length == length).ToList();
 
             decimal width = num_IR_Width.Value;
-            // Sort by width
+            // Filter by width
             if (width > 0)
                 frames = frames.Where(c => c.Width == width).ToList();
 
             decimal minPrice = num_IR_MinPrice.Value;
-            // Sort by min price
+            // Filter by min price
             if (minPrice > 0)
                 frames = frames.Where(c => c.Price >= minPrice).ToList();
 
             decimal maxPrice = num_IR_MaxPrice.Value;
-            // Sort by ma price
+            // Filter by max price
             if (maxPrice > 0)
                 frames = frames.Where(c => c.Price <= maxPrice).ToList();
+
+            string sortByPrice = cmBox_IR_SortPrice.Text;
+            // sort by price, asc or desc
+            if (sortByPrice == "Lav til høj pris")
+                frames = frames.OrderBy(c => c.Price).ToList();
+            else if (sortByPrice == "Høj til lav pris")
+                frames = frames.OrderByDescending(c => c.Price).ToList();
 
 
             dgv_IR_Result.DataSource = frames;
