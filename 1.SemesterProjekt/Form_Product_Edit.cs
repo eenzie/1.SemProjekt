@@ -73,12 +73,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Glas er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Glas er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Kunne desværre ikke oprette glas. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette glas. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -129,12 +129,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Brillestel er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Brillestel er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Kunne desværre ikke oprette brillestellet. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette brillestellet. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -176,12 +176,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Kontaktlensen er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Kontaktlensen er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Kunne desværre ikke oprette kontaktlensen. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette kontaktlensen. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -216,12 +216,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Kikkerten er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Kikkerten er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Kunne desværre ikke oprette kikkerten. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette kikkerten. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -256,12 +256,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Tilbehøren er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Tilbehøren er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Kunne desværre ikke oprette tilbehøren. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette tilbehøren. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             // We update existing product
