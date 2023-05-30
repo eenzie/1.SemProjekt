@@ -19,6 +19,8 @@ namespace _1.SemesterProjekt
         {
             InitializeComponent();
             cmBox_IR_SortPrice.Text = "Høj til lav pris";
+            //cmBox_IR_Length.Text = null;
+            //cmBox_IR_Width.Text = null;
         }
 
         private void Form_Intelligent_Advisor_Load(object sender, EventArgs e)
@@ -35,7 +37,7 @@ namespace _1.SemesterProjekt
         private void btn_IR_Search_Click(object sender, EventArgs e)
         {
             ProductService productService = new ProductService();
-            List<Frames> frames =  productService.GetFrames();
+            List<Frames> frames = productService.GetFrames();
 
             string color = cmBox_IR_Colour.Text.ToLower();
             // Filter by color
@@ -57,15 +59,37 @@ namespace _1.SemesterProjekt
             if (!string.IsNullOrWhiteSpace(material))
                 frames = frames.Where(c => c.Material.ToLower() == material).ToList();
 
-            decimal length = num_IR_Length.Value;
-            // Filter by length
-            if (length > 0)
-                frames = frames.Where(c => c.Length == length).ToList();
+            string length = cmBox_IR_Length.Text;
+            // TryParse text to decimal
+            if (!string.IsNullOrWhiteSpace(length))
+            {
+                decimal lengthDec;
+                if (!Decimal.TryParse(length, out lengthDec))
+                {
+                    MessageBox.Show(string.Format("Unable to parse '{0}'.", length));
+                    return;
+                }
 
-            decimal width = num_IR_Width.Value;
-            // Filter by width
-            if (width > 0)
-                frames = frames.Where(c => c.Width == width).ToList();
+                // Filter by length
+                if (lengthDec > 0)
+                    frames = frames.Where(c => c.Length == lengthDec).ToList();
+            }
+
+
+            string width = cmBox_IR_Length.Text;
+            // TryParse text to decimal
+            if (!string.IsNullOrWhiteSpace(width))
+            {
+                decimal widthDec;
+                if (!Decimal.TryParse(length, out widthDec))
+                {
+                    MessageBox.Show("Unable to parse '{0}'.", length);
+                    return;
+                }
+                // Filter by width
+                if (widthDec > 0)
+                    frames = frames.Where(c => c.Width == widthDec).ToList();
+            }
 
             decimal minPrice = num_IR_MinPrice.Value;
             // Filter by min price
