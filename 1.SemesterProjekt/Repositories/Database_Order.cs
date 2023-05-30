@@ -13,6 +13,7 @@ namespace _1.SemesterProjekt.Repositories
     {
         Database_Shop Database_Shop = new Database_Shop();
         Database_Product Database_Product = new Database_Product();
+        Database_Customer Database_Customer = new Database_Customer();
 
 
         public bool InsertOrder(Order order) {
@@ -83,6 +84,7 @@ namespace _1.SemesterProjekt.Repositories
                 // This is so we can bind the ID of shops and employees to instances.
                 List<Shop> shops = Database_Shop.GetAllShops();
                 List<Employee> employees = Database_Shop.GetAllEmployees();
+                List<Customer> customers = Database_Customer.GetAllCustomers();
 
                 // Iterate over the result set
                 while (reader.Read())
@@ -91,21 +93,23 @@ namespace _1.SemesterProjekt.Repositories
                     int id = reader.GetInt32(0);
                     DateTime dateTime = reader.GetDateTime(1);
                     decimal subTotal = reader.GetDecimal(2);
+                    int customerID = reader.GetInt32(3);
                     int employeeID = reader.GetInt32(4);
                     int shopID = reader.GetInt32(5);
 
                     // Construct order instance
                     Employee employee = employees.Find(x => x.ID == employeeID);
                     Shop shop = shops.Find(x => x.ID == shopID);
+                    Customer cust = customers.Find(c => c.ID == customerID);
 
                     // Verify that instance of employee and shop exist, if not, we can't construct order instance
-                    if (employee  == null|| shop == null) {
+                    if (employee  == null|| shop == null || cust == null) {
                         // Some error handling here
                         continue;
                     }
 
 
-                    Order order = new Order(id, dateTime, subTotal, customer, employee,shop);
+                    Order order = new Order(id, dateTime, subTotal, cust, employee,shop);
                     order.OrderLines = SelectOrderLinesByOrder(order);
 
 

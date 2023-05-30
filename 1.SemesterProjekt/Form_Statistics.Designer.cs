@@ -50,6 +50,7 @@
             this.cmBox_Stat_Employee = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bt_PrintScreen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Stat_OrderResults)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,7 +93,6 @@
             this.dtp_Stat_From.Name = "dtp_Stat_From";
             this.dtp_Stat_From.Size = new System.Drawing.Size(263, 32);
             this.dtp_Stat_From.TabIndex = 13;
-            this.dtp_Stat_From.ValueChanged += new System.EventHandler(this.dtp_Stat_From_ValueChanged);
             // 
             // label1
             // 
@@ -122,7 +122,6 @@
             this.dtp_Stat_To.Name = "dtp_Stat_To";
             this.dtp_Stat_To.Size = new System.Drawing.Size(263, 32);
             this.dtp_Stat_To.TabIndex = 17;
-            this.dtp_Stat_To.ValueChanged += new System.EventHandler(this.dtp_Stat_To_ValueChanged);
             // 
             // dgv_Stat_OrderResults
             // 
@@ -269,12 +268,25 @@
             this.label4.TabIndex = 18;
             this.label4.Text = "Medarbejder";
             // 
+            // bt_PrintScreen
+            // 
+            this.bt_PrintScreen.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_PrintScreen.Location = new System.Drawing.Point(301, 363);
+            this.bt_PrintScreen.Margin = new System.Windows.Forms.Padding(4);
+            this.bt_PrintScreen.Name = "bt_PrintScreen";
+            this.bt_PrintScreen.Size = new System.Drawing.Size(204, 48);
+            this.bt_PrintScreen.TabIndex = 52;
+            this.bt_PrintScreen.Text = "Print til skærm";
+            this.bt_PrintScreen.UseVisualStyleBackColor = true;
+            this.bt_PrintScreen.Click += new System.EventHandler(this.bt_PrintScreen_Click);
+            // 
             // Form_Statistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1325, 549);
+            this.Controls.Add(this.bt_PrintScreen);
             this.Controls.Add(this.link_StatesticsHelp);
             this.Controls.Add(this.btn_PrintToFile);
             this.Controls.Add(this.tb_Stat_AverageOrder);
@@ -329,5 +341,6 @@
         private System.Windows.Forms.ComboBox cmBox_Stat_Employee;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button bt_PrintScreen;
     }
 }

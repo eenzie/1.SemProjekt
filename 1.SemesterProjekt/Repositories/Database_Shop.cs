@@ -59,6 +59,7 @@ namespace _1.SemesterProjekt.Repositories
                     Shop shop = shops.Find(x => x.ID == shopID);
 
                     Employee employee = new Employee(id, name, phone, shop);
+                    employees.Add(employee);
                 }
             }
 

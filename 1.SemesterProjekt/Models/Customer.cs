@@ -45,5 +45,9 @@ namespace _1.SemesterProjekt.Models
         public string PhoneNo { get; set; }
         public string Email { get; set; }
         public bool IsDeleted { get; set; } = false;
+
+        public override string ToString() {
+            return Name;
+        }
     }
 }

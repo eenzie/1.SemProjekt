@@ -22,8 +22,6 @@ namespace _1.SemesterProjekt {
         public BindingList<Order> Orders { get; set; } = new BindingList<Order>();
         private Employee _employee;
         private Customer _customer;
-        private DateTime _start;
-        private DateTime _end;
         private Shop _shop;
 
         public Form_Statistics(Shop shop) {
@@ -43,28 +41,44 @@ namespace _1.SemesterProjekt {
             List<Employee> employees = new List<Employee>(_shopService.GetEmployees(_shop).Prepend(catchAllEmployee));
             cmBox_Stat_Employee.DataSource = employees;
             cmBox_Stat_Employee.DisplayMember = "Name";
-        }
 
-        private void btn_GetSales_Click(object sender, EventArgs e) {
+            dgv_Stat_OrderResults.DataSource = Orders;
 
+            DateTime now = DateTime.Now;
+            DateTime startOfMonth = new DateTime(now.Year, now.Month, 1);
+            DateTime lastDayOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+
+
+            dtp_Stat_From.Value = startOfMonth;
+            dtp_Stat_To.Value = lastDayOfMonth;
         }
 
         private void btn_PrintToFile_Click(object sender, EventArgs e) {
+            UpdateStatistics();
             //Orders
             saveFileDialog.DefaultExt = ".txt";
             saveFileDialog.Title = "Save statistics to Text File";
             saveFileDialog.Filter = "Text file|*.txt";
             saveFileDialog.ShowDialog();
-            
+
+            DateTime _start = dtp_Stat_From.Value;
+            DateTime _end = dtp_Stat_To.Value;
+
             if (saveFileDialog.FileName != "") {
                 using (StreamWriter sw = new StreamWriter(saveFileDialog.OpenFile())) {
 
-                    sw.WriteLine($"Fra Dato: {_start.ToShortDateString()} til Dato: {_end.ToShortDateString()}");
-                    sw.WriteLine($"Kundenummer\t\tNavn\t\tDato\t\tAnsat\t\tKøb");
+                    string head = string.Format("{0,-10} {1,-50} {2,-15} {3,-10} {4,-10}", "KundeNr", "Kunde Navn", "Dato", "Ansat", "Køb");
+                    string datehead = string.Format("{0,-10} {1,-50} {2,-15} {3,-10} {4,-10}", "", "Fra Dato", _start.ToShortDateString(), "Til Dato", _end.ToShortDateString());
+                    sw.WriteLine(datehead);
+                    sw.WriteLine();
+                    sw.WriteLine(head);
                     foreach (var order in Orders) {
-                        sw.WriteLine($"{order.Customer.ID}\t\t{order.Customer.Name}\t\t{order.Date.ToShortDateString()}\t\t{order.Employee.ID}\t\t{order.SubTotal}");
+                        string line = string.Format("{0,-10} {1,-50} {2,-15} {3,-10} {4,-10}", order.Customer.ID, order.Customer, order.Date.ToShortDateString(), order.Employee.ID, order.SubTotal);
+                        sw.WriteLine(line);
                     }
-                    sw.WriteLine($"\t\t\t\t\t\tI alt\t\t{Orders.Sum(c => c.SubTotal)}");
+                    string tail = string.Format("{0,-10} {1,-50} {2,-15} {3,-10} {4,-10}", "", "", "", "I alt", Orders.Sum(c => c.SubTotal));
+                    sw.WriteLine();
+                    sw.WriteLine(tail);
                 }
             }
 
@@ -88,46 +102,40 @@ namespace _1.SemesterProjekt {
 
         private void cmBox_Stat_Customer_SelectedValueChanged(object sender, EventArgs e) {
             _customer = (Customer)cmBox_Stat_Customer.SelectedValue;
-            UpdateStatistics();
         }
 
-        private void dtp_Stat_From_ValueChanged(object sender, EventArgs e) {
-            _start = dtp_Stat_From.Value;
-            UpdateStatistics();
-        }
-
-        private void dtp_Stat_To_ValueChanged(object sender, EventArgs e) {
-            _end = dtp_Stat_To.Value;
-            UpdateStatistics();
-        }
 
         private void cmBox_Stat_Employee_SelectedValueChanged(object sender, EventArgs e) {
             _employee = (Employee)cmBox_Stat_Employee.SelectedValue;
-            UpdateStatistics();
         }
 
         private void UpdateStatistics() {
+            DateTime _start = dtp_Stat_From.Value;
+            DateTime _end = dtp_Stat_To.Value;
             List<Order> orders = _orderService.GetOrdersByDate(_start, _end);
 
-            if (_customer != null) {
-                if (_customer.ID != 0) {
-                    orders = orders.Where(c => c.Customer.ID == _customer.ID).ToList();
-                }
+            if (_customer != null && _customer.ID != 0) {
+                orders = orders.Where(c => c.Customer.ID == _customer.ID).ToList();
+
             }
 
-            if (_employee != null) {
-                if (_employee.ID != 0) {
-                    orders = orders.Where(c => c.Employee.ID == _employee.ID).ToList();
-                }
+            if (_employee != null && _employee.ID != 0) {
+                orders = orders.Where(c => c.Employee.ID == _employee.ID).ToList();
             }
 
             Orders = new BindingList<Order>(orders);
+            dgv_Stat_OrderResults.DataSource = Orders;
 
             if (Orders.Count != 0) {
                 tb_Stat_TotalSales.Text = Orders.Sum(c => c.SubTotal).ToString();
                 tb_Stat_SalesCount.Text = Orders.Count.ToString();
                 tb_Stat_AverageOrder.Text = (Orders.Sum(c => c.SubTotal) / Orders.Count).ToString();
             }
+            Console.WriteLine("");
+        }
+
+        private void bt_PrintScreen_Click(object sender, EventArgs e) {
+            UpdateStatistics();
         }
     }
 }
