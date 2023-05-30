@@ -74,11 +74,10 @@ namespace _1.SemesterProjekt
         private void link_StartHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string fileName = "Start Hjælp.pdf";
-            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
             try
             {
-                Process.Start(filePath);
+                Process.Start(fileName);
             }
             catch (Exception ex)
             {

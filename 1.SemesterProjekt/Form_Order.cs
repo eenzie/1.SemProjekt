@@ -288,11 +288,10 @@ namespace _1.SemesterProjekt
         private void link_OrderHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string fileName = "Ordre Hjælp.pdf";
-            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
             try
             {
-                Process.Start(filePath);
+                Process.Start(fileName);
             }
             catch (Exception ex)
             {

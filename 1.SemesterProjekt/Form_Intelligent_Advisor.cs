@@ -83,11 +83,10 @@ namespace _1.SemesterProjekt
         private void link_IRHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string fileName = "Intelligent Rådgivning Hjælp.pdf";
-            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
             try
             {
-                Process.Start(filePath);
+                Process.Start(fileName);
             }
             catch (Exception ex)
             {
