@@ -73,12 +73,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Glass was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Glas er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Failed to create a new glass. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette glas. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -129,12 +129,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Frame was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Brillestel er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Failed to create a new frame. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette brillestellet. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -176,12 +176,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Contactlense was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Kontaktlensen er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Failed to create a new contactlense. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette kontaktlensen. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -189,7 +189,7 @@ namespace _1.SemesterProjekt
             // We update existing product
             else
             {
-                MessageBox.Show("There was a problem updating the product, make sure the input is correct!", "There was a problem!", MessageBoxButtons.OK);
+               // MessageBox.Show("There was a problem updating the product, make sure the input is correct!", "There was a problem!", MessageBoxButtons.OK);
             }
         }
 
@@ -216,12 +216,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Binocular was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Kikkerten er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Failed to create a new Binocular. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette kikkerten. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
 
@@ -256,12 +256,12 @@ namespace _1.SemesterProjekt
 
                 if (success)
                 {
-                    MessageBox.Show("Accessory was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Tilbehøren er nu oprettet i systemet.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
                 else
                 {
-                    MessageBox.Show("Failed to create a new Accessorry. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Kunne desværre ikke oprette tilbehøren. Prøv venligst igen.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             // We update existing product
