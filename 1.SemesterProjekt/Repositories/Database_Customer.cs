@@ -1,8 +1,10 @@
 ﻿using _1.SemesterProjekt.Models;
+using _1.SemesterProjekt.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace _1.SemesterProjekt.Repositories
 {
@@ -11,30 +13,37 @@ namespace _1.SemesterProjekt.Repositories
         
         public List<Customer> GetCustomerByEmail(string email)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                string selectSQLString = $"select ID, Name, Address, PostCode, Phone, Email from Customers where LOWER(Email) LIKE LOWER('%{email}%') and IsDeleted = 0;";
-                SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
+            // Wrap the using statement in a try catch block
+            try {
+                using (SqlConnection connection = new SqlConnection(ConnectionString)) {
+                    string selectSQLString = $"select ID, Name, Address, PostCode, Phone, Email from Customers where LOWER(Email) LIKE LOWER('%{email}%') and IsDeleted = 0;";
+                    SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
-                List<Customer> customers = new List<Customer>();
-                connection.Open();
+                    List<Customer> customers = new List<Customer>();
+                    connection.Open();
 
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read())
-                {
-                    int id = sqlDataReader.GetInt32(0);
-                    string cname = sqlDataReader.GetString(1);
-                    string address = sqlDataReader.GetString(2);
-                    int postcode = sqlDataReader.GetInt32(3);
-                    string phone = sqlDataReader.GetString(4);
-                    string mail = sqlDataReader.GetString(5);
+                    while (sqlDataReader.Read()) {
+                        int id = sqlDataReader.GetInt32(0);
+                        string cname = sqlDataReader.GetString(1);
+                        string address = sqlDataReader.GetString(2);
+                        int postcode = sqlDataReader.GetInt32(3);
+                        string phone = sqlDataReader.GetString(4);
+                        string mail = sqlDataReader.GetString(5);
 
-                    Customer customer = new Customer(id, cname, address, postcode, phone, mail, false);
-                    customers.Add(customer);
+                        Customer customer = new Customer(id, cname, address, postcode, phone, mail, false);
+                        customers.Add(customer);
+                    }
+
+                    return customers;
                 }
-
-                return customers;
+            }
+            catch (Exception e) {
+                // If there is an error, we write it to the logfile
+                LogService.LogError(e.Message, nameof(Database_Customer), nameof(GetCustomerByEmail));
+                // return empty list.
+                return new List<Customer>();
             }
         }
 
@@ -57,47 +66,54 @@ namespace _1.SemesterProjekt.Repositories
                 return false;
             }
 
-            // Creates a SQL Connection in a using statement,
-            // because a "using" will automatically Dispose the resource (the SqlConnection instance)
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-            {
+            // Wrap using statement in try catch
+            try {
+                // Creates a SQL Connection in a using statement,
+                // because a "using" will automatically Dispose the resource (the SqlConnection instance)
+                using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
 
-                // Construct a parameterized insert SQL string
-                string insertSqlString =
-                    $"insert into Customers (Name, Address, PostCode, Phone, Email, IsDeleted) output inserted.ID values (@name, @address, @postcode, @phoneNumber, @email, 0);";
+                    // Construct a parameterized insert SQL string
+                    string insertSqlString =
+                        $"insert into Customers (Name, Address, PostCode, Phone, Email, IsDeleted) output inserted.ID values (@name, @address, @postcode, @phoneNumber, @email, 0);";
 
-                // Create SQL Command with the insert SQL string and SQL connection
-                SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
+                    // Create SQL Command with the insert SQL string and SQL connection
+                    SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
 
-                // Add parameters and values to the command
+                    // Add parameters and values to the command
 
-                #region Parameters
+                    #region Parameters
 
-                // We add a parameter with a name and a database type and give it a value
-                sqlCommand.Parameters.Add("@name", SqlDbType.NChar).Value = customer.Name;
+                    // We add a parameter with a name and a database type and give it a value
+                    sqlCommand.Parameters.Add("@name", SqlDbType.NChar).Value = customer.Name;
 
-                // rinse and repeat
-                sqlCommand.Parameters.Add("@address", SqlDbType.NChar).Value = customer.Address;
+                    // rinse and repeat
+                    sqlCommand.Parameters.Add("@address", SqlDbType.NChar).Value = customer.Address;
 
-                sqlCommand.Parameters.Add("@postcode", SqlDbType.Int).Value = customer.PostCode;
+                    sqlCommand.Parameters.Add("@postcode", SqlDbType.Int).Value = customer.PostCode;
 
-                sqlCommand.Parameters.Add("@phoneNumber", SqlDbType.NChar).Value = customer.PhoneNo;
+                    sqlCommand.Parameters.Add("@phoneNumber", SqlDbType.NChar).Value = customer.PhoneNo;
 
-                sqlCommand.Parameters.Add("@email", SqlDbType.NChar).Value = customer.Email;
+                    sqlCommand.Parameters.Add("@email", SqlDbType.NChar).Value = customer.Email;
 
-                #endregion
+                    #endregion
 
-                // Open the connection
-                sqlConnection.Open();
+                    // Open the connection
+                    sqlConnection.Open();
 
-                // We execute the command, and store output (Inserted.Id)
-                int newlyInsertedId = (int)sqlCommand.ExecuteScalar();
+                    // We execute the command, and store output (Inserted.Id)
+                    int newlyInsertedId = (int)sqlCommand.ExecuteScalar();
 
-                // Instantiate Customer instance
-                customer.ID = newlyInsertedId;
+                    // Instantiate Customer instance
+                    customer.ID = newlyInsertedId;
 
-                // If the command above succeeded in creating a customer, the Id will be greater than zero
-                return newlyInsertedId > 0;
+                    // If the command above succeeded in creating a customer, the Id will be greater than zero
+                    return newlyInsertedId > 0;
+                }
+            }
+            catch (Exception e) {
+                // Write error to log
+                LogService.LogError(e.Message, nameof(Database_Customer), nameof(CreateCustomer));
+                return false;
             }
         }
 
@@ -109,30 +125,34 @@ namespace _1.SemesterProjekt.Repositories
         /// <returns></returns>
         public List<Customer> GetCustomerByName(string name)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                string selectSQLString = $"select ID, Name, Address, PostCode, Phone, Email from Customers where LOWER(Name) LIKE LOWER('%{name}%') and IsDeleted = 0;";
-                SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
+            try {
+                using (SqlConnection connection = new SqlConnection(ConnectionString)) {
+                    string selectSQLString = $"select ID, Name, Address, PostCode, Phone, Email from Customers where LOWER(Name) LIKE LOWER('%{name}%') and IsDeleted = 0;";
+                    SqlCommand sqlCommand = new SqlCommand(selectSQLString, connection);
 
-                List<Customer> customers = new List<Customer>();
-                connection.Open();
+                    List<Customer> customers = new List<Customer>();
+                    connection.Open();
 
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read())
-                {
-                    int id = sqlDataReader.GetInt32(0);
-                    string cname = sqlDataReader.GetString(1);
-                    string address = sqlDataReader.GetString(2);
-                    int postcode = sqlDataReader.GetInt32(3);
-                    string phone = sqlDataReader.GetString(4);
-                    string email = sqlDataReader.GetString(5);
+                    while (sqlDataReader.Read()) {
+                        int id = sqlDataReader.GetInt32(0);
+                        string cname = sqlDataReader.GetString(1);
+                        string address = sqlDataReader.GetString(2);
+                        int postcode = sqlDataReader.GetInt32(3);
+                        string phone = sqlDataReader.GetString(4);
+                        string email = sqlDataReader.GetString(5);
 
-                    Customer customer = new Customer(id, cname, address, postcode, phone, email, false);
-                    customers.Add(customer);
+                        Customer customer = new Customer(id, cname, address, postcode, phone, email, false);
+                        customers.Add(customer);
+                    }
+
+                    return customers;
                 }
-
-                return customers;
+            }
+            catch (Exception e) {
+                LogService.LogError(e.Message, nameof(Database_Customer), nameof(GetCustomerByName));
+                return new List<Customer>();
             }
         }
 

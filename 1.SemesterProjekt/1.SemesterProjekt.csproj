@@ -110,6 +110,7 @@
     <Compile Include="Repositories\Database_Customer.cs" />
     <Compile Include="Repositories\Database_Shop.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ShopService.cs" />
     <Compile Include="Services\ProductService.cs" />

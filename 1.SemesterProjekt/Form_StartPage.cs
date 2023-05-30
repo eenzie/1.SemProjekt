@@ -1,5 +1,6 @@
 ﻿using _1.SemesterProjekt.Models;
 using _1.SemesterProjekt.Service;
+using _1.SemesterProjekt.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,17 @@ namespace _1.SemesterProjekt
         public Form_StartPage()
         {
             InitializeComponent();
+            // Here we listen to the logservice for errors
+            LogService.ExceptionCaught += LogService_ExceptionCaught;
+        }
+
+        /// <summary>
+        /// This will properly notify the user about the error
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LogService_ExceptionCaught(object sender, string e) {
+            MessageBox.Show(e, "There was an exception!", MessageBoxButtons.OK);
         }
 
         private void Form_StartPage_Load(object sender, EventArgs e)
