@@ -14,21 +14,28 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Security.Cryptography.X509Certificates;
 using System.Globalization;
 using System.Drawing;
+using _1.SemesterProjekt.Services;
 
-namespace _1.SemesterProjekt.Repositories {
-    public class Database_Product : Database_Abstract {
-        
-#region Create
-        private bool InsertProductIntoDatabase(Product product) {
-            if (product.Price <= 0) {
+namespace _1.SemesterProjekt.Repositories
+{
+    public class Database_Product : Database_Abstract
+    {
+
+        #region Create
+        private bool InsertProductIntoDatabase(Product product)
+        {
+            if (product.Price <= 0)
+            {
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(product.Name)) {
+            if (string.IsNullOrWhiteSpace(product.Name))
+            {
                 return false;
             }
 
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 string insertSqlString = $"insert into Products (Name, Brand, Price, ProductGroupID) output inserted.ID values (@name, {product.Brand.ID}, {product.Price}, {product.ProductGroupID});";
                 SqlCommand sqlCommand = new SqlCommand(insertSqlString, sqlConnection);
                 sqlCommand.Parameters.Add("@name", SqlDbType.NVarChar).Value = product.Name;
@@ -45,12 +52,15 @@ namespace _1.SemesterProjekt.Repositories {
         /// </summary>
         /// <param name="glasses"></param>
         /// <returns></returns>
-        public bool InsertGlassesIntoDatabase(Glasses glasses) {
-            if (!InsertProductIntoDatabase(glasses)) {
+        public bool InsertGlassesIntoDatabase(Glasses glasses)
+        {
+            if (!InsertProductIntoDatabase(glasses))
+            {
                 return false;
             }
 
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 int booltoint = (glasses.IsSunglasses) ? 1 : 0;
                 string insertqlString = $"insert into Glass (ID, Strength, GlassType, Coating, IsSunglasses) output inserted.ID values ({glasses.ID}, {glasses.Strength.ToString(CultureInfo.InvariantCulture)}, '{glasses.GlassType}', '{glasses.Coating}', {booltoint});";
                 SqlCommand sqlCommand = new SqlCommand(insertqlString, sqlConnection);
@@ -67,12 +77,15 @@ namespace _1.SemesterProjekt.Repositories {
         /// </summary>
         /// <param name="accessories"></param>
         /// <returns>Returns true if success, false otherwise</returns>
-        public bool InsertAccessoriesIntoDatabase(Accessories accessories) {
-            if (!InsertProductIntoDatabase(accessories)) {
+        public bool InsertAccessoriesIntoDatabase(Accessories accessories)
+        {
+            if (!InsertProductIntoDatabase(accessories))
+            {
                 return false;
             }
 
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 string insertqlString = $"insert into Accessories (ID, Colour, Type) output inserted.ID values ({accessories.ID}, '{accessories.Colour}', '{accessories.Type}');";
                 SqlCommand sqlCommand = new SqlCommand(insertqlString, sqlConnection);
 
@@ -151,12 +164,14 @@ namespace _1.SemesterProjekt.Repositories {
         #endregion
 
 
-#region Read
+        #region Read
 
-        public List<Brand> SelectBrands() {
+        public List<Brand> SelectBrands()
+        {
             List<Brand> brands = new List<Brand>();
 
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 string selectSqlString = $"select * from Brands;";
 
                 SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
@@ -164,7 +179,8 @@ namespace _1.SemesterProjekt.Repositories {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     string name = sqlDataReader.GetString(1);
                     int? productGroupId = sqlDataReader.GetInt32(2);
@@ -178,18 +194,21 @@ namespace _1.SemesterProjekt.Repositories {
             return brands;
         }
 
-        public List<Product> SelectProductsFromDatabase() {
+        public List<Product> SelectProductsFromDatabase()
+        {
             List<Brand> brands = SelectBrands();
             List<Product> products = new List<Product>();
 
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 string selectSqlString = $"select * from Products;";
 
                 SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     string name = sqlDataReader.GetString(1);
                     int brandID = sqlDataReader.GetInt32(2);
@@ -205,9 +224,11 @@ namespace _1.SemesterProjekt.Repositories {
             return products;
         }
 
-        public List<ProductCategory> SelectProductType() {
+        public List<ProductCategory> SelectProductType()
+        {
             List<ProductCategory> categories = new List<ProductCategory>();
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
 
                 string selectSqlString = $"select * from ProductGroups";
 
@@ -216,7 +237,8 @@ namespace _1.SemesterProjekt.Repositories {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     string name = sqlDataReader.GetString(1);
 
@@ -227,9 +249,11 @@ namespace _1.SemesterProjekt.Repositories {
             return categories;
         }
 
-        public List<Frames> SelectFrames() {
+        public List<Frames> SelectFrames()
+        {
             List<Frames> frames = new List<Frames>();
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 string sqlSelectString = $"select * from Frames;";
 
                 SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
@@ -237,7 +261,8 @@ namespace _1.SemesterProjekt.Repositories {
                 List<Product> products = SelectProductsFromDatabase();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     Product product = products.FirstOrDefault(c => c.ID == id);
                     decimal length = sqlDataReader.GetDecimal(1);
@@ -254,9 +279,11 @@ namespace _1.SemesterProjekt.Repositories {
         }
 
 
-        public List<ContactLenses> SelectLenses() {
+        public List<ContactLenses> SelectLenses()
+        {
             List<ContactLenses> lenses = new List<ContactLenses>();
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 string sqlSelectString = $"select * from ContactLenses;";
 
                 SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
@@ -264,7 +291,8 @@ namespace _1.SemesterProjekt.Repositories {
                 List<Product> products = SelectProductsFromDatabase();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     string duration = sqlDataReader.GetString(1);
                     decimal strength = sqlDataReader.GetDecimal(2);
@@ -282,9 +310,11 @@ namespace _1.SemesterProjekt.Repositories {
             return lenses;
         }
 
-        public List<Glasses> SelectGlasses() {
+        public List<Glasses> SelectGlasses()
+        {
             List<Glasses> glasses = new List<Glasses>();
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 string sqlSelectString = $"select * from Glass;";
 
                 SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
@@ -292,7 +322,8 @@ namespace _1.SemesterProjekt.Repositories {
                 List<Product> products = SelectProductsFromDatabase();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     decimal strength = sqlDataReader.GetDecimal(1);
                     string glassType = sqlDataReader.GetString(2);
@@ -303,7 +334,7 @@ namespace _1.SemesterProjekt.Repositories {
 
 
 
-                    Glasses glass = new Glasses(product, strength,glassType, coating, isSunGlasses);
+                    Glasses glass = new Glasses(product, strength, glassType, coating, isSunGlasses);
                     glasses.Add(glass);
                 }
             }
@@ -312,9 +343,11 @@ namespace _1.SemesterProjekt.Repositories {
         }
 
 
-        public List<Binoculars> SelectBinoculars() {
+        public List<Binoculars> SelectBinoculars()
+        {
             List<Binoculars> binos = new List<Binoculars>();
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 string sqlSelectString = $"select * from Binoculars;";
 
                 SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
@@ -322,7 +355,8 @@ namespace _1.SemesterProjekt.Repositories {
                 List<Product> products = SelectProductsFromDatabase();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     string binoType = sqlDataReader.GetString(2);
                     string zoom = sqlDataReader.GetString(2);
@@ -339,9 +373,11 @@ namespace _1.SemesterProjekt.Repositories {
         }
 
 
-        public List<Accessories> SelectAccessories() {
+        public List<Accessories> SelectAccessories()
+        {
             List<Accessories> accessories = new List<Accessories>();
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            {
                 string sqlSelectString = $"select * from Accessories;";
 
                 SqlCommand sqlCommand = new SqlCommand(sqlSelectString, sqlConnection);
@@ -349,7 +385,8 @@ namespace _1.SemesterProjekt.Repositories {
                 List<Product> products = SelectProductsFromDatabase();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read()) {
+                while (sqlDataReader.Read())
+                {
                     int id = sqlDataReader.GetInt32(0);
                     string color = sqlDataReader.GetString(1);
                     string type = sqlDataReader.GetString(2);
@@ -401,6 +438,12 @@ namespace _1.SemesterProjekt.Repositories {
 
 
         #region Update
+        /// <summary>
+        /// Written by Anton
+        /// Emthod to update existing products
+        /// </summary>
+        /// <param name="updatedProduct"></param>
+        /// <returns></returns>
         public bool UpdateProduct(Product updatedProduct)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
@@ -408,7 +451,7 @@ namespace _1.SemesterProjekt.Repositories {
                 string updateSqlString = "UPDATE Product SET " +
                                          "Name = @updatedName, " +
                                          "Brand = @updatedBrand, " +
-                                         "Price = @updatedPrice" +
+                                         "Price = @updatedPrice " +
                                          $"WHERE ID = {updatedProduct.ID};";
 
                 SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
@@ -434,7 +477,11 @@ namespace _1.SemesterProjekt.Repositories {
             }
         }
 
-
+        /// <summary>
+        /// Written by Anh
+        /// </summary>
+        /// <param name="updatedFrame"></param>
+        /// <returns></returns>
         public bool UpdateFrame(Frames updatedFrame)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
@@ -442,9 +489,9 @@ namespace _1.SemesterProjekt.Repositories {
                 string updateSqlString = "UPDATE Frames SET " +
                                          "Length = @updatedLength, " +
                                          "Width = @updatedWidth, " +
-                                         "Colour = @updatedColour" +
-                                         "Material = @updatedMaterial" +
-                                         "Shape = @updatedShape" +
+                                         "Colour = @updatedColour, " +
+                                         "Material = @updatedMaterial, " +
+                                         "Shape = @updatedShape " +
                                          $"WHERE ID = {updatedFrame.ID};";
 
                 SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
@@ -472,6 +519,11 @@ namespace _1.SemesterProjekt.Repositories {
             }
         }
 
+        /// <summary>
+        /// Written by Anton
+        /// </summary>
+        /// <param name="updatedGlass"></param>
+        /// <returns></returns>
         public bool UpdateGlass(Glasses updatedGlass)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
@@ -479,8 +531,8 @@ namespace _1.SemesterProjekt.Repositories {
                 string updateSqlString = "UPDATE Glass SET " +
                                          "Strength = @updatedStrength, " +
                                          "GlassType = @updatedGlassType, " +
-                                         "Coating = @updatedCoating" +
-                                         "IsSunglasses = @updatedIsSunglasses" +
+                                         "Coating = @updatedCoating, " +
+                                         "IsSunglasses = @updatedIsSunglasses " +
                                          $"WHERE ID = {updatedGlass.ID};";
 
                 SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
@@ -504,10 +556,14 @@ namespace _1.SemesterProjekt.Repositories {
                     //false indicates that the program fails to update the product
                     return false;
                 }
-
             }
         }
 
+        /// <summary>
+        /// Written by Anh
+        /// </summary>
+        /// <param name="updatedContactLense"></param>
+        /// <returns></returns>
         public bool UpdateContactLense(ContactLenses updatedContactLense)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
@@ -515,7 +571,7 @@ namespace _1.SemesterProjekt.Repositories {
                 string updateSqlString = "UPDATE ContactLenses SET " +
                                          "Duration = @updatedDuration, " +
                                          "Strength = @updatedStrength, " +
-                                         "HasUVFilter = @updatedHasUVFilter" +
+                                         "HasUVFilter = @updatedHasUVFilter " +
                                          $"WHERE ID = {updatedContactLense.ID};";
 
                 SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
@@ -538,10 +594,14 @@ namespace _1.SemesterProjekt.Repositories {
                     //false indicates that the program fails to update the product
                     return false;
                 }
-
             }
         }
 
+        /// <summary>
+        /// Written by Anh
+        /// </summary>
+        /// <param name="updatedBinocular"></param>
+        /// <returns></returns>
         public bool UpdateBinocular(Binoculars updatedBinocular)
         {
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
@@ -549,7 +609,7 @@ namespace _1.SemesterProjekt.Repositories {
                 string updateSqlString = "UPDATE Binoculars SET " +
                                          "Type = @updatedType, " +
                                          "Zoom = @updatedZoom, " +
-                                         "IsWaterproof = @updatedIsWaterproof" +
+                                         "IsWaterproof = @updatedIsWaterproof " +
                                          $"WHERE ID = {updatedBinocular.ID};";
 
                 SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
@@ -575,22 +635,27 @@ namespace _1.SemesterProjekt.Repositories {
             }
         }
 
+        /// <summary>
+        /// Written by Ina
+        /// </summary>
+        /// <param name="updatedAccessorie"></param>
+        /// <returns></returns>
         public bool UpdateAccessories(Accessories updatedAccessorie)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            try
             {
-                string updateSqlString = "UPDATE Accessories SET " +
-                                         "Colour = @updatedColour, " +
-                                         "Type = @updatedType, " +
-                                         $"WHERE ID = {updatedAccessorie.ID};";
-
-                SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
-
-                sqlCommand.Parameters.Add("@updatedColour", SqlDbType.NVarChar).Value = updatedAccessorie.Colour;
-                sqlCommand.Parameters.Add("@updatedType", SqlDbType.NVarChar).Value = updatedAccessorie.Type;
-
-                try
+                using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
                 {
+                    string updateSqlString = "UPDATE Accessories SET " +
+                                             "Colour = @updatedColour, " +
+                                             "Type = @updatedType " +
+                                             $"WHERE ID = {updatedAccessorie.ID};";
+
+                    SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
+
+                    sqlCommand.Parameters.Add("@updatedColour", SqlDbType.NVarChar).Value = updatedAccessorie.Colour;
+                    sqlCommand.Parameters.Add("@updatedType", SqlDbType.NVarChar).Value = updatedAccessorie.Type;
+
                     sqlConnection.Open();
                     int rowsAffected = sqlCommand.ExecuteNonQuery();
 
@@ -598,11 +663,11 @@ namespace _1.SemesterProjekt.Repositories {
                     //updated the customer, otherwise it is false and can't update the product
                     return rowsAffected > 0;
                 }
-                catch (Exception ex)
-                {
-                    //false indicates that the program fails to update the product
-                    return false;
-                }
+            }
+            catch (Exception e)
+            {
+                LogService.LogError(e.Message, nameof(Database_Product), nameof(UpdateAccessories));
+                return false;
             }
         }
         #endregion

@@ -699,7 +699,6 @@
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form_Product_Edit";
             this.Text = "Produktoprettelse og redigering";
-            this.Load += new System.EventHandler(this.Form_Product_Edit_Load);
             this.gb_glasses.ResumeLayout(false);
             this.gb_glasses.PerformLayout();
             this.gb_lenses.ResumeLayout(false);

@@ -19,12 +19,6 @@ namespace _1.SemesterProjekt.Models {
         /// <param name="glassType"></param>
         /// <param name="coating"></param>
         /// <param name="isSunglasses"></param>
-        public Glasses(int id, string name, Brand brand, decimal price, decimal strength, string glassType, string coating, bool isSunglasses) : base(id, name, brand, price, PGID) {
-            Strength = strength;
-            GlassType = glassType;
-            Coating = coating;
-            IsSunglasses = isSunglasses;
-        }
 
         public Glasses(Product product, decimal strength, string glassType, string coating, bool isSunglasses) : base(product)
         {

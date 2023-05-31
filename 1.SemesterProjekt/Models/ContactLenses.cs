@@ -19,12 +19,6 @@ namespace _1.SemesterProjekt.Models
         /// <param name="strength"></param>
         /// <param name="hasUVFilter"></param>
         /// <param name="type"></param>
-        public ContactLenses(int id, string name, Brand brand, decimal price, string duration, decimal strength, bool hasUVFilter) : base(id, name, brand, price, PGID)
-        {
-            this.Duration = duration;
-            this.Strength = strength;
-            this.HasUVFilter = hasUVFilter;
-        }
 
         public ContactLenses(Product product, string duration, decimal strength, bool hasUVFilter) : base(product)
         {
