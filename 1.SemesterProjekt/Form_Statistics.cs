@@ -81,7 +81,6 @@ namespace _1.SemesterProjekt {
                     sw.WriteLine(tail);
                 }
             }
-
         }
 
         /// <summary>
@@ -119,7 +118,6 @@ namespace _1.SemesterProjekt {
 
             if (_customer != null && _customer.ID != 0) {
                 orders = orders.Where(c => c.Customer.ID == _customer.ID).ToList();
-
             }
 
             if (_employee != null && _employee.ID != 0) {

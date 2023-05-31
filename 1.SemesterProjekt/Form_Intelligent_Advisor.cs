@@ -15,12 +15,21 @@ namespace _1.SemesterProjekt
 {
     public partial class Form_Intelligent_Advisor : Form
     {
+        BindingList<Frames> Frames = new BindingList<Frames>();
+        ProductService productService = new ProductService();
         public Form_Intelligent_Advisor()
         {
             InitializeComponent();
             cmBox_IR_SortPrice.Text = "Høj til lav pris";
-            //cmBox_IR_Length.Text = null;
-            //cmBox_IR_Width.Text = null;
+
+            Frames = new BindingList<Frames>(productService.GetFrames());
+            dgv_IR_Result.DataSource = Frames;
+            dgv_IR_Result.Columns["ProductGroupID"].Visible = false;
+            dgv_IR_Result.Columns["ID"].DisplayIndex = 0;
+            dgv_IR_Result.Columns["Name"].DisplayIndex = 1;
+            dgv_IR_Result.Columns["Brand"].DisplayIndex = 2;
+            dgv_IR_Result.Columns["Price"].DisplayIndex = 3;
+            dgv_IR_Result.Columns.GetLastColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Visible = false;
         }
 
         private void Form_Intelligent_Advisor_Load(object sender, EventArgs e)
@@ -34,15 +43,14 @@ namespace _1.SemesterProjekt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_IR_Search_Click(object sender, EventArgs e)
-        {
-            ProductService productService = new ProductService();
-            List<Frames> frames = productService.GetFrames();
+        private void btn_IR_Search_Click(object sender, EventArgs e) {
+
+            List<Frames> frames = Frames.ToList();
 
             string color = cmBox_IR_Colour.Text.ToLower();
             // Filter by color
             if (!string.IsNullOrWhiteSpace(color))
-                frames = frames.Where(c => c.Colour.ToLower() == color).ToList();
+                frames = Frames.Where(c => c.Colour.ToLower() == color).ToList();
 
             string brand = cmBox_IR_Brand.Text.ToLower();
             // Filter by brand
@@ -61,11 +69,9 @@ namespace _1.SemesterProjekt
 
             string length = cmBox_IR_Length.Text;
             // TryParse text to decimal
-            if (!string.IsNullOrWhiteSpace(length))
-            {
+            if (!string.IsNullOrWhiteSpace(length)) {
                 decimal lengthDec;
-                if (!Decimal.TryParse(length, out lengthDec))
-                {
+                if (!Decimal.TryParse(length, out lengthDec)) {
                     MessageBox.Show(string.Format("Unable to parse '{0}'.", length));
                     return;
                 }
@@ -78,11 +84,9 @@ namespace _1.SemesterProjekt
 
             string width = cmBox_IR_Length.Text;
             // TryParse text to decimal
-            if (!string.IsNullOrWhiteSpace(width))
-            {
+            if (!string.IsNullOrWhiteSpace(width)) {
                 decimal widthDec;
-                if (!Decimal.TryParse(length, out widthDec))
-                {
+                if (!Decimal.TryParse(length, out widthDec)) {
                     MessageBox.Show("Unable to parse '{0}'.", length);
                     return;
                 }
@@ -108,8 +112,8 @@ namespace _1.SemesterProjekt
             else if (sortByPrice == "Høj til lav pris")
                 frames = frames.OrderByDescending(c => c.Price).ToList();
 
-
-            dgv_IR_Result.DataSource = frames;
+            Frames = new BindingList<Frames>(frames);
+            dgv_IR_Result.DataSource = Frames;
         }
 
         /// <summary>
