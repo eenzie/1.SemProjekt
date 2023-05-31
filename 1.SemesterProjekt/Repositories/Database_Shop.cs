@@ -42,54 +42,60 @@ namespace _1.SemesterProjekt.Repositories
         {
             List<Employee> employees = new List<Employee>();
 
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
-            {
-                string selectSqlString = $"select * from Employees";
-                SqlCommand sqlCommand = new SqlCommand( selectSqlString, sqlConnection);
+            try {
+                using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                    string selectSqlString = $"select * from Employees";
+                    SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
 
-                sqlConnection.Open();
-                SqlDataReader reader = sqlCommand.ExecuteReader();
+                    sqlConnection.Open();
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
 
-                List<Shop> shops = GetAllShops();
+                    List<Shop> shops = GetAllShops();
 
-                while (reader.Read())
-                {
-                    int id = reader.GetInt32(0);
-                    string name = reader.GetString(1);
-                    string phone = reader.GetString(2);
-                    int shopID = reader.GetInt32(3);
-                    Shop shop = shops.Find(x => x.ID == shopID);
+                    while (reader.Read()) {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        string phone = reader.GetString(2);
+                        int shopID = reader.GetInt32(3);
+                        Shop shop = shops.Find(x => x.ID == shopID);
 
-                    Employee employee = new Employee(id, name, phone, shop);
-                    employees.Add(employee);
+                        Employee employee = new Employee(id, name, phone, shop);
+                        employees.Add(employee);
+                    }
                 }
             }
-
+            catch (Exception e) {
+                LogService.LogError(e.Message, nameof(Database_Shop), nameof(GetAllEmployees));
+            }
             return employees;
         }
 
         public List<Employee> GetAllEmployees(Shop shop) {
             List<Employee> employees = new List<Employee>();
+            try {
+                using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
+                    string selectSqlString = $"select * from Employees where ShopId = {shop.ID};";
+                    SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
 
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
-                string selectSqlString = $"select * from Employees where ShopId = {shop.ID};";
-                SqlCommand sqlCommand = new SqlCommand(selectSqlString, sqlConnection);
+                    sqlConnection.Open();
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
 
-                sqlConnection.Open();
-                SqlDataReader reader = sqlCommand.ExecuteReader();
+                    List<Shop> shops = GetAllShops();
 
-                List<Shop> shops = GetAllShops();
+                    while (reader.Read()) {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        string phone = reader.GetString(2);
 
-                while (reader.Read()) {
-                    int id = reader.GetInt32(0);
-                    string name = reader.GetString(1);
-                    string phone = reader.GetString(2);
-
-                    Employee employee = new Employee(id, name, phone, shop);
-                    employees.Add(employee);
+                        Employee employee = new Employee(id, name, phone, shop);
+                        employees.Add(employee);
+                    }
                 }
             }
+            catch (Exception e) {
+                LogService.LogError(e.Message, nameof(Database_Shop), nameof(GetAllEmployees));
 
+            }
             return employees;
         }
 
