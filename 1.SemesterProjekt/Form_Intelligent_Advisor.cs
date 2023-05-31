@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace _1.SemesterProjekt
 {
@@ -45,6 +46,11 @@ namespace _1.SemesterProjekt
         /// <param name="e"></param>
         private void btn_IR_Search_Click(object sender, EventArgs e) {
 
+            Frames = new BindingList<Frames>(SearchFrames());
+            dgv_IR_Result.DataSource = Frames;
+        }
+
+        private List<Frames> SearchFrames() {
             List<Frames> frames = Frames.ToList();
 
             string color = cmBox_IR_Colour.Text.ToLower();
@@ -73,7 +79,7 @@ namespace _1.SemesterProjekt
                 decimal lengthDec;
                 if (!Decimal.TryParse(length, out lengthDec)) {
                     MessageBox.Show(string.Format("Unable to parse '{0}'.", length));
-                    return;
+                    return new List<Frames>();
                 }
 
                 // Filter by length
@@ -88,7 +94,7 @@ namespace _1.SemesterProjekt
                 decimal widthDec;
                 if (!Decimal.TryParse(length, out widthDec)) {
                     MessageBox.Show("Unable to parse '{0}'.", length);
-                    return;
+                    return new List<Frames>();
                 }
                 // Filter by width
                 if (widthDec > 0)
@@ -112,8 +118,8 @@ namespace _1.SemesterProjekt
             else if (sortByPrice == "Høj til lav pris")
                 frames = frames.OrderByDescending(c => c.Price).ToList();
 
-            Frames = new BindingList<Frames>(frames);
-            dgv_IR_Result.DataSource = Frames;
+
+            return frames;
         }
 
         /// <summary>
