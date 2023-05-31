@@ -39,6 +39,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.link_ProductHelp = new System.Windows.Forms.LinkLabel();
+            this.bt_PrintToFile = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Products)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,9 +49,12 @@
             this.dgv_Products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Products.Location = new System.Drawing.Point(20, 166);
             this.dgv_Products.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgv_Products.MultiSelect = false;
             this.dgv_Products.Name = "dgv_Products";
+            this.dgv_Products.ReadOnly = true;
             this.dgv_Products.RowHeadersWidth = 51;
             this.dgv_Products.RowTemplate.Height = 24;
+            this.dgv_Products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_Products.Size = new System.Drawing.Size(1029, 318);
             this.dgv_Products.TabIndex = 21;
             // 
@@ -172,12 +177,28 @@
             this.link_ProductHelp.Text = "Få hjælp til denne funktion";
             this.link_ProductHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_ProductHelp_LinkClicked);
             // 
+            // bt_PrintToFile
+            // 
+            this.bt_PrintToFile.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bt_PrintToFile.Image = ((System.Drawing.Image)(resources.GetObject("bt_PrintToFile.Image")));
+            this.bt_PrintToFile.Location = new System.Drawing.Point(881, 498);
+            this.bt_PrintToFile.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.bt_PrintToFile.Name = "bt_PrintToFile";
+            this.bt_PrintToFile.Size = new System.Drawing.Size(168, 43);
+            this.bt_PrintToFile.TabIndex = 31;
+            this.bt_PrintToFile.Text = "Print til fil";
+            this.bt_PrintToFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bt_PrintToFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bt_PrintToFile.UseVisualStyleBackColor = true;
+            this.bt_PrintToFile.Click += new System.EventHandler(this.bt_PrintToFile_Click);
+            // 
             // Form_Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
-            this.ClientSize = new System.Drawing.Size(1068, 495);
+            this.ClientSize = new System.Drawing.Size(1068, 552);
+            this.Controls.Add(this.bt_PrintToFile);
             this.Controls.Add(this.link_ProductHelp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.bt_UpdateProduct);
@@ -209,6 +230,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel link_ProductHelp;
+        private System.Windows.Forms.Button bt_PrintToFile;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

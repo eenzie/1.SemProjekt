@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -155,6 +156,41 @@ namespace _1.SemesterProjekt
             catch (Exception ex)
             {
                 MessageBox.Show($"Error opening the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Written by Ina and Anton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bt_PrintToFile_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.DefaultExt = ".txt";
+            saveFileDialog.Title = "Save products to Text File";
+            saveFileDialog.Filter = "Text file|*.txt";
+            saveFileDialog.ShowDialog();
+
+            var categories = _productService.Categories;
+            if (saveFileDialog.FileName != "")
+            {
+                using (StreamWriter sw = new StreamWriter(saveFileDialog.OpenFile()))
+                {
+                    string head = string.Format("{0,-10} {1,-50} {2,-25} {3,-10} {4,-25}", "Produkt ID", "Navn", "Mærke", "Pris", "Kategori");
+                    sw.WriteLine(head);
+                    for (int i = 0; i < 120; i++)
+                    {
+                        sw.Write("=");
+                    }
+                    sw.WriteLine();
+
+                    foreach (var product in Products)
+                    {
+                        ProductCategory category = categories.FirstOrDefault(x => x.ID == product.ProductGroupID);
+                        string line = string.Format("{0,-10} {1,-50} {2,-25} {3,-10} {4,-25}", product.ID, product.Name, product.Brand, product.Price, category.Name);
+                        sw.WriteLine(line);
+                    }
+                }
             }
         }
     }
