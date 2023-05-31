@@ -1,5 +1,6 @@
 ﻿using _1.SemesterProjekt.Models;
 using _1.SemesterProjekt.Repositories;
+using _1.SemesterProjekt.Services;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -33,6 +34,9 @@ namespace _1.SemesterProjekt.Service
                     return _database.InsertBinocularsIntoDatabase((Binoculars)product);
                 case 5:
                     return _database.InsertAccessoriesIntoDatabase((Accessories)product);
+                default:
+                    LogService.LogError($"Could not locate the proper repository for {product.GetType()}", nameof(ProductService), nameof(CreatedProduct));
+                    break;
             }
 
             return false;
@@ -65,6 +69,9 @@ namespace _1.SemesterProjekt.Service
                     return _database.UpdateBinocular((Binoculars)updatedProduct);
                 case 5:
                     return _database.UpdateAccessories((Accessories)updatedProduct);
+                default:
+                    LogService.LogError($"Could not locate the proper repository for {updatedProduct.GetType()}", nameof(ProductService), nameof(EditProduct));
+                    break;
             }
 
             return false;

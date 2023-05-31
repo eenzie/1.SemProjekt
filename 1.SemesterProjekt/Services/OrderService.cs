@@ -34,6 +34,13 @@ namespace _1.SemesterProjekt.Services
         /// <param name="customer">A customer to filter by</param>
         /// <returns>A list of orders in a time period optionally filtered by a customer</returns>
         public List<Order> GetOrdersByDate(DateTime start, DateTime end, Customer customer = null) {
+            // Make sure that the start datetime is not after end datetime
+            if (start > end) {
+                DateTime tmp = end;
+                end = start;
+                start = tmp;
+            }
+
             return GetCustomerOrders(customer).Where(c => c.Date >= start && end >= c.Date).ToList();
         }
 
@@ -50,7 +57,6 @@ namespace _1.SemesterProjekt.Services
 
         public bool CreateOrder(Order order) {
             // Opret først Order i order tabellen
-
             return database_Order.InsertOrder(order);
         }
 
