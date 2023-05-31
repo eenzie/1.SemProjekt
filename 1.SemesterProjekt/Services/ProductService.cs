@@ -20,7 +20,7 @@ namespace _1.SemesterProjekt.Service
 
 
 
-        public bool CreatedProduct(Product product)
+        public bool CreateProduct(Product product)
         {
             switch (product.ProductGroupID)
             {
@@ -35,7 +35,7 @@ namespace _1.SemesterProjekt.Service
                 case 5:
                     return _database.InsertAccessoriesIntoDatabase((Accessories)product);
                 default:
-                    LogService.LogError($"Could not locate the proper repository for {product.GetType()}", nameof(ProductService), nameof(CreatedProduct));
+                    LogService.LogError($"Could not locate the proper repository for {product.GetType()}", nameof(ProductService), nameof(CreateProduct));
                     break;
             }
 

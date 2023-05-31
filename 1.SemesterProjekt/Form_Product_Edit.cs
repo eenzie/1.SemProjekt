@@ -139,7 +139,7 @@ namespace _1.SemesterProjekt
 
                 Product = new Glasses(product,strength, type, coating, sunglasses);
 
-                bool success = _productService.CreatedProduct(Product);
+                bool success = _productService.CreateProduct(Product);
 
                 if (success)
                 {
@@ -216,7 +216,7 @@ namespace _1.SemesterProjekt
 
                 Product = new Frames(product,length, width, colour, material, shape);
 
-               bool success = _productService.CreatedProduct(Product);
+               bool success = _productService.CreateProduct(Product);
 
                 if (success)
                 {
@@ -285,7 +285,7 @@ namespace _1.SemesterProjekt
 
                 Product = new ContactLenses(product, duration, strength, hasUVFilter);
 
-                bool success = _productService.CreatedProduct(Product);
+                bool success = _productService.CreateProduct(Product);
 
                 if (success)
                 {
@@ -346,7 +346,7 @@ namespace _1.SemesterProjekt
 
                 Product = new Binoculars(product,type, zoom, isWaterproof);
 
-                bool success = _productService.CreatedProduct(Product);
+                bool success = _productService.CreateProduct(Product);
 
                 if (success)
                 {
@@ -407,7 +407,7 @@ namespace _1.SemesterProjekt
                 accessory.Colour = colour;
                 accessory.Type = type;
 
-                bool success = _productService.CreatedProduct(accessory);
+                bool success = _productService.CreateProduct(accessory);
 
                 if (success)
                 {
