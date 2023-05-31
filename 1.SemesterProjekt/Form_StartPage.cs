@@ -23,6 +23,7 @@ namespace _1.SemesterProjekt
         {
             InitializeComponent();
             // Here we listen to the logservice for errors
+            // We listen from this window, because it is always open in the background
             LogService.ExceptionCaught += LogService_ExceptionCaught;
         }
 

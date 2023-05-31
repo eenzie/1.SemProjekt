@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace _1.SemesterProjekt.Services {
+
+    /// <summary>
+    /// Written by Anton
+    /// </summary>
     public static class LogService {
         // This will store the filepath to the logfile
         private readonly static string _fileName = "LogFile.txt";
