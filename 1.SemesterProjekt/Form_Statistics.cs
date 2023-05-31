@@ -111,7 +111,10 @@ namespace _1.SemesterProjekt {
 
         private void UpdateStatistics() {
             DateTime _start = dtp_Stat_From.Value;
+            _start = new DateTime(_start.Year, _start.Month, _start.Day, 0, 0, 0);
             DateTime _end = dtp_Stat_To.Value;
+            _end = new DateTime(_end.Year, _end.Month, _end.Day, 23, 59, 59);
+
             List<Order> orders = _orderService.GetOrdersByDate(_start, _end);
 
             if (_customer != null && _customer.ID != 0) {
@@ -127,11 +130,16 @@ namespace _1.SemesterProjekt {
             dgv_Stat_OrderResults.DataSource = Orders;
 
             if (Orders.Count != 0) {
-                tb_Stat_TotalSales.Text = Orders.Sum(c => c.SubTotal).ToString();
+                tb_Stat_TotalSales.Text = Orders.Sum(c => c.SubTotal).ToString("C");
                 tb_Stat_SalesCount.Text = Orders.Count.ToString();
-                tb_Stat_AverageOrder.Text = (Orders.Sum(c => c.SubTotal) / Orders.Count).ToString();
+                tb_Stat_AverageOrder.Text = (Orders.Sum(c => c.SubTotal) / Orders.Count).ToString("C");
+
+                var timeSpan = _end - _start;
+                
+                tb_Stat_AverageDay.Text = ((double)Orders.Sum(c => c.SubTotal) / timeSpan.TotalDays).ToString("C");
             }
-            Console.WriteLine("");
+
+
         }
 
         private void bt_PrintScreen_Click(object sender, EventArgs e) {

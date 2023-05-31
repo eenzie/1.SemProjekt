@@ -456,7 +456,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
-            this.ClientSize = new System.Drawing.Size(1565, 588);
+            this.ClientSize = new System.Drawing.Size(1582, 588);
             this.Controls.Add(this.link_OrderHelp);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.cmBox_Employee);
