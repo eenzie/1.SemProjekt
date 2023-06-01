@@ -55,6 +55,12 @@ namespace _1.SemesterProjekt.Services
             return orderLines;
         }
 
+        /// <summary>
+        /// Written by Anton
+        /// Will write the order instance to the database
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns>return true if success</returns>
         public bool CreateOrder(Order order) {
             // Opret først Order i order tabellen
             return database_Order.InsertOrder(order);

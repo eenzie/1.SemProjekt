@@ -12,6 +12,12 @@ namespace _1.SemesterProjekt.Service {
     public class CustomerService {
         private Database_Customer _database = new Database_Customer();
 
+        /// <summary>
+        /// Written by Anton
+        /// This method will write a Customer instance to the database
+        /// </summary>
+        /// <param name="customer">The customer instance to be serialized</param>
+        /// <returns>returns true if success, false otherwise</returns>
         public bool CreateCustomer(Customer customer) {
 
             if (customer.ID != 0) {
@@ -52,10 +58,24 @@ namespace _1.SemesterProjekt.Service {
         }
 
 
+        /// <summary>
+        /// Written by Anton
+        /// Will return a full list of all customers
+        /// </summary>
+        /// <returns>returns all customers in the database</returns>
         public List<Customer> ReadAllCustomers() {
             return _database.GetAllCustomers();
         }
 
+
+        /// <summary>
+        /// Written by Anton
+        /// returns a list of customers whos name will contains the input parameter
+        /// postcode is optional
+        /// </summary>
+        /// <param name="input">The name to search customers for</param>
+        /// <param name="postcode">Postcode to filter the results by</param>
+        /// <returns>returns a list of customers whos name matches the input and optionally postcode</returns>
         public List<Customer> ReadCustomersByName(string input, int? postcode = null) {
             List<Customer> customers = _database.GetCustomerByName(input);
 
@@ -66,10 +86,23 @@ namespace _1.SemesterProjekt.Service {
             return customers;
         }
 
+        /// <summary>
+        /// Written by Anton
+        /// This will return a customer instance whos ID is an exact match on the id parameter
+        /// </summary>
+        /// <param name="id">The ID to search the customers for</param>
+        /// <returns>The customer instance, default if no entry found</returns>
         public Customer ReadCustomerById(int id) {
             return _database.GetCustomerById(id);
         }
 
+
+        /// <summary>
+        /// Written by Ina / Ahn
+        /// returns a list of customers where the customers email constains the email parameter
+        /// </summary>
+        /// <param name="email">The email to search for</param>
+        /// <returns>A list of customers whos email matches with the email parameter</returns>
         public List<Customer> ReadCustomerByEmail(string email) {
             return _database.GetCustomerByEmail(email);
         }

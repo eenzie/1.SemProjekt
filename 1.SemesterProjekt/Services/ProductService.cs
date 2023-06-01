@@ -19,7 +19,12 @@ namespace _1.SemesterProjekt.Service
         public List<Brand> Brands => _database.SelectBrands();
 
 
-
+        /// <summary>
+        /// Written by Anton
+        /// This method takes a Product type and will properly write it to the database
+        /// </summary>
+        /// <param name="product">The Product instance to insert to the database</param>
+        /// <returns>returns true if success, false otherwise</returns>
         public bool CreateProduct(Product product)
         {
             switch (product.ProductGroupID)
@@ -55,15 +60,27 @@ namespace _1.SemesterProjekt.Service
         public List<Product> GetProducts() => _database.SelectProductsFromDatabase();
 
 
+        /// <summary>
+        /// Written by Anton
+        /// This will first update the Product instance, and if success, will update the sub instance
+        /// 
+        /// </summary>
+        /// <param name="updatedProduct">The Product instance to update in the database</param>
+        /// <returns>returns true if success, false otherwise</returns>
 
         public bool EditProduct(Product updatedProduct)
         {
 
+            if (!ProductExist(updatedProduct)) {
+                return false;
+            }
+
+            // Updated the product in the Products table
             if (!_database.UpdateProduct(updatedProduct)) {
                 return false;
             }
 
-
+            // Subsequently update the Product sub table
             switch (updatedProduct.ProductGroupID)
             {
                 case 1:
@@ -77,6 +94,7 @@ namespace _1.SemesterProjekt.Service
                 case 5:
                     return _database.UpdateAccessories((Accessories)updatedProduct);
                 default:
+                    // Fail safe
                     LogService.LogError($"Could not locate the proper repository for {updatedProduct.GetType()}", nameof(ProductService), nameof(EditProduct));
                     break;
             }
@@ -88,12 +106,24 @@ namespace _1.SemesterProjekt.Service
         /// <summary>
         /// Written by Anh
         /// </summary>
-        /// <param name="product"></param>
-        /// <returns></returns>
+        /// <param name="product">Product to be deleted</param>
+        /// <returns>returns true if success, false otherwise</returns>
         public bool DeleteProduct(Product product)
         {
+            if (!ProductExist(product)) {
+                return false;
+            }
+
             bool isDeleted = _database.DeleteProduct(product);
             return isDeleted;
+        }
+
+        private bool ProductExist(Product product) {
+            if (product is null || product.ID == 0) {
+                return false;
+            }
+
+            return true;
         }
     }
 }
