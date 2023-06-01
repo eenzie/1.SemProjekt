@@ -32,7 +32,7 @@ namespace _1.SemesterProjekt.Services {
             }
             // We write the message to the file with a timestamp
             using (StreamWriter streamWriter = new StreamWriter(File.Open(_fileName, FileMode.Append))) {
-                string formattedMessage = string.Format("{0, -25} {1,-20} {2, -20} {3}", DateTime.Now.ToString("yyyy/MM/dd hh:MM:ss"), className, methodName, errorMessage);
+                string formattedMessage = string.Format("{0, -25} {1,-30} {2, -30} {3}", DateTime.Now.ToString("yyyy/MM/dd hh:MM:ss"), className, methodName, errorMessage);
                 streamWriter.WriteLine(formattedMessage);
                 ExceptionCaught.Invoke(null, errorMessage);
             }
@@ -43,7 +43,7 @@ namespace _1.SemesterProjekt.Services {
         /// </summary>
         private static void InitErrorFile() {
             using (StreamWriter streamWriter = new StreamWriter(File.Open(_fileName, FileMode.Create))) {
-                string formattedMessage = string.Format("{0, -25} {1,-20} {2, -20} {3}", "Tidspunkt", "Klasse", "Metode", "Besked");
+                string formattedMessage = string.Format("{0, -25} {1,-30} {2, -30} {3}", "Tidspunkt", "Klasse", "Metode", "Besked");
                 streamWriter.WriteLine(formattedMessage);
             }
         }
