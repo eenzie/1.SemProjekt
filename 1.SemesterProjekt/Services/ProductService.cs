@@ -53,10 +53,17 @@ namespace _1.SemesterProjekt.Service
         public List<Accessories> GetAccessories() => _database.SelectAccessories();
 
         public List<Product> GetProducts() => _database.SelectProductsFromDatabase();
-        
+
+
 
         public bool EditProduct(Product updatedProduct)
         {
+
+            if (!_database.UpdateProduct(updatedProduct)) {
+                return false;
+            }
+
+
             switch (updatedProduct.ProductGroupID)
             {
                 case 1:

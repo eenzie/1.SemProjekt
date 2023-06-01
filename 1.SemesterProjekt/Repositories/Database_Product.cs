@@ -444,7 +444,7 @@ namespace _1.SemesterProjekt.Repositories {
         public bool UpdateProduct(Product updatedProduct) {
             try {
                 using (SqlConnection sqlConnection = new SqlConnection(ConnectionString)) {
-                    string updateSqlString = "UPDATE Product SET " +
+                    string updateSqlString = "UPDATE Products SET " +
                                              "Name = @updatedName, " +
                                              "Brand = @updatedBrand, " +
                                              "Price = @updatedPrice " +
@@ -453,7 +453,7 @@ namespace _1.SemesterProjekt.Repositories {
                     SqlCommand sqlCommand = new SqlCommand(updateSqlString, sqlConnection);
 
                     sqlCommand.Parameters.Add("@updatedName", SqlDbType.NVarChar).Value = updatedProduct.Name;
-                    sqlCommand.Parameters.Add("@updatedBrand", SqlDbType.Int).Value = updatedProduct.Brand;
+                    sqlCommand.Parameters.Add("@updatedBrand", SqlDbType.Int).Value = updatedProduct.Brand.ID;
                     sqlCommand.Parameters.Add("@updatedPrice", SqlDbType.Decimal).Value = updatedProduct.Price;
 
                     sqlConnection.Open();
