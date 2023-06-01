@@ -165,6 +165,7 @@ namespace _1.SemesterProjekt
                 string coating = tb_glasses_coating.Text;
                 bool isSunglasses = cb_glasses_sunglasses.Checked;
                 Glasses glasses = new Glasses(product, strength, glassType, coating, isSunglasses);
+                Product = glasses;
 
                 // Call the ProductService to update the product in the database
                 bool success = _productService.EditProduct(Product);
@@ -242,7 +243,8 @@ namespace _1.SemesterProjekt
                 string colour = tb_frames_colour.Text;
                 string shape = tb_frames_shape.Text;
                 string material = tb_frames_material.Text;
-                Frames frames = new Frames(product, length, width, colour, shape, material);
+                Frames frames = new Frames(Product, length, width, colour, shape, material);
+                Product = frames;
 
                 // Call the ProductService to update the product in the database
                 bool success = _productService.EditProduct(Product);
@@ -311,7 +313,8 @@ namespace _1.SemesterProjekt
                 decimal strength = decimal.Parse(tb_contactlenses_strength.Text);
                 bool hasUVFilter = cb_Contactlenses_hasUVFilter.Checked;
                 ContactLenses contactLenses = new ContactLenses(product, duration, strength, hasUVFilter);
-                
+                Product = contactLenses;
+
                 // Call the ProductService to update the product in the database
                 bool success = _productService.EditProduct(Product);
 
@@ -372,9 +375,10 @@ namespace _1.SemesterProjekt
                 string type = tb_binoculars_type.Text;
                 bool isWaterproof = cb_binoculars_isWaterproof.Checked;
                 Binoculars binoculars = new Binoculars(product, zoom, type, isWaterproof);
+                Product = binoculars;
 
                 // Call the ProductService to update the product in the database
-                bool success = _productService.EditProduct(binoculars);
+                bool success = _productService.EditProduct(Product);
 
                 if (success)
                 {
@@ -433,9 +437,10 @@ namespace _1.SemesterProjekt
                 string type = tb_Acces_Type.Text;
                 string color = tb_Acces_Colour.Text;
                 Accessories accessory = new Accessories(product, type , color);
+                Product = accessory;
 
                 // Call the ProductService to update the product in the database
-                bool success = _productService.EditProduct(accessory);
+                bool success = _productService.EditProduct(Product);
 
                 if (success)
                 {
