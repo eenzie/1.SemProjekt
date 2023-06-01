@@ -12,11 +12,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace _1.SemesterProjekt
-{
+namespace _1.SemesterProjekt {
     // Written by Anton
-    public partial class Form_Product_Edit : Form
-    {
+    public partial class Form_Product_Edit : Form {
         // This will store the existing Product
         public Product Product { get; set; }
 
@@ -24,15 +22,13 @@ namespace _1.SemesterProjekt
         public event EventHandler<Product> ProductUpdated;
 
         // This constructor is when we want to Create a new product
-        public Form_Product_Edit()
-        {
+        public Form_Product_Edit() {
             InitializeComponent();
             InitComboBoxes();
         }
 
         // This constructor is when we want to update an existing product
-        public Form_Product_Edit(Product product)
-        {
+        public Form_Product_Edit(Product product) {
             InitializeComponent();
             InitComboBoxes();
 
@@ -41,8 +37,7 @@ namespace _1.SemesterProjekt
             cbBox_Brand.Text = Product.Brand.ToString();
             tb_ProductPrice.Text = Product.Price.ToString();
 
-            switch (product.ProductGroupID)
-            {
+            switch (product.ProductGroupID) {
                 // Frames
                 case 1:
                     Frames frames = _productService.GetFrames().FirstOrDefault(x => x.ID == product.ID);
@@ -100,8 +95,7 @@ namespace _1.SemesterProjekt
             }
         }
 
-        private void InitComboBoxes()
-        {
+        private void InitComboBoxes() {
             List<ProductCategory> categories = _productService.Categories;
             List<Brand> brands = _productService.Brands;
 
@@ -118,65 +112,31 @@ namespace _1.SemesterProjekt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void bt_SaveGlasses_Click(object sender, EventArgs e)
-        {
+        private void bt_SaveGlasses_Click(object sender, EventArgs e) {
+            Product product = ExtractProductInfoFromForm(3);
             // We create a new product
-            if (Product == default)
-            {
-                Product product = ExtractProductInfoFromForm(3);
+            if (Product == default) {
+                bool success = _productService.CreateProduct(product);
 
-                string coating = tb_glasses_coating.Text;
-                string type = tb_glasses_type.Text;
-                string strengthstr = tb_glasses_strength.Text;
-                decimal strength;
-                bool sunglasses = cb_glasses_sunglasses.Checked;
-
-                if (!decimal.TryParse(strengthstr, out strength))
-                {
-                    Console.WriteLine("");
-                    return;
-                }
-
-                Product = new Glasses(product,strength, type, coating, sunglasses);
-
-                bool success = _productService.CreateProduct(Product);
-
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Glas er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke oprette glas. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             // We update existing product
-            else
-            {
-                Product product = ExtractProductInfoFromForm(3);
+            else {
                 product.ID = Product.ID;
-                Product.Name = product.Name;
-                Product.Brand = product.Brand;
-                Product.Price = product.Price;
-
-                decimal strength = decimal.Parse(tb_glasses_strength.Text);
-                string glassType = tb_glasses_type.Text;
-                string coating = tb_glasses_coating.Text;
-                bool isSunglasses = cb_glasses_sunglasses.Checked;
-                Glasses glasses = new Glasses(product, strength, glassType, coating, isSunglasses);
-                Product = glasses;
-
                 // Call the ProductService to update the product in the database
-                bool success = _productService.EditProduct(Product);
+                bool success = _productService.EditProduct(product);
 
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Glas er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke opdatere glas. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -188,74 +148,32 @@ namespace _1.SemesterProjekt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_frames_save_Click(object sender, EventArgs e)
-        {
+        private void btn_frames_save_Click(object sender, EventArgs e) {
+            Product product = ExtractProductInfoFromForm(1);
             // We create a new product
-            if (Product == default)
-            {
-                Product product = ExtractProductInfoFromForm(1);
+            if (Product == default) {
+                bool success = _productService.CreateProduct(product);
 
-                string lengthstr = tb_frames_length.Text;
-                decimal length;
-                string widthstr = tb_frames_width.Text;
-                decimal width;
-                string colour = tb_frames_colour.Text;
-                string shape = tb_frames_shape.Text;
-                string material = tb_frames_material.Text;
-
-                if (!decimal.TryParse(lengthstr, out length))
-                {
-                    Console.WriteLine("");
-                    return;
-                }
-
-                if (!decimal.TryParse(widthstr, out width))
-                {
-                    Console.WriteLine("");
-                    return;
-                }
-
-                Product = new Frames(product,length, width, colour, material, shape);
-
-               bool success = _productService.CreateProduct(Product);
-
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Brillestellet er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke oprette brillestellet. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             // We update existing product
-            else
-            {
-                Product product = ExtractProductInfoFromForm(1);
+            else {
                 product.ID = Product.ID;
-                Product.Name = product.Name;
-                Product.Brand = product.Brand;
-                Product.Price = product.Price;
-
-                decimal length = decimal.Parse(tb_frames_length.Text);
-                decimal width = decimal.Parse(tb_frames_width.Text);
-                string colour = tb_frames_colour.Text;
-                string shape = tb_frames_shape.Text;
-                string material = tb_frames_material.Text;
-                Frames frames = new Frames(Product, length, width, colour, shape, material);
-                Product = frames;
 
                 // Call the ProductService to update the product in the database
-                bool success = _productService.EditProduct(Product);
+                bool success = _productService.EditProduct(product);
 
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Brillestellet er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke opdatere brillestellet. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -267,64 +185,33 @@ namespace _1.SemesterProjekt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_lenses_save_Click(object sender, EventArgs e)
-        {
+        private void btn_lenses_save_Click(object sender, EventArgs e) {
+            Product product = ExtractProductInfoFromForm(2);
             // We create a new product
-            if (Product == default)
-            {
-                Product product = ExtractProductInfoFromForm(2);
+            if (Product == default) {
+                bool success = _productService.CreateProduct(product);
 
-                string duration = tb_contactlenses_duration.Text;
-                string strengthstr = tb_contactlenses_strength.Text;
-                decimal strength;
-                bool hasUVFilter = cb_Contactlenses_hasUVFilter.Checked;
-
-                if (!decimal.TryParse(strengthstr, out strength))
-                {
-                    Console.WriteLine("");
-                    return;
-                }
-
-                Product = new ContactLenses(product, duration, strength, hasUVFilter);
-
-                bool success = _productService.CreateProduct(Product);
-
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Kontaktlensen er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke oprette kontaktlensen. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
             // We update existing product
-            else
-            {
-                Product product = ExtractProductInfoFromForm(2);
+            else {
                 product.ID = Product.ID;
-                Product.Name = product.Name;
-                Product.Brand = product.Brand;
-                Product.Price = product.Price;
-
-                string duration = tb_contactlenses_duration.Text;
-                decimal strength = decimal.Parse(tb_contactlenses_strength.Text);
-                bool hasUVFilter = cb_Contactlenses_hasUVFilter.Checked;
-                ContactLenses contactLenses = new ContactLenses(product, duration, strength, hasUVFilter);
-                Product = contactLenses;
-
+                
                 // Call the ProductService to update the product in the database
                 bool success = _productService.EditProduct(Product);
 
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Kontaktlinserne er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke opdatere kontaktlinserne. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -336,57 +223,32 @@ namespace _1.SemesterProjekt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_bino_save_Click(object sender, EventArgs e) 
-        {
+        private void btn_bino_save_Click(object sender, EventArgs e) {
+            Product product = ExtractProductInfoFromForm(4);
             // We create a new product
-            if (Product == default)
-            {
-                Product product = ExtractProductInfoFromForm(4);
+            if (Product == default) {
+                bool success = _productService.CreateProduct(product);
 
-                string zoom = tb_binoculars_zoom.Text;
-                string type = tb_binoculars_type.Text;
-                bool isWaterproof = cb_binoculars_isWaterproof.Checked;
-
-                Product = new Binoculars(product,type, zoom, isWaterproof);
-
-                bool success = _productService.CreateProduct(Product);
-
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Kikkerten er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke oprette kikkerten. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             // We update existing product
-            else
-            {
-                Product product = ExtractProductInfoFromForm(4);
-
+            else {
                 product.ID = Product.ID;
-                Product.Name = product.Name;
-                Product.Brand = product.Brand;
-                Product.Price = product.Price;
-
-                string zoom = tb_binoculars_zoom.Text;
-                string type = tb_binoculars_type.Text;
-                bool isWaterproof = cb_binoculars_isWaterproof.Checked;
-                Binoculars binoculars = new Binoculars(product, zoom, type, isWaterproof);
-                Product = binoculars;
 
                 // Call the ProductService to update the product in the database
-                bool success = _productService.EditProduct(Product);
+                bool success = _productService.EditProduct(product);
 
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Kikkerten er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke opdatere kikkerten. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -398,87 +260,136 @@ namespace _1.SemesterProjekt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_acces_save_Click(object sender, EventArgs e)
-        {
+        private void btn_acces_save_Click(object sender, EventArgs e) {
+            Product product = ExtractProductInfoFromForm(5);
             // We create a new product
-            if (Product == default)
-            {
-                Product = ExtractProductInfoFromForm(5);
+            if (Product == default) {
+                bool success = _productService.CreateProduct(product);
 
-                string colour = tb_Acces_Colour.Text;
-                string type = tb_Acces_Type.Text;
-                Accessories accessory = new Accessories(Product, type, colour);
-                accessory.Colour = colour;
-                accessory.Type = type;
-
-                bool success = _productService.CreateProduct(accessory);
-
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Tilbehøret er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke oprette tilbehøret. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             // We update existing product
-            else
-            {
-                Product product = ExtractProductInfoFromForm(5);
-
+            else {
                 product.ID = Product.ID;
 
-                Product.Name = product.Name;
-                Product.Brand = product.Brand;
-                Product.Price = product.Price;
-
-                string type = tb_Acces_Type.Text;
-                string color = tb_Acces_Colour.Text;
-                Accessories accessory = new Accessories(product, type , color);
-                Product = accessory;
-
                 // Call the ProductService to update the product in the database
-                bool success = _productService.EditProduct(Product);
+                bool success = _productService.EditProduct(product);
 
-                if (success)
-                {
+                if (success) {
                     MessageBox.Show("Tilbehøret er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
-                else
-                {
+                else {
                     MessageBox.Show("Kunne desværre ikke opdatere tilbehøret. Prøv venligst igen.", "Fejl", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        private Product ExtractProductInfoFromForm(int productGroupID)
-        {
+        private Product ExtractProductInfoFromForm(int productGroupID) {
             string name = tb_ProductName.Text;
             Brand brand = (Brand)cbBox_Brand.SelectedValue;
             string pricestr = tb_ProductPrice.Text;
             decimal price;
 
             // If we fail to parse
-            if (!decimal.TryParse(pricestr, out price))
-            {
+            if (!decimal.TryParse(pricestr, out price)) {
                 return default;
             }
 
             Product product = new Product(name, brand, price, productGroupID);
+
+            switch (productGroupID) {
+                case 1:
+                    return ExtractFramesInfo(product);
+                case 2:
+                    return ExtractLenseInfo(product);
+                case 3:
+                    return ExtractGlasInfo(product);
+                case 4:
+                    return ExtractBinoInfo(product);
+                case 5:
+                    return ExtractAccessoryInfo(product);
+            }
+
             return product;
         }
 
-        private void cbBox_ProductType_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private Accessories ExtractAccessoryInfo(Product product) {
+            string colour = tb_Acces_Colour.Text;
+            string type = tb_Acces_Type.Text;
+            Accessories accessory = new Accessories(product, type, colour);
+            return accessory;
+        }
+
+        private Binoculars ExtractBinoInfo(Product product) {
+            string zoom = tb_binoculars_zoom.Text;
+            string type = tb_binoculars_type.Text;
+            bool isWaterproof = cb_binoculars_isWaterproof.Checked;
+
+            Binoculars bino = new Binoculars(product, type, zoom, isWaterproof);
+            return bino;
+        }
+        private Glasses ExtractGlasInfo(Product product) {
+            string coating = tb_glasses_coating.Text;
+            string type = tb_glasses_type.Text;
+            string strengthstr = tb_glasses_strength.Text;
+            decimal strength;
+            bool sunglasses = cb_glasses_sunglasses.Checked;
+
+            if (!decimal.TryParse(strengthstr, out strength)) {
+                return default;
+            }
+
+            Glasses glasses = new Glasses(product, strength, type, coating, sunglasses);
+            return glasses;
+        }
+
+        private ContactLenses ExtractLenseInfo(Product product) {
+            string duration = tb_contactlenses_duration.Text;
+            string strengthstr = tb_contactlenses_strength.Text;
+            decimal strength;
+            if (!decimal.TryParse(strengthstr, out strength)) {
+                return default;
+            }
+
+            bool hasUVFilter = cb_Contactlenses_hasUVFilter.Checked;
+            ContactLenses contactLenses = new ContactLenses(product, duration, strength, hasUVFilter);
+            return contactLenses;
+        }
+
+        private Frames ExtractFramesInfo(Product product) {
+            string lengthstr = tb_frames_length.Text;
+            decimal length;
+            string widthstr = tb_frames_width.Text;
+            decimal width;
+            string colour = tb_frames_colour.Text;
+            string shape = tb_frames_shape.Text;
+            string material = tb_frames_material.Text;
+
+            if (!decimal.TryParse(lengthstr, out length)) {
+                return default;
+            }
+
+            if (!decimal.TryParse(widthstr, out width)) {
+                return default;
+            }
+
+            Frames frames = new Frames(product, length, width, colour, material, shape);
+            return frames;
+        }
+
+        private void cbBox_ProductType_SelectedIndexChanged(object sender, EventArgs e) {
             ProductCategory data = (ProductCategory)cbBox_ProductType.SelectedItem;
 
             HideAllBoxes();
 
-            switch (data.ID)
-            {
+            switch (data.ID) {
                 case 1: // frames
                     gb_frames.Visible = true;
                     break;
@@ -501,8 +412,7 @@ namespace _1.SemesterProjekt
             }
         }
 
-        private void HideAllBoxes()
-        {
+        private void HideAllBoxes() {
             gb_frames.Visible = false;
             gb_lenses.Visible = false;
             gb_glasses.Visible = false;
