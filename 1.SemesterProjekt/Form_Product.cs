@@ -60,7 +60,13 @@ namespace _1.SemesterProjekt
         private void bt_NewProduct_Click(object sender, EventArgs e)
         {
             Form_Product_Edit form_Product_Edit = new Form_Product_Edit();
+            form_Product_Edit.ProductCreated += Form_Product_Edit_ProductCreated;
             form_Product_Edit.ShowDialog();
+            form_Product_Edit.ProductCreated -= Form_Product_Edit_ProductCreated;
+        }
+
+        private void Form_Product_Edit_ProductCreated(object sender, Product e) {
+            Products.Add(e);
         }
 
 

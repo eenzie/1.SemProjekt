@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace _1.SemesterProjekt
 {
@@ -41,14 +42,23 @@ namespace _1.SemesterProjekt
             num_postcode.Value = _customer.PostCode;
         }
 
-        private void SaveCustomer() {
+        private Customer ExtractCustomerInfo(int? id = null) {
             string name = tb_CustomerName.Text;
             string address = tb_CustomerAddress.Text;
             string phoneNo = tb_CustomerPhone.Text;
             string mail = tb_CustomerMail.Text;
             int postcode = (int)num_postcode.Value;
 
-            Customer customer = new Customer(name, address, postcode, phoneNo, mail);
+            if (id is null) {
+                return new Customer(name, address, postcode, phoneNo, mail);
+            }
+            else {
+                return new Customer(id.Value, name, address, postcode, phoneNo, mail, false);
+            }
+        }
+
+        private void SaveCustomer() {
+            Customer customer = ExtractCustomerInfo();
             if (_customerService.CreateCustomer(customer)) {
                 CustomerCreated.Invoke(this, customer);
                 MessageBox.Show("The customer has been registered in the system!", "Customer created!", MessageBoxButtons.OK);
@@ -60,13 +70,7 @@ namespace _1.SemesterProjekt
         }
 
         private void UpdateCustomer() {
-            string name = tb_CustomerName.Text;
-            string address = tb_CustomerAddress.Text;
-            string phoneNo = tb_CustomerPhone.Text;
-            string mail = tb_CustomerMail.Text;
-            int postcode = (int)num_postcode.Value;
-
-            Customer customer = new Customer(_customer.ID,name, address, postcode, phoneNo, mail, false);
+            Customer customer = ExtractCustomerInfo(_customer.ID);
             if (_customerService.EditCustomer(customer)) {
                 CustomerUpdated.Invoke(this, customer);
                 MessageBox.Show("The customer has been updated in the system!", "Customer updated!", MessageBoxButtons.OK);

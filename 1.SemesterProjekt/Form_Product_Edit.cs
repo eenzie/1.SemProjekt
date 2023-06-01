@@ -19,7 +19,9 @@ namespace _1.SemesterProjekt {
         public Product Product { get; set; }
 
         private readonly ProductService _productService = new ProductService();
+
         public event EventHandler<Product> ProductUpdated;
+        public event EventHandler<Product> ProductCreated;
 
         // This constructor is when we want to Create a new product
         public Form_Product_Edit() {
@@ -119,6 +121,7 @@ namespace _1.SemesterProjekt {
                 bool success = _productService.CreateProduct(product);
 
                 if (success) {
+                    ProductCreated.Invoke(this, product);
                     MessageBox.Show("Glas er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
@@ -133,6 +136,7 @@ namespace _1.SemesterProjekt {
                 bool success = _productService.EditProduct(product);
 
                 if (success) {
+                    ProductUpdated.Invoke(this, product);
                     MessageBox.Show("Glas er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
@@ -155,6 +159,7 @@ namespace _1.SemesterProjekt {
                 bool success = _productService.CreateProduct(product);
 
                 if (success) {
+                    ProductCreated.Invoke(this, product);
                     MessageBox.Show("Brillestellet er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
@@ -170,6 +175,7 @@ namespace _1.SemesterProjekt {
                 bool success = _productService.EditProduct(product);
 
                 if (success) {
+                    ProductUpdated.Invoke(this, product);
                     MessageBox.Show("Brillestellet er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
@@ -192,6 +198,7 @@ namespace _1.SemesterProjekt {
                 bool success = _productService.CreateProduct(product);
 
                 if (success) {
+                    ProductCreated.Invoke(this, product);
                     MessageBox.Show("Kontaktlensen er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
@@ -230,6 +237,7 @@ namespace _1.SemesterProjekt {
                 bool success = _productService.CreateProduct(product);
 
                 if (success) {
+                    ProductCreated.Invoke(this, product);
                     MessageBox.Show("Kikkerten er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
@@ -245,6 +253,7 @@ namespace _1.SemesterProjekt {
                 bool success = _productService.EditProduct(product);
 
                 if (success) {
+                    ProductUpdated.Invoke(this, product);
                     MessageBox.Show("Kikkerten er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
@@ -267,6 +276,7 @@ namespace _1.SemesterProjekt {
                 bool success = _productService.CreateProduct(product);
 
                 if (success) {
+                    ProductCreated.Invoke(this, product);
                     MessageBox.Show("Tilbehøret er nu oprettet i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close(); // Close the current form
                 }
@@ -282,6 +292,7 @@ namespace _1.SemesterProjekt {
                 bool success = _productService.EditProduct(product);
 
                 if (success) {
+                    ProductUpdated.Invoke(this, product);
                     MessageBox.Show("Tilbehøret er nu opdateret i systemet.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
