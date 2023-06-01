@@ -90,10 +90,12 @@ namespace _1.SemesterProjekt {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void link_StatesticsHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-            string fileName = "Statistik Hjælp.pdf";
+            string fileName = "/HelperFiles/Statistik Hjælp.pdf";
+            string dir = Environment.CurrentDirectory;
+            string fullPath = dir + fileName;
 
             try {
-                Process.Start(fileName);
+                Process.Start(fullPath);
             } catch (Exception ex) {
                 MessageBox.Show($"Error opening the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

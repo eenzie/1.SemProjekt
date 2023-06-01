@@ -153,11 +153,13 @@ namespace _1.SemesterProjekt
         /// <param name="e"></param>
         private void link_ProductHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string fileName = "Produkt Hjælp.pdf";
+            string fileName = "/HelperFiles/Produkt Hjælp.pdf";
+            string dir = Environment.CurrentDirectory;
+            string fullPath = dir + fileName;
 
             try
             {
-                Process.Start(fileName);
+                Process.Start(fullPath);
             }
             catch (Exception ex)
             {

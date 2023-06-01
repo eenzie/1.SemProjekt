@@ -168,11 +168,12 @@ namespace _1.SemesterProjekt
         /// <param name="e"></param>
         private void link_CustomerHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string fileName = "Kunde Hjælp.pdf";
-
+            string fileName = "/HelperFiles/Kunde Hjælp.pdf";
+            string dir = Environment.CurrentDirectory;
+            string fullPath = dir + fileName;
             try
             {
-                Process.Start(fileName);
+                Process.Start(fullPath);
             }
             catch (Exception ex)
             {

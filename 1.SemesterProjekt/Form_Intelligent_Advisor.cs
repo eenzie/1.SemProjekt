@@ -130,11 +130,12 @@ namespace _1.SemesterProjekt
         /// <param name="e"></param>
         private void link_IRHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string fileName = "Intelligent Rådgivning Hjælp.pdf";
-
+            string fileName = "/HelperFiles/Intelligent Rådgivning Hjælp.pdf";
+            string dir = Environment.CurrentDirectory;
+            string fullPath = dir + fileName;
             try
             {
-                Process.Start(fileName);
+                Process.Start(fullPath);
             }
             catch (Exception ex)
             {
